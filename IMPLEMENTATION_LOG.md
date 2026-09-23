@@ -37,3 +37,9 @@ The following are not blockers to functional feature development and should only
 - Search: PostgreSQL ts_vector + unaccent (IMMUTABLE f_unaccent wrapper + GIN index) lexical index in `search_entries`. Exact-reference bypass returns deterministic match at score 100 before fuzzy. Every result carries provenance + reason_for_match.
 - Greek and English representative queries return lexical results (tests expand to 11 passing).
 - Semantic embeddings/reranking NOT configured (no local model on Pi); semantic mode falls back to lexical with explicit note. OpenSearch usable as alternate SearchProvider.
+
+### 2026-09-23 — Matter workspace (Phase F) functional
+- MatterDocument ingestion (private MinIO, text parse), MatterFact/MatterEvent/MatterIssue models, all org-scoped.
+- L0 deterministic extractor: dates→chronology events, amounts/obligations/parties→proposed facts, all with char span + confidence (AI enrichment can refine downstream).
+- Lawyer accept/reject persists; chronology sorted; cross-organisation access to a matter's docs/facts/chronology returns 404.
+- Tests expand to 13 passing.

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .api import auth, matters, documents, sources, jobs, ai_endpoint, corpus, search
+from .api import auth, matters, documents, sources, jobs, ai_endpoint, corpus, search, matter_ws
 from .config import settings
 
 app = FastAPI(
@@ -26,6 +26,7 @@ app.include_router(jobs.router)
 app.include_router(ai_endpoint.router)
 app.include_router(corpus.router)
 app.include_router(search.router)
+app.include_router(matter_ws.router)
 
 
 @app.get("/health", tags=["system"])

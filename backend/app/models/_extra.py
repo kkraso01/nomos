@@ -6,3 +6,4 @@ from .run_log import ModelRunLog  # noqa: F401
 from .corpus import (Legislation, LegislationVersion, LegislationNode,  # noqa: F401
                      Judgment, JudgmentVersion, JudgmentNode)
 from .search import SearchEntry  # noqa: F401
+from .matter_ws import (MatterDocument, MatterFact, MatterEvent, MatterIssue)  # noqa: F401

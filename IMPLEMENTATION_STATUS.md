@@ -29,11 +29,11 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Reranking | NOT_STARTED | |
 | Search explanations | FUNCTIONAL | reason_for_match on every result; provenance |
 | Greek / English retrieval | FUNCTIONAL | tests/test_search_e2e.py; unaccent tsvector handles both |
-| Matter workspace | PARTIAL | Matter CRUD + private doc upload/download with tenancy isolation |
-| Matter document ingestion | NOT_STARTED | |
-| Fact extraction | NOT_STARTED | |
-| Chronology | NOT_STARTED | |
-| Issue spotting | NOT_STARTED | |
+| Matter workspace | FUNCTIONAL | create matter, upload doc, extract, chronology, fact accept/reject; tenancy isolation; tests/test_matter_ws_e2e.py |
+| Matter document ingestion | FUNCTIONAL | private upload to MinIO + text extraction |
+| Fact extraction | PARTIAL | L0 deterministic extraction with source spans, proposed→review; no LLM |
+| Chronology | FUNCTIONAL | dated events sorted by date |
+| Issue spotting | PARTIAL | issue create/review scaffold; no LLM issue detection |
 | Authority workspace | NOT_STARTED | |
 | Legal research assistant | NOT_STARTED | |
 | Citation validation | NOT_STARTED | |
