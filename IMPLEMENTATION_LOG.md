@@ -68,3 +68,8 @@ The following are not blockers to functional feature development and should only
 - Firm knowledge base: tenant-scoped precedents/templates; internal search labelled internal=true, primary_authority=false; cross-org isolated.
 - Drafting: research memo generated only from accepted facts + verified authorities; nonexistent citations rejected; output marked draft + lawyer_review_required with full provenance.
 - Tests expand to 23 passing.
+
+### 2026-09-23 — Entitlements (Phase J) functional
+- Org `plan` (starter/standard/pro/enterprise); plan-to-feature gate enforced server-side: starter AI_REMOTE denied (403), pro allowed. /plan set/get endpoints.
+- Fixed a null-byte corruption in app/models/__init__.py (edit-tool artifact) by stripping null bytes and re-registering _extra imports.
+- Tests expand to 25 passing.

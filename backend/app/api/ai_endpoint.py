@@ -52,11 +52,14 @@ def run_capability(req: CapabilityRequest, ctx: dict = Depends(require_org),
 
     org = db.get(models.Org, ctx["org_id"])
     policy = org.remote_ai_policy if org else "PUBLIC_ONLY"
+    plan = org.plan if org else "starter"
     router_ = get_router()
     inp_hash = router_.input_hash({"capability": req.capability, "prompt": req.prompt})
 
-    # Remote (L3) route for gated capabilities.
+    # Remote (L3) route is gated by entitlement in addition to remote-AI policy.
     if req.capability in REMOTE_CAPABILITIES:
+        from ..core.entitlements import require_entitlement
+        require_entitlement(plan, "AI_REMOTE")
         result = router_.run_remote(req.capability, req.prompt, policy, req.is_private)
     else:
         # L0/L1 local route when available; otherwise refuse clearly.

@@ -42,5 +42,6 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Drafting | FUNCTIONAL | verified-authority memo, nonexistent citations rejected, draft/review flag |
 | Audit / evidence | FUNCTIONAL | append-only audit_events working; JSON/CSV export; Evidence model exists |
 | Frontend workflows | NOT_STARTED | |
+| Entitlements / usage metering | FUNCTIONAL | plan-based server-side feature denial; tests/test_plan_e2e.py |
 | Production deployment | DEFERRED_PRODUCTION | Not part of current goal |
 | Performance/load testing | DEFERRED_PRODUCTION | Not part of current goal |
