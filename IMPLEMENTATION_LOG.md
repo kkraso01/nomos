@@ -54,3 +54,11 @@ The following are not blockers to functional feature development and should only
 - Versioned ProceduralRule; deterministic deadline calculator: calendar_days, business_days (weekends + holiday framework), day_of_month, last_day_month; direction/limit-type.
 - Ambiguous rules and unsupported modes return REVIEW_REQUIRED with no guessed date.
 - API /procedure/rules and /procedure/deadline; tested (17 passing). Audit logged per computation.
+
+### 2026-09-23 — Grounded research assistant (Phase G) functional
+- /research/query: grounded retrieval of canonical public law via search pipeline; answer is anchored in retrieved text (never model-memory fabrication).
+- /research/validate-citation: authoritative existence check (Article/Law, ECLI, case) -> blocks nonexistent citations.
+- "No sufficiently supported authority found" path when relevant retrieval below threshold (token-overlap relevance floor).
+- Accepted matter facts can be folded in as evidence (tenant-scoped).
+- Search improved: OR-token recall + ts_rank_cd ordering + token-overlap relevance floor for natural-language queries.
+- Tests expand to 20 passing.

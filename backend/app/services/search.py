@@ -11,6 +11,8 @@ Every result carries provenance and a reason-for-match explanation.
 from dataclasses import dataclass, field
 from typing import Optional
 
+import re
+
 from sqlalchemy import func, or_
 from sqlalchemy.orm import Session
 
@@ -64,17 +66,26 @@ def f_unaccent(x):
 
 def _lexical_query(db: Session, query: str, limit: int):
     q = query.strip().lower()
-    # tf-weighted lexical match on unaccented tsvector (handles Greek + English).
-    base = db.query(SearchEntry).filter(
-        func.to_tsvector("simple", f_unaccent(SearchEntry.body)).op("@@")(
-            func.plainto_tsquery("simple", f_unaccent(q))
-        )
-    )
-    ranked = base.all()
+    # OR tsquery from tokens for broader natural-language recall, then order by
+    # ts_rank (tf-weighted) so the most on-topic entries rank first.
+    tokens = [t for t in re.split(r"[^\w\u0370-\u03ff]+", q) if t]
+    if not tokens:
+        return []
+    or_q = " | ".join(tokens)
+    vector = func.to_tsvector("simple", f_unaccent(SearchEntry.body))
+    qexpr = func.to_tsquery("simple", f_unaccent(or_q))
+    base = db.query(SearchEntry, func.ts_rank_cd(vector, qexpr).label("rank")).filter(
+        vector.op("@@")(qexpr)
+    ).order_by(func.ts_rank_cd(vector, qexpr).desc())
     scored = []
-    for e in ranked:
-        score = 1.0
-        if q in (e.body or "").lower():
+    for e, rank in base.all():
+        body_l = (e.body or "").lower()
+        overlap = sum(1 for t in tokens if t in body_l)
+        # relevance floor: drop entries that only coincidentally share a single token
+        if len(tokens) >= 2 and overlap < 2:
+            continue
+        score = overlap + float(rank or 0)
+        if q in body_l:
             score += 3.0
         if q in (e.title or "").lower():
             score += 2.0

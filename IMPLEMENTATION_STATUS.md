@@ -35,8 +35,8 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Chronology | FUNCTIONAL | dated events sorted by date |
 | Issue spotting | PARTIAL | issue create/review scaffold; no LLM issue detection |
 | Authority workspace | NOT_STARTED | |
-| Legal research assistant | NOT_STARTED | |
-| Citation validation | NOT_STARTED | |
+| Legal research assistant | FUNCTIONAL | grounded retrieval + citation validation + unsupported path; tests/test_research_e2e.py |
+| Citation validation | FUNCTIONAL | generated citations checked against corpus via /research/validate-citation |
 | Firm knowledge base | NOT_STARTED | |
 | Drafting | NOT_STARTED | |
 | Procedural rules / deadlines | FUNCTIONAL | versioned rules; business/calendar days, holidays, ambiguity->REVIEW_REQUIRED; tests/test_procedure_e2e.py |
