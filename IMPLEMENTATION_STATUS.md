@@ -39,7 +39,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Citation validation | NOT_STARTED | |
 | Firm knowledge base | NOT_STARTED | |
 | Drafting | NOT_STARTED | |
-| Procedural rules / deadlines | NOT_STARTED | |
+| Procedural rules / deadlines | FUNCTIONAL | versioned rules; business/calendar days, holidays, ambiguity->REVIEW_REQUIRED; tests/test_procedure_e2e.py |
 | Audit / evidence | PARTIAL | append-only audit_events working; Evidence model exists |
 | Frontend workflows | NOT_STARTED | |
 | Production deployment | DEFERRED_PRODUCTION | Not part of current goal |

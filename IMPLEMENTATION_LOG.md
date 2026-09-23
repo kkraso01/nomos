@@ -49,3 +49,8 @@ The following are not blockers to functional feature development and should only
 - Creation validates both endpoints exist in the corpus (nonexistent citation blocked). Semantic treatment requires supporting quote evidence; marked review_required.
 - Traversal returns cited + citing authorities; search-test-only refs preserved across autogenerations via include_object.
 - Tests expand to 15 passing.
+
+### 2026-09-23 — Procedural rules / deadlines (Phase I) functional
+- Versioned ProceduralRule; deterministic deadline calculator: calendar_days, business_days (weekends + holiday framework), day_of_month, last_day_month; direction/limit-type.
+- Ambiguous rules and unsupported modes return REVIEW_REQUIRED with no guessed date.
+- API /procedure/rules and /procedure/deadline; tested (17 passing). Audit logged per computation.
