@@ -73,3 +73,9 @@ The following are not blockers to functional feature development and should only
 - Org `plan` (starter/standard/pro/enterprise); plan-to-feature gate enforced server-side: starter AI_REMOTE denied (403), pro allowed. /plan set/get endpoints.
 - Fixed a null-byte corruption in app/models/__init__.py (edit-tool artifact) by stripping null bytes and re-registering _extra imports.
 - Tests expand to 25 passing.
+
+### 2026-09-23 — Matter authority workspace + follow notifications (G/I) functional
+- MatterAuthority: mark authorities relied_on/adverse/distinguishable/rejected (corpus-validated; nonexistent denied). /matters/{id}/authorities.
+- FollowedItem + Notification: follow a ref/topic and receive source-backed update notifications; tenant-scoped.
+- Split follow/notify/notifications onto /follow prefix to avoid route collision with /matters/{matter_id}.
+- Tests expand to 27 passing.

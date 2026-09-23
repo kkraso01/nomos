@@ -10,3 +10,4 @@ from .matter_ws import (MatterDocument, MatterFact, MatterEvent, MatterIssue)  #
 from .citation import CitationEdge  # noqa: F401
 from .procedure import ProceduralRule  # noqa: F401
 from .firm import FirmPrecedent  # noqa: F401
+from .authority import (MatterAuthority, FollowedItem, Notification)  # noqa: F401
