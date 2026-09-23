@@ -37,11 +37,10 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Authority workspace | NOT_STARTED | |
 | Legal research assistant | FUNCTIONAL | grounded retrieval + citation validation + unsupported path; tests/test_research_e2e.py |
 | Citation validation | FUNCTIONAL | generated citations checked against corpus via /research/validate-citation |
-| Firm knowledge base | NOT_STARTED | |
-| Drafting | NOT_STARTED | |
 | Procedural rules / deadlines | FUNCTIONAL | versioned rules; business/calendar days, holidays, ambiguity->REVIEW_REQUIRED; tests/test_procedure_e2e.py |
-| Audit / evidence | PARTIAL | append-only audit_events working; Evidence model exists |
+| Firm knowledge base | FUNCTIONAL | tenant-scoped precedents/templates, internal-labelled search, never primary authority; tests/test_gov_firm_draft_e2e.py |
+| Drafting | FUNCTIONAL | verified-authority memo, nonexistent citations rejected, draft/review flag |
+| Audit / evidence | FUNCTIONAL | append-only audit_events working; JSON/CSV export; Evidence model exists |
 | Frontend workflows | NOT_STARTED | |
 | Production deployment | DEFERRED_PRODUCTION | Not part of current goal |
 | Performance/load testing | DEFERRED_PRODUCTION | Not part of current goal |
-

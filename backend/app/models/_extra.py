@@ -9,3 +9,4 @@ from .search import SearchEntry  # noqa: F401
 from .matter_ws import (MatterDocument, MatterFact, MatterEvent, MatterIssue)  # noqa: F401
 from .citation import CitationEdge  # noqa: F401
 from .procedure import ProceduralRule  # noqa: F401
+from .firm import FirmPrecedent  # noqa: F401

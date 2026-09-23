@@ -62,3 +62,9 @@ The following are not blockers to functional feature development and should only
 - Accepted matter facts can be folded in as evidence (tenant-scoped).
 - Search improved: OR-token recall + ts_rank_cd ordering + token-overlap relevance floor for natural-language queries.
 - Tests expand to 20 passing.
+
+### 2026-09-23 — Audit export, firm knowledge, drafting (J/H/I) functional
+- /audit/export (JSON/CSV), append-only.
+- Firm knowledge base: tenant-scoped precedents/templates; internal search labelled internal=true, primary_authority=false; cross-org isolated.
+- Drafting: research memo generated only from accepted facts + verified authorities; nonexistent citations rejected; output marked draft + lawyer_review_required with full provenance.
+- Tests expand to 23 passing.
