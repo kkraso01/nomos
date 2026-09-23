@@ -32,6 +32,13 @@ target_metadata = models.Base.metadata
 # ... etc.
 
 
+def include_object(object_, name, type_, reflected, compare_to):
+    """Never autogen changes to the GIN expression index we manage manually."""
+    if type_ == "index" and name == "ix_search_entries_body_tsv":
+        return False
+    return True
+
+
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
 
@@ -71,7 +78,7 @@ def run_migrations_online() -> None:
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection, target_metadata=target_metadata, include_object=include_object
         )
 
         with context.begin_transaction():

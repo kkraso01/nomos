@@ -21,7 +21,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Legislation model | FUNCTIONAL | versioned Legislation/LegislationVersion/LegislationNode; deterministic normalizer |
 | Temporal legislation | FUNCTIONAL | as-of date resolves correct version; tests/test_corpus_e2e.py |
 | Judgment model | FUNCTIONAL | Judgment/JudgmentVersion/JudgmentNode versioned ingest |
-| Citation graph | NOT_STARTED | |
+| Citation graph | FUNCTIONAL | validated edges (must exist), semantic evidence requirement, traversal; tests/test_citation_e2e.py |
 | Legal reference parser | FUNCTIONAL | Cyprus/EU Article/Law, ECLI, case-number; L0 exact bias |
 | BM25 search | FUNCTIONAL | Postgres ts_vector/unaccent lexical (EN+EL); OpenSearch provider pluggable |
 | Semantic search | NOT_STARTED | no local embed model on Pi; semantic mode falls back to lexical |

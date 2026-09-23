@@ -7,3 +7,4 @@ from .corpus import (Legislation, LegislationVersion, LegislationNode,  # noqa: 
                      Judgment, JudgmentVersion, JudgmentNode)
 from .search import SearchEntry  # noqa: F401
 from .matter_ws import (MatterDocument, MatterFact, MatterEvent, MatterIssue)  # noqa: F401
+from .citation import CitationEdge  # noqa: F401

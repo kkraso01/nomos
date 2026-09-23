@@ -43,3 +43,9 @@ The following are not blockers to functional feature development and should only
 - L0 deterministic extractor: dates→chronology events, amounts/obligations/parties→proposed facts, all with char span + confidence (AI enrichment can refine downstream).
 - Lawyer accept/reject persists; chronology sorted; cross-organisation access to a matter's docs/facts/chronology returns 404.
 - Tests expand to 13 passing.
+
+### 2026-09-23 — Citation graph (Phase D) functional
+- CitationEdge model (CITES / REFERENCES / semantic FOLLOWS/DISTINGUISHES/APPROVES/CRITICISES/OVERRULES) with evidence + review_status.
+- Creation validates both endpoints exist in the corpus (nonexistent citation blocked). Semantic treatment requires supporting quote evidence; marked review_required.
+- Traversal returns cited + citing authorities; search-test-only refs preserved across autogenerations via include_object.
+- Tests expand to 15 passing.
