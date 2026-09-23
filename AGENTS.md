@@ -160,6 +160,19 @@ AI auto-accept never means lawyer approval. Lawyer decision is required before a
 
 Maintain `IMPLEMENTATION_LOG.md` with meaningful phase completions, migrations, architecture/model/source decisions, source permission blockers, major regressions, and deliberate deviations. Avoid line-by-line noise.
 
+## Cache / storage location (HARD REQUIREMENT)
+
+The SD card is small and must not be used for caches or downloaded artifacts.
+
+All caches and downloads for this project MUST live on the hard drive under `/mnt/jellyfin/Projects/NOMOS/`:
+
+- Docker data-root: `/mnt/jellyfin/Projects/NOMOS/docker-data` (set in `/etc/docker/daemon.json`)
+- npm cache: `/mnt/jellyfin/Projects/NOMOS/cache/npm`
+- pip cache: `/mnt/jellyfin/Projects/NOMOS/cache/pip`
+- HuggingFace / torch / model caches: `/mnt/jellyfin/Projects/NOMOS/cache/...` (`HF_HOME`, `TORCH_HOME`, `XDG_CACHE_HOME`)
+
+Do NOT write caches, model weights, pip/npm downloads, or Docker images to the SD card (`/`, `/var/lib/docker`, `~/.npm`, `~/.cache`). If a tool defaults to the SD card, redirect it to the HDD paths above.
+
 ## Git safety
 
 Do not force-push, rewrite history, delete branches, commit secrets or delete user data. Keep checkpoints reviewable.
@@ -432,41 +445,4 @@ Public visibility does not equal reuse permission.
 
 CyLaw must not be bulk crawled without written permission.
 
-Prefer official/open/approved primary sources.
-
-## Legal correctness discipline
-
-Never invent:
-
-- judgments
-- citations
-- case numbers
-- ECLI
-- statute provisions
-- quotations
-- deadlines
-- holdings
-
-No source = no authoritative legal claim.
-
-## Stop conditions
-
-Only stop for:
-
-- missing required credentials
-- destructive/irreversible action requiring approval
-- genuine source/licensing ambiguity
-- missing external account
-- legal access restriction
-- product ambiguity that materially changes architecture
-- impossible external dependency with no safe substitute
-
-Do not stop merely because:
-
-- production deployment is not available
-- performance testing is deferred
-- a live external source is temporarily unavailable
-- one optional model/provider is unavailable
-
-Continue safe functional implementation.
-
+Prefer official/open/approved primary s                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      

@@ -1,0 +1,65 @@
+services:
+  postgres:
+    image: postgres:13-alpine
+    container_name: nomos-postgres
+    environment:
+      POSTGRES_USER: nomos
+      POSTGRES_PASSWORD: nomos
+      POSTGRES_DB: nomos
+    ports:
+      - "5433:5432"
+    volumes:
+      - nomos-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nomos"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  redis:
+    image: redis:7-alpine
+    container_name: nomos-redis
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  minio:
+    image: quay.io/minio/minio:latest
+    container_name: nomos-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: nomos
+      MINIO_ROOT_PASSWORD: nomossecret
+    ports:
+      - "9011:9000"
+      - "9012:9001"
+    volumes:
+      - nomos-minio:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  minio-init:
+    image: quay.io/minio/mc:latest
+    container_name: nomos-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://nomos-minio:9000 nomos nomossecret;
+      mc mb --ignore-existing local/nomos-public;
+      mc mb --ignore-existing local/nomos-private;
+      mc anonymous set download local/nomos-public;
+      exit 0;
+      "
+
+volumes:
+  nomos-data:
+  nomos-minio:

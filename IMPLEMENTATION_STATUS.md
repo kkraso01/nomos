@@ -13,11 +13,11 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 
 | Area | Status | Evidence / Notes |
 |---|---|---|
-| Platform foundation | NOT_STARTED | |
-| Authentication / tenancy | NOT_STARTED | |
-| Source registry | NOT_STARTED | |
-| Source reuse enforcement | NOT_STARTED | |
-| Raw source ingestion | NOT_STARTED | |
+| Platform foundation | FUNCTIONAL | FastAPI modular app, PostgreSQL(alembic) on HDD, Redis+rq durable jobs, MinIO storage; tests/test_platform_e2e.py (3 pass) |
+| Authentication / tenancy | FUNCTIONAL | register org+owner, login, JWT; cross-org blocked (403/404) verified |
+| Source registry | FUNCTIONAL | seeded from SOURCE_REGISTRY_SEED.yaml; CRUD + disable adapter endpoint |
+| Source reuse enforcement | FUNCTIONAL | UNKNOWN/PERMISSION_REQUIRED blocked from bulk ingest; audit recorded |
+| Raw source ingestion | FUNCTIONAL | immutable raw→canonical, dedupe, changed→new version, provenance |
 | Legislation model | NOT_STARTED | |
 | Temporal legislation | NOT_STARTED | |
 | Judgment model | NOT_STARTED | |
@@ -29,7 +29,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Reranking | NOT_STARTED | |
 | Search explanations | NOT_STARTED | |
 | Greek / English retrieval | NOT_STARTED | |
-| Matter workspace | NOT_STARTED | |
+| Matter workspace | PARTIAL | Matter CRUD + private doc upload/download with tenancy isolation |
 | Matter document ingestion | NOT_STARTED | |
 | Fact extraction | NOT_STARTED | |
 | Chronology | NOT_STARTED | |
@@ -40,7 +40,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Firm knowledge base | NOT_STARTED | |
 | Drafting | NOT_STARTED | |
 | Procedural rules / deadlines | NOT_STARTED | |
-| Audit / evidence | NOT_STARTED | |
+| Audit / evidence | PARTIAL | append-only audit_events working; Evidence model exists |
 | Frontend workflows | NOT_STARTED | |
 | Production deployment | DEFERRED_PRODUCTION | Not part of current goal |
 | Performance/load testing | DEFERRED_PRODUCTION | Not part of current goal |
