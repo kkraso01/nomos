@@ -1,0 +1,86 @@
+# Engineering seed only. Re-check source terms before production activation.
+# checked_at: 2026-09-23
+sources:
+  - key: cyprus_open_data
+    name: Cyprus National Open Data Portal
+    base_url: https://www.data.gov.cy/
+    jurisdiction: CY
+    official_source: true
+    primary_source: true
+    reuse_status: APPROVED_WITH_ATTRIBUTION
+    licence: CC BY 4.0 (general portal default; verify per dataset)
+    automated_access_allowed: null
+    bulk_download_allowed: null
+    attribution_required: true
+    adapter_enabled: true
+    notes: "Portal FAQ says datasets are generally CC BY 4.0. Preserve dataset-specific licence/terms."
+
+  - key: cyprus_gazette
+    name: Government Gazette of the Republic of Cyprus
+    base_url: https://www.gov.cy/en/service/episimi-efimerida-tis-dimokratias/
+    jurisdiction: CY
+    official_source: true
+    primary_source: true
+    reuse_status: UNKNOWN
+    licence: null
+    automated_access_allowed: null
+    bulk_download_allowed: null
+    attribution_required: null
+    adapter_enabled: false
+    notes: "Authoritative source. Do not assume unrestricted bulk crawling; verify approved acquisition/reuse mechanism."
+
+  - key: cyprus_supreme_court
+    name: Supreme Court / Judicial Service of Cyprus
+    base_url: https://www.supremecourt.gov.cy/
+    jurisdiction: CY
+    official_source: true
+    primary_source: true
+    reuse_status: UNKNOWN
+    licence: null
+    automated_access_allowed: null
+    bulk_download_allowed: null
+    attribution_required: null
+    adapter_enabled: false
+    notes: "Official decisions source. Activation for systematic acquisition requires source-specific terms/access review."
+
+  - key: cylaw
+    name: CyLaw
+    base_url: https://www.cylaw.org/
+    jurisdiction: CY
+    official_source: false
+    primary_source: false
+    reuse_status: PERMISSION_REQUIRED
+    licence: "CyLaw site terms"
+    automated_access_allowed: false
+    bulk_download_allowed: false
+    attribution_required: true
+    adapter_enabled: false
+    notes: "Terms prohibit external indexing by web robots and mass/systematic downloading without prior written consent. Use link/reference only unless permission obtained."
+
+  - key: eurlex
+    name: EUR-Lex / CELLAR
+    base_url: https://eur-lex.europa.eu/
+    jurisdiction: EU
+    official_source: true
+    primary_source: true
+    reuse_status: APPROVED_OPEN
+    licence: "Reuse free of charge subject to copyright conditions"
+    automated_access_allowed: true
+    bulk_download_allowed: true
+    attribution_required: true
+    adapter_enabled: true
+    notes: "Prefer official webservice, CELLAR REST/SPARQL, or data dumps for volume."
+
+  - key: hudoc
+    name: HUDOC / European Court of Human Rights
+    base_url: https://hudoc.echr.coe.int/
+    jurisdiction: ECHR
+    official_source: true
+    primary_source: true
+    reuse_status: UNKNOWN
+    licence: null
+    automated_access_allowed: null
+    bulk_download_allowed: null
+    attribution_required: null
+    adapter_enabled: false
+    notes: "Official database. Verify exact reuse/automation terms before bulk ingestion."

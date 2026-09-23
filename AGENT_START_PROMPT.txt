@@ -1,0 +1,33 @@
+Read AGENTS.md, PRD.md, SOURCE_POLICY_AND_INGESTION.md, ARCHITECTURE_AND_RETRIEVAL.md, and IMPLEMENTATION_PLAN.md completely before modifying code.
+
+Goal: implement NOMOS from Phase A through Phase J sequentially and autonomously, prioritizing functional correctness and real end-to-end workflows.
+
+Do not reduce the product to generic RAG or a chatbot. The legislation tree, historical/effective-date legislation, exact legal-reference parsing, BM25 lexical search, semantic retrieval, hybrid fusion, reranking, citation graph, source provenance, public/private separation, matter evidence, lawyer review, citation validation, and source-grounded drafting are foundational requirements.
+
+For every phase:
+1. inspect existing repository first;
+2. classify relevant code KEEP / REFACTOR / EXTEND / REPLACE / ADD;
+3. implement the smallest complete vertical workflows before broad scaffolding;
+4. add coherent migrations;
+5. add targeted functional tests;
+6. verify the intended workflow on the real local stack where practical;
+7. update IMPLEMENTATION_LOG.md;
+8. continue immediately to the next phase.
+
+A table/model/endpoint/placeholder service is not proof of completion. A feature is complete when representative input travels through the actual workflow and produces correct traceable output.
+
+Docker Compose, PostgreSQL, OpenSearch, Redis and MinIO may be used for functional integration checks. Do NOT spend time on sustained load/stress/chaos/thermal/cloud-parity benchmarking or production deployment unless explicitly requested. Record those as deferred production validation, not blockers.
+
+SOURCE RULE: public accessibility is not bulk-ingestion permission. Enforce SourceRegistry reuse states. Never bulk scrape/index/download CyLaw without recorded written permission. For Gazette, Supreme Court and other public sites with unverified automation rights, implement gated adapters and fixtures but do not bypass terms/robots/access controls. Prefer approved official APIs/bulk/open-data mechanisms.
+
+AI RULE: use L0 deterministic → L1 local ML → L2 local OSS LLM → L3 remote fallback. Domain code requests AI capabilities, never model/provider IDs. Never invent authority, quotations or deadlines. Validate generated citations and exact quotes against canonical source records.
+
+PRIVACY RULE: private client/firm documents must remain tenant/matter scoped and must not be sent to remote AI unless organisation policy explicitly permits private remote processing.
+
+Search default: exact references + BM25 + dense semantic + legislation-tree expansion + citation-graph expansion → dedupe → RRF/fusion → rerank → temporal/metadata explanation.
+
+Start by auditing the repository against Phase A. If there is no existing implementation, create the foundation without unnecessary microservices. Then continue A → B → C → D → E → F → G → H → I → J automatically.
+
+Only stop for a genuine human-required blocker. If one source is permission-blocked, document it and continue other implementation using approved sources, synthetic fixtures or mocks.
+
+Begin now.
