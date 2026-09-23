@@ -8,7 +8,8 @@ from ..db import get_db
 from .. import models
 from ..core.tenancy import require_org
 from ..services.corpus import (ingest_legislation, ingest_judgment,
-                               resolve_version_as_of, normalize_legislation_text)
+                               resolve_version_as_of, resolve_judgment_segments,
+                               normalize_legislation_text)
 from ..services.references import parse_reference
 from ..models.corpus import LegislationNode, JudgmentNode
 
@@ -84,6 +85,15 @@ def create_judgment(payload: JudgmentIngest, ctx: dict = Depends(require_org),
         raw_text=payload.raw_text, source_id=uuid_or_none(payload.source_id))
     return {"judgment_id": str(j.id), "version_id": str(version.id),
             "version_number": version.version_number, "is_new_version": is_new}
+
+
+@router.get("/judgment/{canonical_id}/segments")
+def judgment_segments(canonical_id: str, ctx: dict = Depends(require_org),
+                      db: Session = Depends(get_db)):
+    segs = resolve_judgment_segments(db, canonical_id)
+    if segs is None:
+        raise HTTPException(404, "Judgment not found")
+    return {"canonical_id": canonical_id, "segments": segs}
 
 
 @router.post("/parse-reference", response_model=ParseOut)

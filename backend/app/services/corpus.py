@@ -146,6 +146,44 @@ def ingest_legislation(db: Session, *, canonical_id: str, title: str,
     return law, version, True
 
 
+_SEG_HEADINGS = {
+    "facts": "facts", "the facts": "facts",
+    "procedural history": "procedural_history",
+    "the issue": "issue", "issues": "issue", "the issues": "issue",
+    "legal analysis": "legal_analysis", "the law": "legal_analysis", "the applicable law": "legal_analysis",
+    "holding": "holding", "decision": "holding", "conclusion": "holding",
+    "order": "order", "costs": "order",
+    "dissent": "dissent", "separate opinion": "dissent", "concurring": "dissent",
+}
+
+
+def _segment_label(para: str):
+    """L0 heading detection -> segment_type. Empty means 'analysis' default."""
+    key = (para or "").strip().lower().rstrip(":.")
+    return _SEG_HEADINGS.get(key)
+
+
+def _segment_judgment(db: Session, version_id):
+    """Returns segments grouped by type for a judgment version."""
+    nodes = db.query(JudgmentNode).filter_by(version_id=version_id).order_by(JudgmentNode.sort_order).all()
+    out = []
+    for n in nodes:
+        out.append({"para_number": n.para_number, "text": n.text,
+                    "segment_type": n.segment_type or "analysis",
+                    "char_start": n.char_start, "char_end": n.char_end})
+    return out
+
+
+def resolve_judgment_segments(db: Session, canonical_id: str) -> list[dict] | None:
+    judgment = db.query(Judgment).filter_by(canonical_id=canonical_id).first()
+    if judgment is None:
+        return None
+    version = db.get(JudgmentVersion, judgment.current_version_id)
+    if version is None:
+        return None
+    return _segment_judgment(db, version.id)
+
+
 def resolve_version_as_of(db: Session, canonical_id: str,
                           as_of: datetime | None = None) -> LegislationVersion | None:
     """Resolve the legislation version effective as of `as_of` (or latest)."""
@@ -190,15 +228,17 @@ def ingest_judgment(db: Session, *, canonical_id: str, title: str, court: str | 
     db.flush()
 
     paras = [p for p in (line.strip() for line in raw_text.splitlines()) if p]
+    nodes = []
     for i, para in enumerate(paras):
-        db.add(JudgmentNode(version_id=version.id, para_number=str(i + 1), text=para,
-                            sort_order=i))
+        n = JudgmentNode(version_id=version.id, para_number=str(i + 1), text=para,
+                         sort_order=i, segment_type=_segment_label(para))
+        db.add(n)
+        nodes.append(n)
     judgment.current_version_id = version.id
     db.commit()
     db.refresh(judgment)
     ref = ecli if ecli else (case_number or canonical_id)
-    paras = db.query(JudgmentNode).filter_by(version_id=version.id).all()
-    body = "\n".join(p.text for p in paras)
+    body = "\n".join(p.text for p in nodes)
     upsert_search_entry(
         db, kind="judgment_node", canonical_ref=f"judgment-{ref}", canonical_id=canonical_id,
         title=title, body=body, language="en",

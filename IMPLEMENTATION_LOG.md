@@ -79,3 +79,7 @@ The following are not blockers to functional feature development and should only
 - FollowedItem + Notification: follow a ref/topic and receive source-backed update notifications; tenant-scoped.
 - Split follow/notify/notifications onto /follow prefix to avoid route collision with /matters/{matter_id}.
 - Tests expand to 27 passing.
+
+### 2026-09-23 — Judgment segmentation (Phase E) functional
+- L0 deterministic segmentation of judgments into facts / procedural_history / legal_analysis / holding / order / dissent, stored on JudgmentNode.segment_type with para/source spans; GET /corpus/judgment/{id}/segments.
+- Tests expand to 28 passing.

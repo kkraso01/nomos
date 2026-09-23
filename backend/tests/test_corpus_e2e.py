@@ -64,3 +64,15 @@ def test_reference_parser_deterministic():
     assert p3.kind == "judgment" and p3.case_number == "45/2018"
     p4 = parse_reference("Some ordinary prose about liability")
     assert p4.kind == "unknown"
+
+def test_judgment_segmentation():
+    import uuid
+    h = _login()
+    cid = f"CJS-{uuid.uuid4().hex[:6]}"
+    client.post("/corpus/judgment", headers=h, json={
+        "canonical_id": cid, "title": "X", "case_number": "5/2020",
+        "raw_text": "Facts\none fact.\nProcedural history\none proc.\nHolding\none holding.\nOrder\none order."})
+    segs = client.get(f"/corpus/judgment/{cid}/segments", headers=h).json()["segments"]
+    types = {s["segment_type"] for s in segs}
+    assert {"facts", "procedural_history", "holding", "order"} <= types
+    assert any(s["text"] == "one fact." and s["para_number"] for s in segs)
