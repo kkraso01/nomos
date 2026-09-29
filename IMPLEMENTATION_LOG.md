@@ -212,3 +212,10 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
 ### 2026-09-29 — Platform stability: de-flake background-job test
 - test_durable_background_job previously polled for max 15s; under CPU load the rq job completed at ~16s causing CI noise.
 - Raised the poll window to 60s and guarded against a None status. Full suite now stable (53 passed, no flake).
+
+### 2026-09-29 — Formal versioned benchmark asset (task-1) complete
+- Created eval/ asset: README (governance/provenance rules), queries/nomos_eval_queries.json (15 queries, full metadata: id/language/jurisdiction/query_type/relevant_date/legal_issue/notes/provenance/review_status), expected/nomos_eval_gold.json (relevant + hard_negative per id), fixtures/nomos_cy_corpus.json (synthetic-test-only corpus), reports/.
+- Query classes covered: exact_reference, ordinary_research, factual/legal_issue/procedural similarity, temporal_legislation, case_citation_lookup, cited_by_related, greek, english, cross_lingual_gr_en, cross_lingual_en_gr, ambiguous, hard_negative, adverse_contrary.
+- scripts/run_eval.py now loads the asset, ingests fixtures via the pipeline, evaluates the hybrid retriever scoped to the benchmark collection, writes timestamped reports (baseline.json), prints per-query + segmented metrics (language/query_type/jurisdiction/temporal/exact-vs-semantic). Metrics: Recall@10/50, MRR, nDCG@10, P@10.
+- Scoped baseline: cross-lingual GR<->EN and Greek MRR=1.0, exact_reference & temporal MRR=0.5, hard_negative=0.
+- eval_metrics.py refactored to asset-driven (load_queries/load_expected/load_fixtures/evaluate_from/write_report); tests updated. Full suite 53 passed.

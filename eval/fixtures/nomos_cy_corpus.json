@@ -1,0 +1,16 @@
+{
+  "synthetic_notice": "ALL fixtures in this file are SYNTHETIC / TEST-ONLY. None are real, citable legal authorities. They exist only to make evaluation reproducible and must never be presented as authoritative legal data.",
+  "docs": [
+    {"kind": "law", "canonical_id": "ELW", "title": "Winding up Law (synthetic test law)", "jurisdiction": "CY",
+     "raw_string": "Article 1. Short title.\n(1) This Law may be cited as the Winding up Law (synthetic test law).\nArticle 5. Winding up.\n(1) A company may be wound up by the court in the event of insolvency.\n(2) The court may appoint a liquidator.",
+     "note": "synthetic-test-only; canonical refs become law-ELW-art-1, law-ELW-art-5"},
+    {"kind": "judgment", "canonical_id": "GRD-1", "title": "Alpha v Beta (synthetic test judgment)", "jurisdiction": "CY",
+     "metadata": {"court": "Supreme Court (synthetic)", "case_number": "1/2018"},
+     "raw_string": "Facts\nThe seller failed to deliver goods under the contract.\nHolding\nDamages awarded to the buyer.",
+     "note": "synthetic-test-only; canonical ref becomes judgment-1/2018"},
+    {"kind": "judgment", "canonical_id": "GRD-2", "title": "Gamma v Delta (synthetic test judgment)", "jurisdiction": "CY",
+     "metadata": {"court": "Supreme Court (synthetic)", "case_number": "4/2022"},
+     "raw_string": "Facts\nThe creditor sought the winding up of an insolvent company.\nHolding\nThe court appointed a liquidator to wind up the company.",
+     "note": "synthetic-test-only; canonical ref becomes judgment-4/2022"}
+  ]
+}

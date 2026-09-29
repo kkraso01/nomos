@@ -9,7 +9,7 @@ from app.main import app
 from app.db import SessionLocal
 from app.models.core import LegalChunk
 from app.services.embedding import get_provider, _ONNX
-from app.services.eval_metrics import metrics
+from app.services.eval_metrics import metrics, evaluate_from, load_queries, load_expected
 
 client = TestClient(app)
 needs_model = pytest.mark.skipif(not os.path.exists(_ONNX) or not get_provider().available(),
@@ -35,6 +35,10 @@ def _ingest_corpus(src_id):
                  jurisdiction="CY", canonical_id="GRD-1", title="Alpha v Beta",
                  metadata={"court": "Supreme Court", "case_number": "1/2018"}, raw_payload=
                  "Facts\nThe seller failed to deliver the goods under the contract.\nHolding\nDamages awarded to the buyer.")
+    run_pipeline(s, source_id=src_id, ingest_key="jud-grd2", kind="judgment",
+                 jurisdiction="CY", canonical_id="GRD-2", title="Gamma v Delta",
+                 metadata={"court": "Supreme Court", "case_number": "4/2022"}, raw_payload=
+                 "Facts\nThe creditor sought the winding up of an insolvent company.\nHolding\nThe court appointed a liquidator to wind up the company.")
     s.close()
 
 
@@ -112,21 +116,22 @@ def test_hybrid_rerank_actually_executes():
 def test_eval_runs_on_live_corpus():
     src = _cleared_source(); _ingest_corpus(src)
     from app.services.hybrid import hybrid_search
-    from app.services.eval_metrics import evaluate
     s = SessionLocal()
 
     def retriever(q):
         return [r["canonical_ref"] for r in hybrid_search(s, q, limit=50, enable_rerank=True)["results"]]
 
-    rep = evaluate(retriever)
-    res = rep["results"]
-    en = res["company wound up in the event of insolvency"]["metrics"]
-    # target retrieved and ranked (robust across a growing dev index): recall@50=1.0, mrr>0
-    assert en["recall@50"] == 1.0 and en["mrr"] > 0.0
-    el = res["εκκαθάριση εταιρείας λόγω αφερεγγυότητας"]["metrics"]
+    queries = load_queries()
+    expected = load_expected()
+    rep = evaluate_from(queries, expected, retriever)
+    res = rep["per_query"]
+    en = res["en-001"]["metrics"]
+    assert en["recall@50"] == 1.0 and en["mrr"] > 0.0  # target retrieved
+    el = res["el-001"]["metrics"]
     assert el["recall@50"] == 1.0  # cross-lingual target retrieved
-    j = res["the seller failed to deliver goods under the contract"]["metrics"]
-    assert j["recall@50"] == 1.0  # fixture ref matches ingested judgment-1/2018
-    hard = res["quantum teleportation liability"]["metrics"]
+    j = res["en-003"]["metrics"]
+    assert j["recall@50"] == 1.0  # judgment-1/2018 retrieved
+    hard = res["hard-002"]["metrics"]
     assert hard["recall@10"] == 0.0  # hard negative stays irrelevant
+    assert "en" in rep["segments"] and "el" in rep["segments"]  # language segmentation
     s.close()

@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-"""Run the early NOMOS retrieval evaluation over an ingested corpus.
+"""Run the NOMOS retrieval benchmark from the versioned eval/ asset.
 
-Sets up a deterministic CY corpus (a winding-up law + a sale-of-goods judgment),
-ingests + embeds it through the pipeline, then evaluates the hybrid retriever and
-prints Recall@10/50, MRR, nDCG@10, Precision@10 per eval query.
-Usage:  python scripts/run_eval.py
+Ingests eval/fixtures (idempotent), evaluates the hybrid retriever against
+eval/queries + eval/expected, prints per-query + segmented metrics, and writes a
+timestamped report to eval/reports/. Usage:  python scripts/run_eval.py
 """
 import os
 import sys
@@ -16,7 +15,7 @@ from app.models import SourceRegistry
 from app.services.seed import seed_core, seed_sources_from_yaml
 from app.services.pipeline import run_pipeline
 from app.services.hybrid import hybrid_search
-from app.services.eval_metrics import evaluate
+from app.services import eval_metrics as em
 
 
 def _ensure_source(s):
@@ -29,34 +28,58 @@ def _ensure_source(s):
     return src.id
 
 
-def _ingest(s, src_id):
-    run_pipeline(s, source_id=src_id, ingest_key="eval-elw", kind="legislation",
-                 jurisdiction="CY", canonical_id="ELW", title="Winding up Law",
-                 effective_from="2020-01-01T00:00:00Z",
-                 raw_payload="Article 5. Winding up.\n(1) A company may be wound up by the court in the event of insolvency.\n(2) The court may appoint a liquidator.")
-    run_pipeline(s, source_id=src_id, ingest_key="eval-jud", kind="judgment",
-                 jurisdiction="CY", canonical_id="GRD-1", title="Alpha v Beta",
-                 metadata={"court": "Supreme Court", "case_number": "1/2018"},
-                 raw_payload="Facts\nThe seller failed to deliver goods under the contract.\nHolding\nDamages awarded.")
+def _ingest(s, src_id, fixture):
+    kind = fixture["kind"]
+    if kind == "law":
+        run_pipeline(s, source_id=src_id, ingest_key=f"eval-{fixture['canonical_id']}",
+                     kind="legislation", jurisdiction=fixture.get("jurisdiction", "CY"),
+                     canonical_id=fixture["canonical_id"], title=fixture["title"],
+                     raw_payload=fixture["raw_string"])
+    else:
+        run_pipeline(s, source_id=src_id, ingest_key=f"eval-{fixture['canonical_id']}",
+                     kind="judgment", jurisdiction=fixture.get("jurisdiction", "CY"),
+                     canonical_id=fixture["canonical_id"], title=fixture["title"],
+                     metadata=fixture.get("metadata", {}), raw_payload=fixture["raw_string"])
 
 
 def main():
     s = SessionLocal()
     src_id = _ensure_source(s)
-    _ingest(s, src_id)
+    fixtures = em.load_fixtures()
+    for fx in fixtures:
+        _ingest(s, src_id, fx)
+    queries = em.load_queries()
+    expected = em.load_expected()
+
+    # Scoped-collection evaluation: only judge ranking with the benchmark corpus
+    # docs, so the shared dev index does not drown reproducible signal.
+    law_prefixes = {f"law-{d['canonical_id']}-" for d in fixtures if d['kind'] == 'law'}
+    judgment_refs = {f"judgment-{d['metadata']['case_number']}" for d in fixtures if d['kind'] == 'judgment'}
+
+    def in_scope(ref):
+        return any(ref.startswith(p) for p in law_prefixes) or ref in judgment_refs
 
     def retriever(q):
-        return [r["canonical_ref"]
-                for r in hybrid_search(s, q, limit=50, enable_dense=True, enable_rerank=True)["results"]]
+        ranked = [r["canonical_ref"]
+                  for r in hybrid_search(s, q, limit=50, enable_dense=True, enable_rerank=True)["results"]]
+        return [r for r in ranked if in_scope(r)]
 
-    report = evaluate(retriever)
-    print(f"# NOMOS retrieval evaluation — {report['queries']} queries")
-    for query, res in report["results"].items():
+    report = em.evaluate_from(queries, expected, retriever)
+    baseline = os.path.join(em.EVAL_ROOT, "reports", "baseline.json")
+    written = em.write_report(report, "baseline.json") if not os.path.exists(baseline) else em.write_report(report)
+    print(f"# NOMOS retrieval evaluation — {report['queries']} queries  (report: {written})")
+    for qid, res in report["per_query"].items():
         m = res["metrics"]
-        print(f"\nQ: {query}  [{res['note']}]")
-        print(f"   recall@10={m['recall@10']} recall@50={m['recall@50']} mrr={m['mrr']} "
-              f"ndcg@10={m['ndcg@10']} precision@10={m['precision@10']}")
-        print(f"   relevant={res['relevant'] or '(hard negative)'} top={res['ranked_top']}")
+        rel = res["relevant"] or "(none)"
+        print(f"\n[{qid}] {res['query_type']}/{res['language']} :: {res['query']}")
+        print(f"   rel={rel} "
+              f"R@10={m['recall@10']} R@50={m['recall@50']} MRR={m['mrr']} "
+              f"nDCG@10={m['ndcg@10']} P@10={m['precision@10']}")
+        print(f"   top={res['ranked_top']}")
+    print("\n--- segmented aggregates ---")
+    for k, v in sorted(report["segments"].items()):
+        print(f"   {k or '?'}: R@10={v['recall@10']} R@50={v['recall@50']} MRR={v['mrr']} "
+              f"nDCG@10={v['ndcg@10']} P@10={v['precision@10']}")
     s.close()
     print("\nDone.")
 

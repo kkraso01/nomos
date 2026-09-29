@@ -1,0 +1,17 @@
+{
+  "cy-ref-001": {"relevant": ["law-ELW-art-5"], "hard_negative": []},
+  "en-001": {"relevant": ["law-ELW-art-5"], "hard_negative": ["judgment-1/2018"]},
+  "en-002": {"relevant": ["law-ELW-art-5", "judgment-4/2022"], "hard_negative": []},
+  "en-003": {"relevant": ["judgment-1/2018"], "hard_negative": []},
+  "en-temp-001": {"relevant": ["law-ELW-art-5"], "hard_negative": []},
+  "el-001": {"relevant": ["law-ELW-art-5"], "hard_negative": []},
+  "x-gr-en-001": {"relevant": ["law-ELW-art-5"], "hard_negative": []},
+  "x-en-gr-001": {"relevant": ["law-ELW-art-5"], "hard_negative": []},
+  "case-001": {"relevant": [], "hard_negative": []},
+  "cited-001": {"relevant": [], "hard_negative": []},
+  "amb-001": {"relevant": [], "hard_negative": []},
+  "proced-001": {"relevant": [], "hard_negative": []},
+  "hard-001": {"relevant": [], "hard_negative": []},
+  "hard-002": {"relevant": [], "hard_negative": []},
+  "adv-001": {"relevant": [], "hard_negative": []}
+}
