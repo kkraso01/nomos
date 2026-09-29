@@ -179,3 +179,8 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
 - Extended L0 extractor to all Cyprus/Greek forms with exact spans (άρθρο 15(2)(α), ΚΕΦ.6, Κεφ.148, Ν.123(I)/2020, ΕΛLI, case numbers, Article 15).
 - scan_legislation creates ProvisionCrossReference(source_node->target_node, span, high confidence) within a legislation version; /citation/scan-provision-refs.
 - Tests expand to 44 passing.
+
+### 2026-09-29 — Judgment enrichment + citations/treatment + graph (task-6) complete
+- enrich_judgment deterministically links a judgment's paragraphs (as exact evidence_paragraph_id) to legislation provisions (APPLIES) and cited cases (CITES) via in-text refs; /citation/enrich-judgment.
+- Expanded graph expansion returns cited/citing/treatments/legislation_links; semantic treatment starts REVIEW_REQUIRED (evidence-backed, never invented).
+- Tests expand to 45 passing.

@@ -24,6 +24,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Legislation model | FUNCTIONAL | versioned Legislation/LegislationVersion/LegislationNode; deterministic normalizer |
 | Temporal legislation + amendments | FUNCTIONAL | amendments as append-only events (INSERT/REPLACE/DELETE/RENUMBER/REPEAL/COMMENCE) with prev/new text + effective/pub dates + evidence; new version on amend; as-of resolves applicable vs current; diff API; tests/test_amendments_e2e.py |
 | Temporal legislation | FUNCTIONAL | as-of date resolves correct version; tests/test_corpus_e2e.py |
+| Judgment enrichment + citations/treatment | FUNCTIONAL | sections+paragraphs with segment types; deterministic enrich links paragraphs (evidence_paragraph_id) to provisions (APPLIES) + case citations (CITES); semantic treatment REVIEW_REQUIRED; graph expansion exposes cited/citing/treatments/legislation_links; /citation/enrich-judgment; tests/test_judgment_enrichment_e2e.py |
 | Judgment model | FUNCTIONAL | versioned ingest + L0 segmentation (facts/procedural/holding/order); tests/test_corpus_e2e.py |
 | Provision cross-references | FUNCTIONAL | deterministic L0 extractor (άρθρο 15(2)(α), ΚΕΦ.6, Κεφ.148, Ν.123(I)/2020, ECLI, case no) + scan creates ProvisionCrossReference with exact spans; /citation/scan-provision-refs; tests/test_provision_refs_e2e.py |
 | Citation graph | FUNCTIONAL | validated edges (must exist), semantic evidence requirement, traversal; tests/test_citation_e2e.py |

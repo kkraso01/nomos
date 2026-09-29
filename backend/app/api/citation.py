@@ -115,6 +115,16 @@ def scan_provision_refs(canonical_id: str, ctx: dict = Depends(require_org),
     return out
 
 
+@router.post("/enrich-judgment")
+def enrich_judgment(canonical_id: str, applicable_law_canonical_id: str | None = None,
+                    ctx: dict = Depends(require_org), db: Session = Depends(get_db)):
+    from ..services.judgment_enrichment import enrich_judgment as _enrich
+    out = _enrich(db, canonical_id, applicable_law_canonical_id)
+    audit.record_audit(db, action="graph.enrich_judgment", org_id=ctx["org_id"],
+                       actor_user_id=ctx["user"].id, detail={"canonical_id": canonical_id})
+    return out
+
+
 @router.get("/case/{ref}")
 def expand_case(ref: str, ctx: dict = Depends(require_org), db: Session = Depends(get_db)):
     import uuid as _uuid
