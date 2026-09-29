@@ -219,3 +219,8 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
 - scripts/run_eval.py now loads the asset, ingests fixtures via the pipeline, evaluates the hybrid retriever scoped to the benchmark collection, writes timestamped reports (baseline.json), prints per-query + segmented metrics (language/query_type/jurisdiction/temporal/exact-vs-semantic). Metrics: Recall@10/50, MRR, nDCG@10, P@10.
 - Scoped baseline: cross-lingual GR<->EN and Greek MRR=1.0, exact_reference & temporal MRR=0.5, hard_negative=0.
 - eval_metrics.py refactored to asset-driven (load_queries/load_expected/load_fixtures/evaluate_from/write_report); tests updated. Full suite 53 passed.
+
+### 2026-09-29 — Matter authority model + workflow (task-2) complete
+- Rebuilt MatterAuthority to task-2 spec: authority_type (legislation/judgment/source_document), source_scope (public/private), lawyer-controlled classification (supporting/adverse/neutral/unclassified), separate system suggestion + suggestion_provenance (MODEL_INFERENCE, never silently accepted), lawyer_note, saved_by/saved_at, matter_issue, evidence links (JSON), temporal_applicability (JSON). References canonical_ref (no duplication of canonical content).
+- Endpoints: PUT /matters/{mid}/authorities (save), POST .../classify (lawyer decision overrides), POST .../suggest (MODEL_INFERENCE stored separately), GET .../authorities (+ classification filter), GET .../authorities/folders. JSON-body canonical_ref avoids path-slash issues.
+- Tenant deny-by-default (cross-org returns 404). Migration with server defaults. Tests: test_authority_e2e.py (3) incl. suggest-does-not-override-lawyer and tenant isolation. Full suite 54 passed.
