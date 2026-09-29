@@ -257,3 +257,9 @@ Measured on the benchark (baseline -> post-change, both committed):
 - el / greek / cross_lingual GR<->EN MRR 1.0 (unchanged); temporal MRR 0.5; hard negatives 0 (no regression on any important class)
 Reports: eval/reports/baseline.json (pre) + eval/reports/report-20260929-172739.json (post).
 Suite 59 passed.
+
+### 2026-09-29 — Lawyer research workflow end-to-end + functional completion (task-6) complete
+- Added tests/test_lawyer_workflow_e2e.py: a single acceptance test covering the full done-criteria vertical through the HTTP API:
+  create/open matter -> research question with relevant date -> ranked legislation+case authorities -> WHY matched -> exact provision/judgment evidence -> historically applicable provision version (as-of) -> save authority to matter -> classify supporting/neutral -> grounded research question -> evidence-linked SOURCE FACT answer -> inspect every supporting authority -> authority folders -> tenant isolation (cross-org 404).
+- All prior tasks wired: eval/{queries,fixtures,expected,reports} + run_eval + baseline/post reports (task-1/5), matter authority workflow (task-2), research vertical (task-3), grounded assistant with provenance (task-4), measured ranking pass (task-5).
+- Full suite 60 passed. No drafting / no fine-tuning / no new retrieval subsystem introduced.
