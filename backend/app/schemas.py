@@ -98,6 +98,13 @@ class SourceRegistryOut(BaseModel):
     api_available: bool
     automated_access_allowed: bool
     commercial_reuse_allowed: bool = False
+    licence: Optional[str] = None
+    licence_url: Optional[str] = None
+    official_source: bool = False
+    primary_source: bool = False
+    attribution_required: bool = False
+    terms_checked_by: Optional[str] = None
+    terms_snapshot_hash: Optional[str] = None
     terms_checked_at: Optional[datetime] = None
     created_at: Optional[datetime] = None
 

@@ -150,3 +150,12 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
 - Dropped legacy CitationEdge; rewrote citation/graph + similarity + corpus services/APIs onto the new model; rewrote migration chain to a single clean baseline (5097d44a2bc1) + add_case_treatment_target_key.
 - Seeded jurisdictions (CY/EU/ECHR/GR/UK) + representative CY court hierarchy; fixed search indexing to materialize raw node values and rebuild idempotently on dedupe (Greek + English + exact-reference verified).
 - Full suite 34 passed.
+
+### 2026-09-29 — Licence-aware source acquisition + metadata (task-2) complete
+- Confirmed SourceRegistry carries all required metadata (jurisdiction, official/primary, the 7 reuse statuses,
+  licence+url+terms hash, commercial_reuse_allowed, automated_access/bulk/api, attribution_required,
+  terms_checked_at/by). Exposed licence/terms/official/commercial fields via the API response.
+- Enforcement: UNKNOWN is not permission; PERMISSION_REQUIRED/RESTRICTED/DISABLED blocked; approved sources still
+  need recorded commercial clearance in paid mode (audited PUT /sources/registry/{id}/clearance).
+- data.gov.cy remains the CONFIRMED CC BY 4.0 commercial source (seed + evidence). CC BY 4.0 permit commercial use with attribution.
+- Added tests (tests/test_licence_registry_e2e.py); full suite 37 passing.

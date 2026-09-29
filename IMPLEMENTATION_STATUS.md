@@ -16,6 +16,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 |---|---|---|
 | Platform foundation | FUNCTIONAL | FastAPI modular app, PostgreSQL(alembic) on HDD, Redis+rq durable jobs, MinIO storage; tests/test_platform_e2e.py (3 pass) |
 | Authentication / tenancy | FUNCTIONAL | register org+owner, login, JWT; cross-org blocked (403/404) verified |
+| Licence-aware source registry | FUNCTIONAL | full metadata (jurisdiction, 7 statuses, licence+url+hash, commercial clearance, terms audit) exposed via API; UNKNOWN!=permission; commercial gate enforced; data.gov.cy CC BY 4.0 confirmed; tests/test_licence_registry_e2e.py |
 | Source registry | FUNCTIONAL | seeded from SOURCE_REGISTRY_SEED.yaml; CRUD + disable adapter endpoint |
 | Source reuse enforcement | FUNCTIONAL | UNKNOWN/PERMISSION_REQUIRED blocked from bulk ingest; audit recorded |
 | Raw source ingestion | FUNCTIONAL | immutable raw→canonical, dedupe, changed→new version, provenance |
