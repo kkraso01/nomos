@@ -16,3 +16,4 @@ from .matter_ws import (MatterDocument, MatterFact, MatterEvent, MatterIssue)  #
 from .procedure import ProceduralRule  # noqa: F401
 from .firm import FirmPrecedent  # noqa: F401
 from .authority import (MatterAuthority, FollowedItem, Notification)  # noqa: F401
+from .pipeline import IngestionRun, RunArtifact  # noqa: F401

@@ -19,6 +19,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Licence-aware source registry | FUNCTIONAL | full metadata (jurisdiction, 7 statuses, licence+url+hash, commercial clearance, terms audit) exposed via API; UNKNOWN!=permission; commercial gate enforced; data.gov.cy CC BY 4.0 confirmed; tests/test_licence_registry_e2e.py |
 | Source registry | FUNCTIONAL | seeded from SOURCE_REGISTRY_SEED.yaml; CRUD + disable adapter endpoint |
 | Source reuse enforcement | FUNCTIONAL | UNKNOWN/PERMISSION_REQUIRED blocked from bulk ingest; audit recorded |
+| Immutable ingestion pipeline | FUNCTIONAL | 10-stage (DISCOVER..INDEX), content-addressed (SHA256), restartable-from-cached-RAW, provenance (snapshot+parser/normalizer/embedding_versions+model_run_id), structural LegalChunks; tests/test_pipeline_e2e.py |
 | Raw source ingestion | FUNCTIONAL | immutable raw→canonical, dedupe, changed→new version, provenance |
 | Legislation model | FUNCTIONAL | versioned Legislation/LegislationVersion/LegislationNode; deterministic normalizer |
 | Temporal legislation | FUNCTIONAL | as-of date resolves correct version; tests/test_corpus_e2e.py |

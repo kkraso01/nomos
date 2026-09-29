@@ -159,3 +159,11 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
   need recorded commercial clearance in paid mode (audited PUT /sources/registry/{id}/clearance).
 - data.gov.cy remains the CONFIRMED CC BY 4.0 commercial source (seed + evidence). CC BY 4.0 permit commercial use with attribution.
 - Added tests (tests/test_licence_registry_e2e.py); full suite 37 passing.
+
+### 2026-09-29 — Immutable, restartable ingestion pipeline (task-3) complete
+- Added IngestionRun + RunArtifact (provenance to RAW snapshot + parser/normalizer/embedding versions + model_run_id).
+- Pipeline stages DISCOVER→FETCH→RAW→PARSE→NORMALIZE→LINK→ENRICH→CHUNK→EMBED→INDEX, each idempotent and recorded per-run; run is content-addressed (source+ingest_key+sha256) so same-hash is a no-op and changed content is a NEW snapshot (never overwrites).
+- Failure at any stage is recorded; retry resumes from cached RAW (snapshot id reused) without re-fetching.
+- CHUNK stage writes structural LegalChunk rows (idempotent, deterministic chunk ids tied to canonical unit).
+- ENDPOINT /pipeline/run + /pipeline/{id}; tests expand to 41 passing (test_pipeline_e2e.py).
+- EMBED stage currently records embedding_version=None (replaceable provider wired in task-7).
