@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -43,3 +45,14 @@ def research(payload: ResearchIn, ctx: dict = Depends(require_org),
 def check_citation(payload: CitationCheckIn, ctx: dict = Depends(require_org),
                    db: Session = Depends(get_db)):
     return validate_citation(db, payload.text)
+
+@router.get("/vertical")
+def research_vertical(q: str, matter_id: str | None = None,
+                      as_of: datetime | None = None, limit: int = 20,
+                      ctx: dict = Depends(require_org), db: Session = Depends(get_db)):
+    from ..services.research_vertical import research as _research
+    out = _research(db, q, as_of=as_of, limit=limit)
+    audit.record_audit(db, action="research.vertical", org_id=ctx["org_id"],
+                       actor_user_id=ctx["user"].id,
+                       detail={"q": q, "count": out["count"], "matter_id": matter_id})
+    return out

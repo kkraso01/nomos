@@ -224,3 +224,10 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
 - Rebuilt MatterAuthority to task-2 spec: authority_type (legislation/judgment/source_document), source_scope (public/private), lawyer-controlled classification (supporting/adverse/neutral/unclassified), separate system suggestion + suggestion_provenance (MODEL_INFERENCE, never silently accepted), lawyer_note, saved_by/saved_at, matter_issue, evidence links (JSON), temporal_applicability (JSON). References canonical_ref (no duplication of canonical content).
 - Endpoints: PUT /matters/{mid}/authorities (save), POST .../classify (lawyer decision overrides), POST .../suggest (MODEL_INFERENCE stored separately), GET .../authorities (+ classification filter), GET .../authorities/folders. JSON-body canonical_ref avoids path-slash issues.
 - Tenant deny-by-default (cross-org returns 404). Migration with server defaults. Tests: test_authority_e2e.py (3) incl. suggest-does-not-override-lawyer and tenant isolation. Full suite 54 passed.
+
+### 2026-09-29 — Research vertical end-to-end (task-3) complete
+- services/research_vertical.py: research query -> hybrid_search -> per-result enrichment:
+  why (explanation), exact evidence (judgment paragraphs with char/spans/section, or exact provision text+span resolved to the applicable version via as-of), authority detail (court/date/jurisdiction/ECLI/case_no/cited/citing/treatments/legislation_links; legislation title+jurisdiction).
+- GET /research/vertical?q=&as_of=&matter_id=&limit= returning enriched results (evidence-first, no opaque similarity percentages).
+- Saving/classifying into a matter reuses the task-2 authority endpoints (canonical_ref reference, no duplication).
+- Tests: tests/test_research_vertical_e2e.py (evidence+detail rows; save+classify+folders). Full suite 56 passed.
