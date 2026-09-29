@@ -83,3 +83,26 @@ docker run --rm --volumes-from nomos-minio -v "$PWD/backups":/b \
 # restore PostgreSQL
 docker exec -i nomos-postgres pg_restore -U nomos -d nomos --clean < backups/nomos.dump
 ```
+
+### Apache exposure
+
+NOMOS is reachable at `http://<host>/nomos/` through the existing Apache server
+(reverse proxy to the local FastAPI backend on `127.0.0.1:8010`). A backup of the
+stock vhost lives at `/etc/apache2/sites-enabled/000-default.conf.nomos-bak`.
+
+- `GET /nomos/` → browsable landing page
+- `GET /nomos/health` → JSON health
+- `GET /nomos/docs` → Swagger UI
+
+The proxy block was appended to the `:80` default vhost (same pattern as the
+pre-existing demiourgo preview) and reloaded with a graceful `systemctl reload
+apache2` — no other service was stopped or altered.
+
+To re-apply after a fresh config: in `/etc/apache2/sites-enabled/000-default.conf`
+inside the `<VirtualHost *:80>` add
+```apache
+ProxyPreserveHost On
+ProxyPass        /nomos/ http://127.0.0.1:8010/
+ProxyPassReverse /nomos/ http://127.0.0.1:8010/
+```
+then `sudo apachectl configtest && sudo systemctl reload apache2`.

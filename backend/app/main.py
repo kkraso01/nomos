@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 
 from .api import auth, matters, documents, sources, jobs, ai_endpoint, corpus, search, matter_ws, citation, procedure, research, audit_export, drafting, firm, plan, authority, similarity
 from .config import settings
@@ -44,6 +45,28 @@ def health():
     return {"status": "ok", "env": settings.app_env, "debug": settings.debug}
 
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def root():
-    return {"app": "NOMOS", "docs": "/docs"}
+    version = app.version
+    env = settings.app_env
+    return """<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>NOMOS — Cyprus Legal Intelligence Platform</title>
+<style>
+:root{{color-scheme:light dark}} body{{font-family:system-ui,sans-serif;max-width:760px;margin:2.5rem auto;padding:0 1.2rem;line-height:1.55}}
+h1{{font-size:2rem;margin-bottom:.15rem}} header p.tag{{color:#6b7280;margin:.2rem 0 1rem}}
+a{{color:#1d4ed8}} ul{{line-height:1.9}} footer{{color:#9ca3af;font-size:.85rem;margin-top:1.5rem}}
+</style>
+</head><body>
+<header><h1>NOMOS</h1><p class="tag">Evidence-first legal research &amp; matter-intelligence</p></header>
+<main>
+<p>This is the NOMOS API. Browse the API documentation or key workflow endpoints below.</p>
+<ul>
+<li><a href="/docs">Interactive API docs (Swagger UI)</a></li>
+<li><a href="/health">Health check</a></li>
+<li><a href="/openapi.json">OpenAPI specification</a></li>
+<li><a href="/sources/registry">Source registry</a></li>
+<li><a href="/search?q=insolvency">Search (needs auth)</a></li>
+</ul>
+</main>
+<footer><span>NOMOS {version}</span> · <span>env: {env}</span></footer>
+</body></html>""".format(version=version, env=env)
