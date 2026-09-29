@@ -191,3 +191,9 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
 - Pipeline EMBED stage persists vectors + provider/model/version/dimensions/created_at + model_run_id per chunk.
 - /ai/embed + /ai/cosine endpoints. Cross-lingual cosine sanity verified (English insolvency vs Greek liquidation).
 - Tests expand to 47 passing (test_embedding_e2e.py).
+
+### 2026-09-29 — Hybrid retrieval + temporal + eval + feedback (task-8) complete
+- /search/hybrid implements: query understanding (exact-reference, event-date) -> exact + BM25 + dense(e5 chunk vectors) + graph/legislation-tree -> dedup -> RRF (never sums raw BM25/dense) -> reranker -> explanation; legislation results expose applicable-as-of version (+diff).
+- Temporal-aware: as-of date (explicit or extracted from "2021"/"14 April 2019") resolves applicable provision version.
+- Early Cyprus eval corpus (English/Greek/cross-lingual + hard negatives) + metrics script (Recall@10/50, MRR, nDCG@10, Precision@10); /feedback stores lawyer signals (no fine-tuning).
+- Tests expand to 51 passing (test_hybrid_retrieval_e2e.py).

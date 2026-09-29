@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 import os
 
-from .api import auth, matters, documents, sources, jobs, ai_endpoint, corpus, search, matter_ws, citation, procedure, research, audit_export, drafting, firm, plan, authority, similarity, pipeline, amendments, embed
+from .api import auth, matters, documents, sources, jobs, ai_endpoint, corpus, search, hybrid, matter_ws, citation, procedure, research, audit_export, drafting, firm, plan, authority, similarity, pipeline, amendments, embed, feedback
 from .config import settings
 
 app = FastAPI(
@@ -43,6 +43,8 @@ app.include_router(similarity.router)
 app.include_router(pipeline.router)
 app.include_router(amendments.router)
 app.include_router(embed.router)
+app.include_router(hybrid.router)
+app.include_router(feedback.router)
 
 # Minimal browseable web frontend (single self-contained page).
 _static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
