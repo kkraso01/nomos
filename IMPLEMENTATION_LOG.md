@@ -124,3 +124,12 @@ The following are not blockers to functional feature development and should only
 ### 2026-09-23 — PDF matter-document parsing
 - Added deterministic PDF text extraction (PyMuPDF) to private matter documents; PDFs now feed the fact/event/chronology pipeline (previously text-only). No OCR/ML.
 - Tests expand to 32 passing.
+
+### 2026-09-29 — Small on-device reranker (Reranking → FUNCTIONAL)
+- Installed a lightweight reranker (no torch/CUDA): ONNX Runtime + `cross-encoder/ms-marco-MiniLM-L-6-v2`
+  qint8 ARM64 ONNX (22.6 MB) downloaded to HDD `models/reranker-minilm`.
+- Wired via the `RERANK_SEARCH` capability (POST /ai/capability returns per-doc scores) and as an
+  opt-in cross-encoder rerank step on `GET /search?rerank=true` (graceful fallback to lexical if model absent).
+- Verified on this ARM64 host: relevant doc scored high (+8) vs irrelevant (~-11); first load ~1.8 s.
+- Tests expand to 34 passing (2 new rerank e2e, guarded on model presence).
+- Semantic *embeddings* (dense retrieval) remain intentionally unconfigured on this device.

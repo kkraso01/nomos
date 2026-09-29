@@ -109,3 +109,16 @@ then `sudo apachectl configtest && sudo systemctl reload apache2`.
 
 - `GET /nomos/ui` (or `/nomos/frontend`) → minimal **web UI** (login/register, public search,
   citation validation) whose JavaScript calls the same API through the same `/nomos/` proxy.
+
+### Semantic reranking (on-device, no GPU)
+A small efficient reranker runs on the Pi: `cross-encoder/ms-marco-MiniLM-L-6-v2`
+exported as **qint8 ARM64 ONNX** (22.6 MB, HDD `models/reranker-minilm`), served by
+ONNX Runtime (no torch/CUDA).
+
+- `POST /ai/capability {capability:"RERANK_SEARCH", prompt, documents:[...]}` → per-doc scores.
+- `GET /search?q=...&rerank=true` → lexical/exact candidates reranked by the cross-encoder
+  (graceful fallback to lexical order if the model is unavailable).
+
+Semantic *embeddings* (dense retrieval) remain intentionally unconfigured on this device.
+Model download: `huggingface_hub` → `cross-encoder/ms-marco-MiniLM-L-6-v2`, file
+`onnx/model_qint8_arm64.onnx` (+ tokenizer/config) into `models/reranker-minilm`.

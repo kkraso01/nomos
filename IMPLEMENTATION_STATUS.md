@@ -28,7 +28,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | BM25 search | FUNCTIONAL | Postgres ts_vector/unaccent lexical (EN+EL); OpenSearch provider pluggable |
 | Semantic search | NOT_STARTED | no local embed model on Pi; semantic mode falls back to lexical |
 | Hybrid retrieval | PARTIAL | exact-reference + lexical fused; semantic punch-out deferred |
-| Reranking | NOT_STARTED | |
+| Reranking | FUNCTIONAL | ONNX MiniLM cross-encoder (qint8 arm64, no torch) via RERANK_SEARCH + /search?rerank=true; tests/test_rerank_e2e.py |
 | Search explanations | FUNCTIONAL | reason_for_match on every result; provenance |
 | Greek / English retrieval | FUNCTIONAL | tests/test_search_e2e.py; unaccent tsvector handles both |
 | Matter workspace | FUNCTIONAL | create matter, upload doc, extract, chronology, fact accept/reject; tenancy isolation; tests/test_matter_ws_e2e.py |
