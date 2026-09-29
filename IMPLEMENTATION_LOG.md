@@ -184,3 +184,10 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
 - enrich_judgment deterministically links a judgment's paragraphs (as exact evidence_paragraph_id) to legislation provisions (APPLIES) and cited cases (CITES) via in-text refs; /citation/enrich-judgment.
 - Expanded graph expansion returns cited/citing/treatments/legislation_links; semantic treatment starts REVIEW_REQUIRED (evidence-backed, never invented).
 - Tests expand to 45 passing.
+
+### 2026-09-29 — Structural LegalChunk + replaceable embeddings (task-7) complete
+- LegalChunk gained an `embedding` JSON vector column; chunking is structural (legislation article/paragraph; judgment paragraph+section) and idempotent with deterministic chunk ids tied to the canonical unit.
+- Replaceable embedding provider interface (app/services/embedding.py): EMBED_TEXT; initial baseline multilingual-e5-small ONNX (384-dim, GR+EN) on HDD models/e5-small; disabled fallback provider so nothing crashes when uninstalled.
+- Pipeline EMBED stage persists vectors + provider/model/version/dimensions/created_at + model_run_id per chunk.
+- /ai/embed + /ai/cosine endpoints. Cross-lingual cosine sanity verified (English insolvency vs Greek liquidation).
+- Tests expand to 47 passing (test_embedding_e2e.py).

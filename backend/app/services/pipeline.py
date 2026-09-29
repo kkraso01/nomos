@@ -8,6 +8,7 @@ material. Every derived artifact records source_snapshot_id + parser/normalizer/
 embedding versions + model_run_id.
 """
 from datetime import datetime, timezone
+import uuid
 
 from sqlalchemy.orm import Session
 
@@ -126,7 +127,7 @@ def run_pipeline(db: Session, *, source_id, ingest_key, kind: str = "legislation
                     judgment = db.get(Judgment, run.document_id)
                     chunk_svc.chunk_judgment(db, judgment, run.document_version_id, run.parser_version)
             elif stage == "EMBED":
-                run.embedding_version = _EMBED_PROVIDER  # None => skipped
+                run.embedding_version = _embed_chunks(db, run)
             elif stage == "INDEX":
                 db.flush()  # search projection already maintained by corpus ingest
 
@@ -150,3 +151,28 @@ def _ensure_jurisdiction(db: Session, code: str):
     if db.get(Jurisdiction, code) is None:
         db.add(Jurisdiction(code=code, name=code, node_terms={}, active=True))
         db.commit()
+
+def _embed_chunks(db: Session, run) -> str | None:
+    """Embed the run's chunks with the current embedding provider; persist vectors
+    + provider metadata + model_run_id. Returns the embedding version or None."""
+    from ..services.embedding import get_provider
+    from ..models.core import LegalChunk
+    prov = get_provider()
+    if not prov.available() or run.document_version_id is None:
+        return None
+    chunks = db.query(LegalChunk).filter_by(version_id=run.document_version_id).all()
+    if not chunks:
+        return prov.meta()["version"]
+    texts = [(c.hierarchy_context or c.text) for c in chunks]
+    vecs = prov.embed(texts, is_query=False)
+    model_run_id = uuid.uuid4()
+    for c, v in zip(chunks, vecs):
+        c.embedding = v
+        c.embedding_provider = prov.meta()["provider"]
+        c.embedding_model = prov.meta()["model"]
+        c.embedding_version = prov.meta()["version"]
+        c.embedding_dimensions = prov.meta()["dimensions"]
+        c.embedding_created_at = datetime.now(timezone.utc)
+        c.model_run_id = model_run_id
+    db.flush()
+    return prov.meta()["version"]

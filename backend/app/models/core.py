@@ -282,7 +282,7 @@ class LegalChunk(Base):
     embedding_version = Column(String(64), nullable=True)
     embedding_dimensions = Column(Integer, nullable=True)
     embedding_created_at = Column(DateTime(timezone=True), nullable=True)
-    embedding = None  # stored in a side table/vector column externally
+    embedding = Column(JSON, nullable=True)  # vector as JSON float array (pgvector substitute)
     content_hash = Column(String(64), nullable=True)
     model_run_id = Column(UUID(as_uuid=True), nullable=True)
     created_at = Column(DateTime(timezone=True), default=_now)
