@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>NOMOS Web</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{color-scheme:light dark} body{font-family:system-ui,sans-serif;max-width:860px;margin:2rem auto;padding:0 1rem}
+h1{font-size:1.6rem} section{background:#f6f7f9;border:1px solid #dfe3e8;border-radius:8px;padding:12px 14px;margin:12px 0}
+input,select,button{font:inherit;padding:6px 8px;border:1px solid #cbd;border-radius:6px}
+button{background:#1d4ed8;color:#fff;border:none;cursor:pointer}
+pre{white-space:pre-wrap;background:#0f1117;color:#d6dadd;padding:10px;border-radius:6px;max-height:220px;overflow:auto}
+small{color:#6b7280}
+</style></head>
+<body>
+<h1>NOMOS · Web</h1>
+<div id="api" hidden></div>
+
+<section id="authSec">
+  <h3>Sign in</h3>
+  <form id="loginF">
+    Email <input id="email" size="22" value="a@law.com">
+    Password <input id="password" type="password" size="14" value="pw123">
+    <button type="submit">Login</button>
+  </form>
+  <p><small>No account? <button type="button" id="registerBtn">Register org (admin@example.com / adminpass)</button></small></p>
+</section>
+
+<section id="searchSec" hidden>
+  <h3>Search public law</h3>
+  <input id="q" size="34" placeholder="e.g. Article 5 of Law 261; insolvency; εκκαθάριση">
+  <select id="mode"><option value="hybrid">hybrid</option><option value="lexical">lexical</option></select>
+  <button id="go">Search</button>
+  <button id="logout">Logout</button>
+  <p id="who"></p>
+</section>
+
+<section id="resSec" hidden>
+  <h3>Results</h3>
+  <div id="results"></div>
+</section>
+
+<section id="citSec" hidden>
+  <h3>Validate a citation</h3>
+  <input id="cit" size="34" placeholder="Article 5 of Law 261 of 2015">
+  <button id="citGo">Validate</button>
+  <pre id="citOut"></pre>
+</section>
+
+<script>
+const API = location.pathname.startsWith('/nomos') ? '/nomos' : '';
+let TOKEN = null;
+
+function show(id,on){document.getElementById(id).hidden=!on;}
+function set(key,val){document.getElementById(key).value=val;}
+
+async function req(path,opts){opts=opts||{};opts.headers=Object.assign({},opts.headers||{});
+  if(TOKEN)opts.headers['Authorization']='Bearer '+TOKEN;
+  if(opts.json){opts.headers['Content-Type']='application/json';opts.body=JSON.stringify(opts.json);delete opts.json;}
+  const r=await fetch(API+path,opts);const ct=r.headers.get('content-type')||'';
+  const body=ct.includes('json')?await r.json():{status:r.status};
+  return {r,body};
+}
+
+document.getElementById('loginF').onsubmit=async(e)=>{e.preventDefault();
+  const {r,body}=await req('/auth/login',{method:'POST',json:{email:document.getElementById('email').value,password:document.getElementById('password').value}});
+  if(r.ok){TOKEN=body.access_token;enter();}else{alert('Login failed: '+JSON.stringify(body));}
+};
+
+document.getElementById('registerBtn').onclick=async()=>{
+  const {r,body}=await req('/auth/register',{method:'POST',json:{org:{name:'Web Org',slug:'web'+Date.now()},admin_email:'admin@example.com',admin_password:'adminpass'}});
+  if(r.ok){TOKEN=body.access_token;enter();}else{alert(JSON.stringify(body));}
+};
+
+function enter(){show('authSec',false);show('searchSec',true);show('citSec',true);
+  document.getElementById('who').textContent='Signed in · token '+TOKEN.slice(0,12)+'…';
+}
+
+function render(r){const d=document.getElementById('results');d.innerHTML='';
+  if(r.results&&r.results.length===0){d.innerHTML='<p>No results.</p>';}
+  (r.results||[]).forEach(x=>{const box=document.createElement('div');
+    box.innerHTML='<b>'+escapeHtml(x.title||x.kind)+'</b> <code>'+escapeHtml(x.canonical_ref||'')+'</code><br>'+
+      '<small>score '+x.score+' · '+escapeHtml(x.reason_for_match||'')+'</small>'+
+      '<pre>'+escapeHtml((x.text||'').slice(0,260))+'</pre>';d.appendChild(box);});
+}
+
+document.getElementById('go').onclick=async()=>{
+  const q=document.getElementById('q').value;if(!q)return;
+  const {r,body}=await req('/search?q='+encodeURIComponent(q)+'&mode='+document.getElementById('mode').value);
+  if(r.ok){show('resSec',true);render(body);}else{alert(JSON.stringify(body));}
+};
+
+document.getElementById('citGo').onclick=async()=>{
+  const t=document.getElementById('cit').value;if(!t)return;
+  const {r,body}=await req('/research/validate-citation',{method:'POST',json:{text:t}});
+  document.getElementById('citOut').textContent=JSON.stringify(body,null,2);
+};
+
+document.getElementById('logout').onclick=()=>{TOKEN=null;show('searchSec',false);show('resSec',false);show('citSec',false);show('authSec',true);};
+
+function escapeHtml(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// on load: if we have no token, show login (authSec already visible)
+</script>
+</body></html>

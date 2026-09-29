@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
+import os
 
 from .api import auth, matters, documents, sources, jobs, ai_endpoint, corpus, search, matter_ws, citation, procedure, research, audit_export, drafting, firm, plan, authority, similarity
 from .config import settings
@@ -39,6 +41,21 @@ app.include_router(authority.router)
 app.include_router(authority.follow_router)
 app.include_router(similarity.router)
 
+# Minimal browseable web frontend (single self-contained page).
+_static_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+
+
+@app.get("/ui", response_class=HTMLResponse)
+def web_ui():
+    with open(os.path.join(_static_dir, "index.html"), encoding="utf-8") as fh:
+        return HTMLResponse(fh.read())
+
+
+@app.get("/frontend", response_class=HTMLResponse)
+def frontend_alias():
+    with open(os.path.join(_static_dir, "index.html"), encoding="utf-8") as fh:
+        return HTMLResponse(fh.read())
+
 
 @app.get("/health", tags=["system"])
 def health():
@@ -61,6 +78,7 @@ a{{color:#1d4ed8}} ul{{line-height:1.9}} footer{{color:#9ca3af;font-size:.85rem;
 <main>
 <p>This is the NOMOS API. Browse the API documentation or key workflow endpoints below.</p>
 <ul>
+<li><a href="/ui">Web UI (login → search)</a></li>
 <li><a href="/docs">Interactive API docs (Swagger UI)</a></li>
 <li><a href="/health">Health check</a></li>
 <li><a href="/openapi.json">OpenAPI specification</a></li>

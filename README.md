@@ -106,3 +106,6 @@ ProxyPass        /nomos/ http://127.0.0.1:8010/
 ProxyPassReverse /nomos/ http://127.0.0.1:8010/
 ```
 then `sudo apachectl configtest && sudo systemctl reload apache2`.
+
+- `GET /nomos/ui` (or `/nomos/frontend`) → minimal **web UI** (login/register, public search,
+  citation validation) whose JavaScript calls the same API through the same `/nomos/` proxy.
