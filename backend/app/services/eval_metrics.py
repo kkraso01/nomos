@@ -5,12 +5,14 @@ Recall@10, Recall@50, MRR, nDCG@10, Precision@10. No model fine-tuning.
 """
 import math
 
-# Each item: (query, [relevant canonical_refs], note)
+# Each item: (query, [relevant canonical_refs], note). canonical refs must match
+# what the ingestion pipeline produces (law-{canonical_id}-art-{n} for legislation;
+# judgment-{case_number} for judgments with a case number).
 EVAL_QUERIES = [
     ("company wound up in the event of insolvency", ["law-ELW-art-5"], "EN, direct"),
     ("εκκαθάριση εταιρείας λόγω αφερεγγυότητας", ["law-ELW-art-5"], "EL, cross-lingual"),
     ("winding up on insolvency 2021", ["law-ELW-art-5"], "temporal year in query"),
-    ("the seller failed to deliver goods under the contract", ["judgment-GRD-1"], "EN judgments"),
+    ("the seller failed to deliver goods under the contract", ["judgment-1/2018"], "EN judgment (case-number ref)"),
     ("appointment of a liquidator after insolvency", ["law-ELW-art-5"], "EN phrasing"),
     ("limitation period professional negligence", [], "hard negative: not in corpus"),
     ("quantum teleportation liability", [], "hard negative: out-of-scope"),

@@ -197,3 +197,9 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
 - Temporal-aware: as-of date (explicit or extracted from "2021"/"14 April 2019") resolves applicable provision version.
 - Early Cyprus eval corpus (English/Greek/cross-lingual + hard negatives) + metrics script (Recall@10/50, MRR, nDCG@10, Precision@10); /feedback stores lawyer signals (no fine-tuning).
 - Tests expand to 51 passing (test_hybrid_retrieval_e2e.py).
+
+### 2026-09-29 — Auditor fixes: real hybrid rerank + legislation-tree candidates + exercised eval
+- hybrid_search rerank is no longer dead code: it reorders the RRF-fused results with the ONNX cross-encoder and exposes per-result rerank_score + reranked flag (test asserts non-increasing model scores).
+- Added legislation-tree candidate source (_legislation_tree_candidates) — for matched laws, adds all their provision nodes as a distinct RRF input (parent/sibling/related provisions), satisfying the explicit tree-traversal requirement.
+- Eval corpus made consistent with ingestion: judgment fixture canonical ref changed to the case-number-based "judgment-1/2018" the pipeline actually produces; added test_eval_runs_on_live_corpus which ingests law+jJudgment and runs eval_metrics.evaluate() against the live hybrid retriever (recall@10==1.0, MRR>0, hard-negative recall==0).
+- Full suite: 53 passed.

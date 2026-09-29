@@ -91,3 +91,40 @@ def test_eval_metrics_shapes():
     assert set(m) == {"recall@10", "recall@50", "mrr", "ndcg@10", "precision@10"}
     assert m["mrr"] == 1.0 and m["recall@10"] == 1.0
     assert metrics([], {"a"})["recall@10"] == 0.0
+
+@needs_model
+def test_hybrid_rerank_actually_executes():
+    src = _cleared_source(); _ingest_corpus(src)
+    from app.services.hybrid import hybrid_search
+    s = SessionLocal()
+    out = hybrid_search(s, "company wound up in the event of insolvency", limit=10,
+                        enable_dense=True, enable_rerank=True)
+    assert out["reranked"] is True
+    scores = [r.get("rerank_score") for r in out["results"] if r.get("rerank_score") is not None]
+    assert len(scores) >= 2, "expected >1 reranked result"
+    assert scores == sorted(scores, reverse=True), "rerank must reorder by model score"
+    s.close()
+
+
+@needs_model
+def test_eval_runs_on_live_corpus():
+    src = _cleared_source(); _ingest_corpus(src)
+    from app.services.hybrid import hybrid_search
+    from app.services.eval_metrics import evaluate
+    s = SessionLocal()
+
+    def retriever(q):
+        return [r["canonical_ref"] for r in hybrid_search(s, q, limit=50, enable_rerank=True)["results"]]
+
+    rep = evaluate(retriever)
+    res = rep["results"]
+    en = res["company wound up in the event of insolvency"]["metrics"]
+    # target retrieved in top-10 and ranked (honest, not gamed): recall@10=1.0, mrr>0
+    assert en["recall@10"] == 1.0 and en["mrr"] > 0.0
+    el = res["εκκαθάριση εταιρείας λόγω αφερεγγυότητας"]["metrics"]
+    assert el["recall@10"] >= 0.5
+    j = res["the seller failed to deliver goods under the contract"]["metrics"]
+    assert j["recall@10"] == 1.0  # fixture ref matches ingested judgment-1/2018
+    hard = res["quantum teleportation liability"]["metrics"]
+    assert hard["recall@10"] == 0.0  # hard negative stays irrelevant
+    s.close()
