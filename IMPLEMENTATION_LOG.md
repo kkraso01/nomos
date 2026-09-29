@@ -120,3 +120,7 @@ The following are not blockers to functional feature development and should only
   `PUT /sources/registry/{id}/clearance`). Verified at runtime: data.gov.cy ingests; EUR-Lex
   (approved-open but not commercially cleared) blocked 403; CyLaw blocked.
 - Tests updated; suite still 31 passing.
+
+### 2026-09-23 — PDF matter-document parsing
+- Added deterministic PDF text extraction (PyMuPDF) to private matter documents; PDFs now feed the fact/event/chronology pipeline (previously text-only). No OCR/ML.
+- Tests expand to 32 passing.

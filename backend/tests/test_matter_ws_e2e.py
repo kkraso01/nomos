@@ -73,3 +73,30 @@ def test_issue_spotting_from_accepted_facts():
     texts = [i["text"] for i in issues]
     assert any("insolvent" in t for t in texts)
     assert any("damages" in t for t in texts)
+
+
+def test_pdf_matter_document_parsing():
+    import uuid
+    try:
+        import pymupdf
+    except Exception:
+        import fitz as pymupdf
+    p = f"pdf{uuid.uuid4().hex[:5]}"
+    rr = client.post("/auth/register", json={"org": {"name": p, "slug": p},
+                                             "admin_email": f"{p}@x.com", "admin_password": "pw123"})
+    h3 = {"Authorization": f"Bearer {rr.json()['access_token']}"}
+    mid = client.post("/matters", headers=h3, json={"title": "P"}).json()["id"]
+
+    doc = pymupdf.open()
+    pg = doc.new_page()
+    pg.insert_text((72, 72), "The seller shall pay damages for the breach on 05/09/2021.")
+    data = doc.tobytes(); doc.close()
+
+    up = client.post(f"/matters/{mid}/documents", headers=h3,
+                     files={"file": ("c.pdf", io.BytesIO(data), "application/pdf")}).json()
+    assert up["extracted_text_chars"] > 0
+    did = up["document_id"]
+    ex = client.post(f"/matters/{mid}/documents/{did}/extract", headers=h3).json()
+    assert ex["proposed_events"] >= 1
+    dates = " ".join(e["event_date"] for e in client.get(f"/matters/{mid}/chronology", headers=h3).json()["events"])
+    assert "2021-09-05" in dates

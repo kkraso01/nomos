@@ -32,7 +32,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Search explanations | FUNCTIONAL | reason_for_match on every result; provenance |
 | Greek / English retrieval | FUNCTIONAL | tests/test_search_e2e.py; unaccent tsvector handles both |
 | Matter workspace | FUNCTIONAL | create matter, upload doc, extract, chronology, fact accept/reject; tenancy isolation; tests/test_matter_ws_e2e.py |
-| Matter document ingestion | FUNCTIONAL | private upload to MinIO + text extraction |
+| Matter document ingestion | FUNCTIONAL | private upload to MinIO; text + PDF parsing (PyMuPDF); tests/test_matter_ws_e2e.py |
 | Fact extraction | PARTIAL | L0 deterministic extraction with source spans, proposed→review; no LLM |
 | Chronology | FUNCTIONAL | dated events sorted by date |
 | Issue spotting | FUNCTIONAL | L0 proposed issues from accepted facts for lawyer review; tests/test_matter_ws_e2e.py |

@@ -10,6 +10,7 @@ from ..core.tenancy import require_org
 from ..core import audit
 from ..storage.s3 import storage
 from ..services import extract
+from ..services.document_parse import extract_text_from_bytes
 from ..models.matter_ws import MatterDocument, MatterFact, MatterEvent, MatterIssue
 
 router = APIRouter(prefix="/matters", tags=["matter-workspace"])
@@ -35,9 +36,7 @@ def upload_matter_document(matter_id: uuid.UUID, file: UploadFile = File(...),
     org = ctx["org_id"]
     _get_matter(db, org, matter_id)
     data = file.file.read()
-    text = ""
-    if (file.content_type or "").startswith("text") or file.filename.endswith(".txt"):
-        text = data.decode("utf-8", "replace")
+    text = extract_text_from_bytes(data, file.filename)
     text_bytes = data
     key = f"{org}/matters/{matter_id}/{file.filename or 'doc.bin'}"
     storage.put_bytes(text_bytes, key, private=True,
