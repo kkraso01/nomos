@@ -167,3 +167,10 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
 - CHUNK stage writes structural LegalChunk rows (idempotent, deterministic chunk ids tied to canonical unit).
 - ENDPOINT /pipeline/run + /pipeline/{id}; tests expand to 41 passing (test_pipeline_e2e.py).
 - EMBED stage currently records embedding_version=None (replaceable provider wired in task-7).
+
+### 2026-09-29 — Temporal legislation + amendments as events (task-4) complete
+- apply_amendment creates a NEW legislation version effective on the amendment date (never overwrites history),
+  carries all node wording forward, and applies the operation to the affected node; records LegislationAmendment
+  (insert/delete/replace/renumber/repeal/commence + previous/new text + publication/effective dates + source evidence).
+- /amendments record, list, diff; as-of resolves the version applicable on a date (tests: 2022 amendment -> 2021 vs 2023 text).
+- Tests expand to 42 passing.

@@ -22,6 +22,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Immutable ingestion pipeline | FUNCTIONAL | 10-stage (DISCOVER..INDEX), content-addressed (SHA256), restartable-from-cached-RAW, provenance (snapshot+parser/normalizer/embedding_versions+model_run_id), structural LegalChunks; tests/test_pipeline_e2e.py |
 | Raw source ingestion | FUNCTIONAL | immutable raw→canonical, dedupe, changed→new version, provenance |
 | Legislation model | FUNCTIONAL | versioned Legislation/LegislationVersion/LegislationNode; deterministic normalizer |
+| Temporal legislation + amendments | FUNCTIONAL | amendments as append-only events (INSERT/REPLACE/DELETE/RENUMBER/REPEAL/COMMENCE) with prev/new text + effective/pub dates + evidence; new version on amend; as-of resolves applicable vs current; diff API; tests/test_amendments_e2e.py |
 | Temporal legislation | FUNCTIONAL | as-of date resolves correct version; tests/test_corpus_e2e.py |
 | Judgment model | FUNCTIONAL | versioned ingest + L0 segmentation (facts/procedural/holding/order); tests/test_corpus_e2e.py |
 | Citation graph | FUNCTIONAL | validated edges (must exist), semantic evidence requirement, traversal; tests/test_citation_e2e.py |
