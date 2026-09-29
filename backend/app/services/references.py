@@ -66,3 +66,42 @@ def parse_reference(text: str, default_law_number: str | None = None) -> ParsedR
         return ParsedReference(kind="legislation", law_number=ln.group(1),
                                law=ln.group(1), raw=raw, confidence=0.9)
     return ParsedReference(kind="unknown", raw=raw, confidence=0.0)
+
+# --- Deterministic multi-reference extractor (returns exact spans) ---
+_REF_ARTICLE = re.compile(
+    r"(?:Άρθρο|άρθρο|Article|αρ\.)\s*\.?\s*"
+    r"([0-9IVXLC]+(?:[A-Z])?)(?:\((\d+[a-z]?)\))?(?:\(([α-ω])\))?", re.IGNORECASE)
+_REF_CHAPTER = re.compile(r"(?:ΚΕΦ\.|Κεφ\.|Κεφάλαιο|Chapter)\s*([0-9]+)", re.IGNORECASE)
+_REF_LAW = re.compile(
+    r"(?:Ν\.\s*|Law\s+|Νόμος\s+)?([0-9]+)(?:\(([IVXLC]+)\))?\s*/\s*([0-9]{4})", re.IGNORECASE)
+_REF_ECLI = re.compile(r"\bECLI:([A-Z]{2}):[A-Z0-9]{1,6}:[0-9]{4}:[A-Z0-9]{1,6}\b", re.IGNORECASE)
+_REF_CASE = re.compile(r"([0-9]{1,5})\s*/\s*([0-9]{4})", re.IGNORECASE)
+
+
+def extract_references(text: str) -> list[dict]:
+    """Return deterministic legal references with exact character spans.
+
+    Each item: {"kind": article|chapter|law|judgment_ecli|judgment_case,
+                "article"/"sub"/"para"/"chapter"/"law"/"ecli"/"case", start, end}
+    """
+    if not text:
+        return []
+    out = []
+    for m in _REF_ARTICLE.finditer(text):
+        out.append({"kind": "article", "article": m.group(1), "sub": m.group(2),
+                    "para": m.group(3), "start": m.start(), "end": m.end(),
+                    "text": text[m.start():m.end()]})
+    for m in _REF_CHAPTER.finditer(text):
+        out.append({"kind": "chapter", "chapter": m.group(1), "start": m.start(),
+                    "end": m.end(), "text": text[m.start():m.end()]})
+    for m in _REF_LAW.finditer(text):
+        out.append({"kind": "law", "law": m.group(1), "roman": m.group(2),
+                    "year": m.group(3), "start": m.start(), "end": m.end(),
+                    "text": text[m.start():m.end()]})
+    for m in _REF_ECLI.finditer(text):
+        out.append({"kind": "judgment_ecli", "ecli": m.group(0), "start": m.start(),
+                    "end": m.end(), "text": m.group(0)})
+    for m in _REF_CASE.finditer(text):
+        out.append({"kind": "judgment_case", "case": f"{m.group(1)}/{m.group(2)}",
+                    "start": m.start(), "end": m.end(), "text": m.group(0)})
+    return out

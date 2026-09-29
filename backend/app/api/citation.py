@@ -104,6 +104,17 @@ def add_provision_ref(payload: ProvRefIn, ctx: dict = Depends(require_org),
     return {"reference_id": str(r.id), "confidence": r.confidence}
 
 
+@router.post("/scan-provision-refs")
+def scan_provision_refs(canonical_id: str, ctx: dict = Depends(require_org),
+                        db: Session = Depends(get_db)):
+    from ..services.provision_refs import scan_legislation
+    out = scan_legislation(db, canonical_id)
+    audit.record_audit(db, action="graph.scan_provision_refs", org_id=ctx["org_id"],
+                       actor_user_id=ctx["user"].id,
+                       detail={"canonical_id": canonical_id, "created": out.get("created")})
+    return out
+
+
 @router.get("/case/{ref}")
 def expand_case(ref: str, ctx: dict = Depends(require_org), db: Session = Depends(get_db)):
     import uuid as _uuid

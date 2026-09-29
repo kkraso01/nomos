@@ -174,3 +174,8 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
   (insert/delete/replace/renumber/repeal/commence + previous/new text + publication/effective dates + source evidence).
 - /amendments record, list, diff; as-of resolves the version applicable on a date (tests: 2022 amendment -> 2021 vs 2023 text).
 - Tests expand to 42 passing.
+
+### 2026-09-29 — Deterministic provision cross-references (task-5) complete
+- Extended L0 extractor to all Cyprus/Greek forms with exact spans (άρθρο 15(2)(α), ΚΕΦ.6, Κεφ.148, Ν.123(I)/2020, ΕΛLI, case numbers, Article 15).
+- scan_legislation creates ProvisionCrossReference(source_node->target_node, span, high confidence) within a legislation version; /citation/scan-provision-refs.
+- Tests expand to 44 passing.
