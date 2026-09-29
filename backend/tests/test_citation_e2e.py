@@ -1,13 +1,12 @@
-"""Functional tests for the citation graph."""
+"""Functional tests for the jurisdiction-agnostic legal graph (CaseCitation,
+JudgmentLegislationLink, ProvisionCrossReference, CaseTreatment, expansion)."""
 import uuid
 
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.services.citation import CitationValidationError, create_edge
 
 client = TestClient(app)
-from app.db import SessionLocal
 
 
 def _login():
@@ -18,47 +17,50 @@ def _login():
     return {"Authorization": f"Bearer {r.json()['access_token']}"}
 
 
-def test_citation_graph_via_api():
+def _seed_judgment(h, cid, title, case_no, body):
+    return client.post("/corpus/judgment", headers=h, json={
+        "canonical_id": cid, "title": title, "jurisdiction": "CY",
+        "court": "Supreme Court", "case_number": case_no, "raw_text": body}).status_code
+
+
+def test_case_citation_and_treatment():
     h = _login()
-    # seed a judgment + law article
-    client.post("/corpus/judgment", headers=h, json={
-        "canonical_id": f"CJ-{uuid.uuid4().hex[:6]}", "title": "X v Y",
-        "case_number": "10/2019", "raw_text": "The court held X. Cited Article 5."})
-    jref = f"judgment-10/2019"
-    law_cid = f"L{uuid.uuid4().hex[:6]}"
-    client.post("/corpus/legislation", headers=h, json={
-        "canonical_id": law_cid, "title": "T", "language": "en",
-        "raw_text": "Article 5. Rule.\n(1) liability is established."})
-    lref = f"law-{law_cid}-art-5"
+    assert _seed_judgment(h, "JA", "A v B", "10/2019", "Facts\none.\nHolding\ntwo.")
+    assert _seed_judgment(h, "JB", "C v D", "11/2020", "Facts\none.\nHolding\ntwo.")
 
-    e = {"source_kind": "judgment_node", "source_ref": jref,
-         "target_kind": "legislation_node", "target_ref": lref, "treatment": "CITES"}
-    assert client.post("/citation", headers=h, json=e).status_code == 201
-
-    # nonexistent target rejected
-    bad = dict(e, target_ref="law-999-zzz")
-    assert client.post("/citation", headers=h, json=bad).status_code == 400
-
-    # semantic without evidence rejected
-    sem = dict(e, treatment="OVERRULES")
-    assert client.post("/citation", headers=h, json=sem).status_code == 400
-    sem["evidence"] = {"quote": "the provision is overruled"}
-    r = client.post("/citation", headers=h, json=sem)
+    # case citation (CITES) — cross-jurisdiction target supported via key
+    r = client.post("/citation/case", headers=h, json={
+        "source_case_key": "JA", "source_jurisdiction": "CY",
+        "target_case_key": "ECLI:CE:ECHR:2019:0123", "target_jurisdiction": "ECHR", "kind": "CITES"})
     assert r.status_code == 201 and r.json()["review_status"] == "review_required"
 
-    # traversal
-    t = client.get(f"/citation/node/judgment_node/{jref}", headers=h).json()
-    assert t["counts"]["cited"] >= 2
+    # case treatment (semantic) — starts REVIEW_REQUIRED
+    t = client.post("/citation/treatment", headers=h, json={
+        "source_case_key": "JA", "source_jurisdiction": "CY",
+        "target_case_key": "JB", "target_jurisdiction": "CY",
+        "treatment": "DISTINGUISHES", "confidence": "0.9"}).json()
+    assert t["treatment"] == "DISTINGUISHES" and t["review_status"] == "review_required"
+
+    # graph expansion
+    exp = client.get("/citation/case/JA", headers=h).json()
+    cited_keys = [c["key"] for c in exp["cited"]]
+    assert "ECLI:CE:ECHR:2019:0123" in cited_keys
+    assert any(x["treatment"] == "DISTINGUISHES" for x in exp["treatments"])
 
 
-def test_nonexistent_citation_blocked_at_service():
-    from app.db import SessionLocal as SL
-    s = SL()
-    try:
-        create_edge(s, source_kind="judgment_node", source_ref="nope",
-                    target_kind="legislation_node", target_ref="nope2")
-        raise AssertionError("should have raised")
-    except CitationValidationError:
-        pass
-    finally:
-        s.close()
+def test_provision_reference_link():
+    h = _login()
+    cid = f"L{uuid.uuid4().hex[:6]}"
+    client.post("/corpus/legislation", headers=h, json={
+        "canonical_id": cid, "title": "T", "jurisdiction": "CY",
+        "raw_text": "Article 5. Rule.\n(1) liability is established.\nArticle 15. Limitation.\n(1) claims are time-barred after six years."})
+    nodes = client.get(f"/corpus/legislation/{cid}/as-of", headers=h).json()["nodes"]
+    art5 = next(n["id"] for n in nodes if n["node_type"] == "ARTICLE" and n["number"] == "5")
+    art15 = next(n["id"] for n in nodes if n["node_type"] == "ARTICLE" and n["number"] == "15")
+    r = client.post("/citation/provision-reference", headers=h, json={
+        "jurisdiction": "CY", "source_node_id": art15,
+        "target_node_id": art5, "source_text": "subject to Article 5",
+        "source_span_start": 0, "source_span_end": 18, "confidence": "high"})
+    assert r.status_code == 201 and r.json()["confidence"] == "high"
+    exp = client.get(f"/citation/provision/{art15}", headers=h).json()
+    assert any(x["target_node_id"] == art5 for x in exp["references_out"])

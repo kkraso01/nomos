@@ -133,3 +133,20 @@ The following are not blockers to functional feature development and should only
 - Verified on this ARM64 host: relevant doc scored high (+8) vs irrelevant (~-11); first load ~1.8 s.
 - Tests expand to 34 passing (2 new rerank e2e, guarded on model presence).
 - Semantic *embeddings* (dense retrieval) remain intentionally unconfigured on this device.
+
+### 2026-09-29 — GOAL DECISION: clean refactor, no compatibility/backfill
+The user directed a from-scratch refactor of the legal-knowledge core onto the
+jurisdiction-agnostic design. Per explicit instruction, we are NOT keeping backward
+compatibility and NOT backfilling legacy schema/data. Old service/API shapes and tests
+will be rewritten to the new canonical model. No production data exists yet, so there is
+nothing valuable to migrate; this is a green-field rebuild of the model + retrieval core.
+
+### 2026-09-29 — Jurisdiction-agnostic canonical model (task-1) complete
+- Green-field refactor (no backfill) onto app/models/core.py:
+  Jurisdiction, Court, LegalSource, Legislation/Version/Node (permanent identity)/NodeVersion (versioned text),
+  LegislationAmendment + AmendmentOperation, ProvisionCrossReference,
+  Judgment/Version/Section/Paragraph, CaseCitation, JudgmentLegislationLink, CaseTreatment, LegalChunk.
+- Legislative node = stable identity; wording lives in LegislationNodeVersion per legislation version (as-of resolves correct version). Node terminology per jurisdiction (JurisdictionConfig). Cross-jurisdiction links supported (CY case CITES ECHR ECLI target_key).
+- Dropped legacy CitationEdge; rewrote citation/graph + similarity + corpus services/APIs onto the new model; rewrote migration chain to a single clean baseline (5097d44a2bc1) + add_case_treatment_target_key.
+- Seeded jurisdictions (CY/EU/ECHR/GR/UK) + representative CY court hierarchy; fixed search indexing to materialize raw node values and rebuild idempotently on dedupe (Greek + English + exact-reference verified).
+- Full suite 34 passed.

@@ -10,7 +10,6 @@ from sqlalchemy.orm import Session
 from ..models.search import SearchEntry
 from ..services.search import search
 from ..services.references import parse_reference
-from ..services.citation import resolve_node
 
 
 def validate_citation(db: Session, text: str) -> dict:

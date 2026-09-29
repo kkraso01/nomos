@@ -1,5 +1,3 @@
-import uuid
-
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -7,55 +5,120 @@ from sqlalchemy.orm import Session
 from ..db import get_db
 from ..core.tenancy import require_org
 from ..core import audit
-from ..services.citation import create_edge, cited_authorities, citing_authorities, CitationValidationError
-from ..models.citation import CitationEdge
+from ..services import citation as svc
 
-router = APIRouter(prefix="/citation", tags=["citation"])
-
-
-class EdgeIn(BaseModel):
-    source_kind: str
-    source_ref: str
-    target_kind: str
-    target_ref: str
-    treatment: str = "CITES"
-    evidence: dict | None = None
-    review_status: str | None = None
-    note: str | None = None
+router = APIRouter(prefix="/citation", tags=["legal-graph"])
 
 
-def _edge_out(e: CitationEdge) -> dict:
-    return {"id": str(e.id), "source_kind": e.source_kind, "source_ref": e.source_ref,
-            "target_kind": e.target_kind, "target_ref": e.target_ref,
-            "treatment": e.treatment, "review_status": e.review_status,
-            "evidence": e.evidence}
+class CitationIn(BaseModel):
+    source_case_id: str | None = None
+    source_case_key: str | None = None
+    source_jurisdiction: str = "CY"
+    target_case_id: str | None = None
+    target_case_key: str | None = None
+    target_jurisdiction: str | None = None
+    kind: str = "CITES"
+    evidence_paragraph_id: str | None = None
 
 
-@router.post("", status_code=201)
-def add_edge(payload: EdgeIn, ctx: dict = Depends(require_org), db: Session = Depends(get_db)):
+class TreatmentIn(BaseModel):
+    source_case_id: str | None = None
+    source_case_key: str | None = None
+    source_jurisdiction: str = "CY"
+    target_case_id: str | None = None
+    target_case_key: str | None = None
+    target_jurisdiction: str | None = None
+    treatment: str
+    evidence_paragraph_id: str | None = None
+    confidence: str | None = None
+
+
+class ProvRefIn(BaseModel):
+    jurisdiction: str = "CY"
+    source_node_id: str
+    target_node_id: str | None = None
+    target_jurisdiction: str | None = None
+    target_external_key: str | None = None
+    source_text: str | None = None
+    source_span_start: int | None = None
+    source_span_end: int | None = None
+    confidence: str = "high"
+
+
+def _u(v):
+    import uuid
+    if not v or str(v).lower() in ("", "null", "none"):
+        return None
     try:
-        edge = create_edge(db, source_kind=payload.source_kind, source_ref=payload.source_ref,
-                           target_kind=payload.target_kind, target_ref=payload.target_ref,
-                           treatment=payload.treatment, evidence=payload.evidence,
-                           review_status=payload.review_status, org_id=ctx["org_id"], note=payload.note)
-    except CitationValidationError as exc:
-        raise HTTPException(400, str(exc))
-    db.add(edge)
-    db.commit()
-    db.refresh(edge)
-    audit.record_audit(db, action="citation.edge.create", org_id=ctx["org_id"],
-                       actor_user_id=ctx["user"].id, resource_type="citation_edge", resource_id=edge.id,
-                       detail={"treatment": edge.treatment})
-    return _edge_out(edge)
+        return uuid.UUID(v)
+    except (ValueError, AttributeError, TypeError):
+        return None
 
 
-@router.get("/node/{kind}/{ref:path}")
-def traverse(kind: str, ref: str, ctx: dict = Depends(require_org), db: Session = Depends(get_db)):
-    cited = cited_authorities(db, kind, ref)
-    citing = citing_authorities(db, kind, ref)
-    return {
-        "node": {"kind": kind, "ref": ref},
-        "cited_authorities": [_edge_out(e) for e in cited],
-        "citing_authorities": [_edge_out(e) for e in citing],
-        "counts": {"cited": len(cited), "citing": len(citing)},
-    }
+@router.post("/case", status_code=201)
+def add_case_citation(payload: CitationIn, ctx: dict = Depends(require_org),
+                      db: Session = Depends(get_db)):
+    c = svc.create_case_citation(db, source_case_id=_u(payload.source_case_id),
+                                 source_case_key=payload.source_case_key,
+                                 source_jurisdiction=payload.source_jurisdiction,
+                                 target_case_id=_u(payload.target_case_id),
+                                 target_case_key=payload.target_case_key,
+                                 target_jurisdiction=payload.target_jurisdiction,
+                                 kind=payload.kind,
+                                 evidence_paragraph_id=_u(payload.evidence_paragraph_id))
+    audit.record_audit(db, action="graph.case_citation", org_id=ctx["org_id"],
+                       actor_user_id=ctx["user"].id, detail={"kind": c.kind})
+    return {"citation_id": str(c.id), "kind": c.kind, "review_status": c.review_status}
+
+
+@router.post("/treatment", status_code=201)
+def add_treatment(payload: TreatmentIn, ctx: dict = Depends(require_org),
+                  db: Session = Depends(get_db)):
+    t = svc.create_treatment(db, source_case_id=_u(payload.source_case_id),
+                             source_case_key=payload.source_case_key,
+                             source_jurisdiction=payload.source_jurisdiction,
+                             target_case_id=_u(payload.target_case_id),
+                             target_case_key=payload.target_case_key,
+                             target_jurisdiction=payload.target_jurisdiction,
+                             treatment=payload.treatment,
+                             evidence_paragraph_id=_u(payload.evidence_paragraph_id),
+                             confidence=payload.confidence)
+    audit.record_audit(db, action="graph.treatment", org_id=ctx["org_id"],
+                       actor_user_id=ctx["user"].id, detail={"treatment": t.treatment,
+                                                             "review_status": t.review_status})
+    return {"treatment_id": str(t.id), "treatment": t.treatment, "review_status": t.review_status}
+
+
+@router.post("/provision-reference", status_code=201)
+def add_provision_ref(payload: ProvRefIn, ctx: dict = Depends(require_org),
+                      db: Session = Depends(get_db)):
+    r = svc.create_provision_reference(db, source_node_id=_u(payload.source_node_id),
+                                       target_node_id=_u(payload.target_node_id),
+                                       source_jurisdiction=payload.jurisdiction,
+                                       target_jurisdiction=payload.target_jurisdiction,
+                                       target_external_key=payload.target_external_key,
+                                       source_text=payload.source_text,
+                                       source_span_start=payload.source_span_start,
+                                       source_span_end=payload.source_span_end,
+                                       confidence=payload.confidence)
+    return {"reference_id": str(r.id), "confidence": r.confidence}
+
+
+@router.get("/case/{ref}")
+def expand_case(ref: str, ctx: dict = Depends(require_org), db: Session = Depends(get_db)):
+    import uuid as _uuid
+    try:
+        case_id = _uuid.UUID(ref)
+        return svc.expand_case(db, case_id=case_id)
+    except (ValueError, AttributeError, TypeError):
+        return svc.expand_case(db, case_key=ref)
+
+
+@router.get("/provision/{node_id}")
+def expand_provision(node_id: str, ctx: dict = Depends(require_org),
+                     db: Session = Depends(get_db)):
+    import uuid as _uuid
+    try:
+        return svc.expand_provision(db, node_id=_uuid.UUID(node_id))
+    except (ValueError, AttributeError, TypeError):
+        raise HTTPException(404, "provise node not found")

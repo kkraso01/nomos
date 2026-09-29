@@ -73,9 +73,11 @@ def test_judgment_segmentation():
         "canonical_id": cid, "title": "X", "case_number": "5/2020",
         "raw_text": "Facts\none fact.\nProcedural history\none proc.\nHolding\none holding.\nOrder\none order."})
     segs = client.get(f"/corpus/judgment/{cid}/segments", headers=h).json()["segments"]
-    types = {s["segment_type"] for s in segs}
+    types = {s["section_type"] for s in segs}
     assert {"facts", "procedural_history", "holding", "order"} <= types
-    assert any(s["text"] == "one fact." and s["para_number"] for s in segs)
+    facts = next(s for s in segs if s["section_type"] == "facts")
+    assert facts["paragraphs"][0]["text"] == "one fact."
+    assert facts["paragraphs"][0]["para_number"]
 
 
 def test_judgment_summary_source_grounded():

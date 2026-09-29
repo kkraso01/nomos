@@ -12,6 +12,7 @@ Allowed states:
 Do not use FUNCTIONAL unless the workflow has been tested end-to-end with representative data.
 
 | Area | Status | Evidence / Notes |
+| Jurisdiction-agnostic canonical model | FUNCTIONAL | green-field refactor: Jurisdiction/Court/LegalSource; LegislationNode (permanent identity)+LegislationNodeVersion; AmendmentOperation; ProvisionCrossReference; JudgmentSection/Paragraph; CaseCitation/JudgmentLegislationLink/CaseTreatment; LegalChunk; node terms per jurisdiction; CY seed; 34 tests |
 |---|---|---|
 | Platform foundation | FUNCTIONAL | FastAPI modular app, PostgreSQL(alembic) on HDD, Redis+rq durable jobs, MinIO storage; tests/test_platform_e2e.py (3 pass) |
 | Authentication / tenancy | FUNCTIONAL | register org+owner, login, JWT; cross-org blocked (403/404) verified |

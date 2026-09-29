@@ -1,81 +1,76 @@
-"""Public corpus services: normalization, temporal version resolution, ingestion."""
+"""Canonical corpus services (jurisdiction-agnostic core).
+
+Legislation: permanent provision identity (LegislationNode) is separate from its
+versioned wording (LegislationNodeVersion). Ingest is appended-into-a-version and
+hash-deduped; an amendment of the same law creates a new version, never overwrites.
+Judgments: structured into JudgmentSection + JudgmentParagraph under a version.
+"""
 import hashlib
 import re
-import uuid
 from datetime import datetime, timezone
 
 from sqlalchemy.orm import Session
 
-from .. import models
-from ..models.corpus import (Legislation, LegislationVersion, LegislationNode,
-                             Judgment, JudgmentVersion, JudgmentNode)
 from .search import upsert_search_entry
+from ..models.core import (
+    Legislation, LegislationVersion, LegislationNode, LegislationNodeVersion,
+    Judgment, JudgmentVersion, JudgmentSection, JudgmentParagraph,
+)
 
 
 def content_hash(data: str) -> str:
     return hashlib.sha256(data.encode("utf-8")).hexdigest()
 
 
-# ---- Normalization: raw legislation text -> hierarchical nodes ----
-_ARTICLE_RE = re.compile(r"^\s*(?:Article|Άρθρο)\s+([0-9IVXLC]+(?:[A-Z])?)\b", re.IGNORECASE)
+# ---- L0 structural normalizer (jurisdiction-configurable node terms) ----
+_ARTICLE_RE = re.compile(r"^\s*(?:Article|Άρθρο)\s+([0-9IVXLC]+(?:[A-Z]|\(\d+\))*)(?:\.|\b)", re.IGNORECASE)
 _PARAGRAPH_RE = re.compile(r"^\s*\(([0-9]+[a-z]?)\)\b", re.IGNORECASE)
-_SUB_RE = re.compile(r"^\s*\(([a-z])\)\b", re.IGNORECASE)
 
 
 def normalize_legislation_text(raw_text: str) -> list[dict]:
-    """Parse a representative legislation text into node dicts.
-
-    This is an L0 deterministic parser (not a model). It recognizes:
-      'Article N.' headings -> ARTICLE nodes
-      '(n)' -> PARAGRAPH children
-      plain body lines under an Article -> part of the article text
-    Returns a flat list of {node_type, number, source_text}.
-    """
+    """Determine structural heads: ARTICLE + PARAGRAPH nodes (flat list)."""
     nodes = []
     lines = [ln.rstrip("\n") for ln in raw_text.splitlines()]
     current = None
-    current_buf = []
-    current_para = None
+    buf: list[str] = []
 
     def flush():
         if current is not None:
-            nodes.append({"node_type": "ARTICLE", "number": current,
-                          "source_text": "\n".join(current_buf).strip()})
+            body = "\n".join(buf).strip()
+            nodes.append({"node_type": "ARTICLE", "number": current, "source_text": body})
+            buf.clear()
 
     for ln in lines:
         m = _ARTICLE_RE.match(ln)
         if m:
             flush()
             current = m.group(1)
-            current_buf = []
-            current_para = None
+            buf = []
             continue
-        # paragraph detector works even without a preceding Article heading
         mp = _PARAGRAPH_RE.match(ln)
         if mp:
-            if current is None:
-                nodes.append({"node_type": "PARAGRAPH", "number": mp.group(1),
-                              "source_text": ln.strip()})
-                continue
+            # a paragraph under the previous article
             nodes.append({"node_type": "PARAGRAPH", "number": mp.group(1),
-                          "source_text": ln.strip()})
+                          "source_text": ln.strip(), "parent_article": current})
             continue
         if current is None:
-            continue  # leading title text, skipped for node model
-        current_buf.append(ln)
+            continue
+        buf.append(ln)
     flush()
     return nodes
 
 
-def ingest_legislation(db: Session, *, canonical_id: str, title: str,
-                       jurisdiction: str, raw_text: str, language: str | None = None,
-                       source_id=None, effective_from: datetime | None = None,
-                       source_snapshot_id=None) -> tuple[Legislation, LegislationVersion, bool]:
-    """Idempotent legislation ingest. Same content_hash -> return existing version.
+def _node_number(n: dict) -> str:
+    nnum = n.get("number")
+    if n.get("node_type") == "PARAGRAPH" and nnum:
+        return nnum
+    return nnum or ""
 
-    Different text with the same canonical identity becomes a NEW version
-    (never a destructive overwrite). Returns (law, version, is_new_version).
-    """
+
+def ingest_legislation(db: Session, *, canonical_id: str, title: str, jurisdiction: str,
+                       raw_text: str, language: str | None = None, source_id=None,
+                       effective_from: datetime | None = None,
+                       source_snapshot_id=None) -> tuple[Legislation, LegislationVersion, bool]:
     h = content_hash(raw_text)
     law = db.query(Legislation).filter_by(canonical_id=canonical_id).first()
     if law is None:
@@ -83,159 +78,106 @@ def ingest_legislation(db: Session, *, canonical_id: str, title: str,
                           language=language, source_id=source_id)
         db.add(law)
         db.flush()
-        new_law = True
-    else:
-        new_law = False
 
     existing = db.query(LegislationVersion).filter_by(
         legislation_id=law.id, content_hash=h).first()
     if existing is not None:
+        # projection is rebuildable: keep the lexical index idempotently in sync
+        _index_legislation_version(db, law, existing)
         db.commit()
         return law, existing, False
 
-    version_number = (db.query(LegislationVersion)
-                      .filter_by(legislation_id=law.id).count()) + 1
-    # supersede prior current version
-    prior = db.query(LegislationVersion).filter_by(
-        legislation_id=law.id, status="current").first()
-    effective_from = effective_from or (prior.effective_to if prior else datetime.now(timezone.utc))
+    vnum = (db.query(LegislationVersion).filter_by(legislation_id=law.id).count()) + 1
+    prior = db.query(LegislationVersion).filter_by(legislation_id=law.id, status="current").first()
+    eff = effective_from or (prior.effective_to if prior else datetime.now(timezone.utc))
 
-    version = LegislationVersion(
-        legislation_id=law.id, version_number=version_number, content_hash=h,
-        effective_from=effective_from, status="current",
-        supersedes_version_id=prior.id if prior else None,
-        source_snapshot_id=source_snapshot_id,
-    )
+    version = LegislationVersion(legislation_id=law.id, version_number=vnum, content_hash=h,
+                                 effective_from=eff, status="current",
+                                 supersedes_version_id=prior.id if prior else None,
+                                 source_snapshot_id=source_snapshot_id)
     db.add(version)
     db.flush()
-
     if prior:
         prior.status = "superseded"
-        prior.effective_to = effective_from
+        prior.effective_to = eff
 
-    nodes = normalize_legislation_text(raw_text)
-    for i, nd in enumerate(nodes):
-        # find parent paragraph? flat ARTICLE + PARAGRAPH; PARAGRAPH under last ARTICLE
+    # Build permanent node identities + versioned wording.
+    for i, nd in enumerate(normalize_legislation_text(raw_text)):
+        number = _node_number(nd)
+        node_type = nd["node_type"]
         parent = None
-        if nd["node_type"] == "PARAGRAPH":
-            parent = (db.query(LegislationNode).filter_by(
-                version_id=version.id, node_type="ARTICLE").order_by(
-                    LegislationNode.sort_order.desc()).first())
-        db.add(LegislationNode(
-            version_id=version.id, parent_id=parent.id if parent else None,
-            node_type=nd["node_type"], number=nd.get("number"), source_text=nd["source_text"],
-            normalized_text=nd["source_text"], language=language, sort_order=i,
-            effective_from=effective_from,
-        ))
+        if node_type == "PARAGRAPH":
+            art = nd.get("parent_article")
+            if art:
+                parent = db.query(LegislationNode).filter_by(
+                    legislation_id=law.id, node_type="ARTICLE", number=art).first()
+        node = db.query(LegislationNode).filter_by(
+            legislation_id=law.id, node_type=node_type, number=number).first()
+        if node is None:
+            node = LegislationNode(legislation_id=law.id, node_type=node_type,
+                                   number=number, parent_id=parent.id if parent else None,
+                                   sort_order=i)
+            db.add(node)
+            db.flush()
+        elif parent is not None:
+            node.parent_id = parent.id
+        db.add(LegislationNodeVersion(
+            node_id=node.id, legislation_version_id=version.id,
+            source_text=nd["source_text"], normalized_text=nd["source_text"],
+            language=language, effective_from=eff,
+            source_locator={"canonical_id": canonical_id, "node_type": node_type,
+                            "number": number, "article": nd.get("parent_article")},
+            content_hash=content_hash(nd["source_text"])))
 
+    # Repopulate the lexical search projection from this version's wording.
+    _index_legislation_version(db, law, version)
     law.current_version_id = version.id
-    db.commit()
-    db.refresh(law)
-    # rebuild search projection for this version's nodes
-    nodes_q = db.query(LegislationNode).filter_by(version_id=version.id).all()
-    for nd in nodes_q:
-        upsert_search_entry(
-            db, kind="legislation_node",
-            canonical_ref=f"law-{canonical_id}-art-{nd.number or ''}",
-            canonical_id=canonical_id, title=title,
-            body=nd.source_text or nd.normalized_text or "", language=language or "en",
-            ref_law=str(canonical_id), ref_article=nd.number, jurisdiction=jurisdiction,
-            source_id=source_id)
     db.commit()
     db.refresh(law)
     return law, version, True
 
 
-_SEG_HEADINGS = {
-    "facts": "facts", "the facts": "facts",
-    "procedural history": "procedural_history",
-    "the issue": "issue", "issues": "issue", "the issues": "issue",
-    "legal analysis": "legal_analysis", "the law": "legal_analysis", "the applicable law": "legal_analysis",
-    "holding": "holding", "decision": "holding", "conclusion": "holding",
-    "order": "order", "costs": "order",
-    "dissent": "dissent", "separate opinion": "dissent", "concurring": "dissent",
-}
+def _index_legislation_version(db, law, version):
+    """Index this version's wording into the lexical projection.
 
-
-def _segment_label(para: str):
-    """L0 heading detection -> segment_type. Empty means 'analysis' default."""
-    key = (para or "").strip().lower().rstrip(":.")
-    return _SEG_HEADINGS.get(key)
-
-
-def _segment_judgment(db: Session, version_id):
-    """Returns segments grouped by type for a judgment version."""
-    nodes = db.query(JudgmentNode).filter_by(version_id=version_id).order_by(JudgmentNode.sort_order).all()
-    out = []
-    for n in nodes:
-        out.append({"para_number": n.para_number, "text": n.text,
-                    "segment_type": n.segment_type or "analysis",
-                    "char_start": n.char_start, "char_end": n.char_end})
-    return out
-
-
-def resolve_judgment_segments(db: Session, canonical_id: str) -> list[dict] | None:
-    judgment = db.query(Judgment).filter_by(canonical_id=canonical_id).first()
-    if judgment is None:
-        return None
-    version = db.get(JudgmentVersion, judgment.current_version_id)
-    if version is None:
-        return None
-    return _segment_judgment(db, version.id)
-
-
-def summarize_judgment(db: Session, canonical_id: str) -> dict:
-    """Extractive, source-grounded summary from the authoritative segments.
-
-    No generation from model memory: only verbatim sentences from the holding,
-    legal analysis and order segments, each with its source span.
+    Materialize raw column values (safe across the per-row commits inside
+    upsert_search_entry) and index every node, adding article context to
+    paragraph chunks so the real legal text is searchable.
     """
-    import re as _re
-    judgment = db.query(Judgment).filter_by(canonical_id=canonical_id).first()
-    if judgment is None:
-        return {"ok": False}
-    nodes = db.query(JudgmentNode).filter_by(version_id=judgment.current_version_id)\
-        .order_by(JudgmentNode.sort_order).all()
-    # group body by dominant segment type
-    groups: dict[str, list[str]] = {}
-    current = None
-    for n in nodes:
-        if n.segment_type and n.segment_type != "analysis":
-            current = n.segment_type
+    from sqlalchemy import select
+    stmt = (
+        select(LegislationNode.id, LegislationNode.node_type, LegislationNode.number,
+               LegislationNode.parent_id, LegislationNodeVersion.source_text,
+               LegislationNodeVersion.language)
+        .join(LegislationNodeVersion, LegislationNodeVersion.node_id == LegislationNode.id)
+        .where(LegislationNodeVersion.legislation_version_id == version.id)
+        .order_by(LegislationNode.sort_order)
+    )
+    rows = db.execute(stmt).mappings().all()
+    by_id = {r["id"]: r for r in rows}
+    for r in rows:
+        node_type, number = r["node_type"], r["number"] or ""
+        if node_type == "PARAGRAPH" and r["parent_id"]:
+            parent = by_id.get(r["parent_id"])
+            article_no = parent["number"] if parent else None
+            ref = f"law-{law.canonical_id}-art-{article_no or ''}-p{number}" if number else None
+            ref_article = article_no
+        else:
+            ref = f"law-{law.canonical_id}-art-{number}" if number else None
+            ref_article = number
+        if not ref or not r["source_text"]:
             continue
-        groups.setdefault(current or "body", []).append(n.text or "")
-    preferred = ["holding", "legal_analysis", "order", "body"]
-    sentences: list[dict] = []
-    for seg in preferred:
-        if seg not in groups:
-            continue
-        for para in groups[seg]:
-            for s in _re.split(r"[.;]\s+", para):
-                s = s.strip(" .")
-                if len(s.split()) >= 4:
-                    sentences.append({"text": s, "segment": seg,
-                                      "char_span": [para.find(s), para.find(s) + len(s)]})
-    # take the strongest signals (holding first, then legal analysis), dedupe
-    ordered = [x for x in sentences if x["segment"] in ("holding", "legal_analysis", "order")]
-    if not ordered:
-        ordered = sentences
-    seen, summary = set(), []
-    for s in ordered:
-        if s["text"].lower() in seen:
-            continue
-        seen.add(s["text"].lower())
-        summary.append(s)
-        if len(summary) >= 3:
-            break
-    return {"ok": True, "canonical_id": canonical_id,
-            "mode": "extractive", "source_grounded": True,
-            "summary": summary[:3] if summary else [{"text": "(no extractive holding text available)",
-                                                       "segment": "holding"}]}
+        upsert_search_entry(
+            db, kind="legislation_node", canonical_ref=ref,
+            canonical_id=law.canonical_id, title=law.title,
+            body=r["source_text"], language=r["language"] or law.language or "en",
+            ref_law=str(law.canonical_id), ref_article=ref_article,
+            jurisdiction=law.jurisdiction, source_id=law.source_id)
+    db.flush()
 
 
 def resolve_version_as_of(db: Session, canonical_id: str,
                           as_of: datetime | None = None) -> LegislationVersion | None:
-    """Resolve the legislation version effective as of `as_of` (or latest)."""
     law = db.query(Legislation).filter_by(canonical_id=canonical_id).first()
     if law is None:
         return None
@@ -245,22 +187,68 @@ def resolve_version_as_of(db: Session, canonical_id: str,
                 .order_by(LegislationVersion.effective_from).all())
     applicable = None
     for v in versions:
-        start = v.effective_from
-        end = v.effective_to
+        start, end = v.effective_from, v.effective_to
         if start is not None and start <= as_of and (end is None or as_of < end):
             applicable = v
-    return applicable or versions[-1] if versions else None
+    return applicable or (versions[-1] if versions else None)
 
 
-def ingest_judgment(db: Session, *, canonical_id: str, title: str, court: str | None,
-                    case_number: str | None, judgment_date, raw_text: str,
-                    source_id=None, source_snapshot_id=None, ecli: str | None = None) -> tuple[Judgment, JudgmentVersion, bool]:
+def node_contents_for_version(db: Session, version_id) -> list[dict]:
+    rows = db.query(LegislationNode, LegislationNodeVersion).join(
+        LegislationNodeVersion, LegislationNodeVersion.node_id == LegislationNode.id).filter(
+        LegislationNodeVersion.legislation_version_id == version_id)\
+        .order_by(LegislationNode.sort_order).all()
+    return [{"id": str(n.id), "node_type": n.node_type, "number": n.number,
+             "parent_id": str(n.parent_id) if n.parent_id else None,
+             "text": nv.source_text} for n, nv in rows]
+
+
+# ---- Judgments: sections + paragraphs ----
+_SEG_HEADINGS = {
+    "facts": "facts", "the facts": "facts",
+    "procedural history": "procedural_history",
+    "issue": "issue", "issues": "issue", "the issue": "issue", "the issues": "issue",
+    "party argument": "party_argument", "arguments": "party_argument",
+    "legal analysis": "legal_analysis", "the law": "legal_analysis", "reasoning": "legal_analysis",
+    "holding": "holding", "decision": "holding", "conclusion": "holding",
+    "order": "order", "costs": "order",
+    "separate opinion": "separate_opinion", "dissent": "separate_opinion",
+}
+
+
+def segment_judgment_text(raw_text: str) -> list[dict]:
+    """Return [{section_type, title, paragraphs:[str]}] from headings + body lines."""
+    sections: list[dict] = []
+    current = None
+    for ln in raw_text.splitlines():
+        ln = ln.strip()
+        if not ln:
+            continue
+        key = ln.lower().rstrip(":.")
+        seg = _SEG_HEADINGS.get(key)
+        if seg:
+            current = seg
+            sections.append({"section_type": seg, "title": ln, "paragraphs": []})
+            continue
+        if sections:
+            sections[-1]["paragraphs"].append(ln)
+        else:
+            sections.append({"section_type": "body", "title": None, "paragraphs": [ln]})
+    return sections
+
+
+def ingest_judgment(db: Session, *, canonical_id: str, title: str, jurisdiction: str = "CY",
+                    court: str | None = None, court_id=None, case_number: str | None = None,
+                    ecli: str | None = None, judgment_date=None, judges=None,
+                    language: str | None = None, raw_text: str, source_id=None,
+                    source_snapshot_id=None) -> tuple[Judgment, JudgmentVersion, bool]:
     h = content_hash(raw_text)
     judgment = db.query(Judgment).filter_by(canonical_id=canonical_id).first()
     if judgment is None:
-        judgment = Judgment(canonical_id=canonical_id, title=title, court=court,
-                            case_number=case_number, judgment_date=judgment_date,
-                            source_id=source_id, ecli=ecli)
+        judgment = Judgment(canonical_id=canonical_id, title=title, jurisdiction=jurisdiction,
+                            court=court, court_id=court_id, case_number=case_number, ecli=ecli,
+                            judgment_date=judgment_date, judges=judges,
+                            language=language, source_id=source_id)
         db.add(judgment)
         db.flush()
     existing = db.query(JudgmentVersion).filter_by(
@@ -271,28 +259,77 @@ def ingest_judgment(db: Session, *, canonical_id: str, title: str, court: str | 
 
     vnum = (db.query(JudgmentVersion).filter_by(judgment_id=judgment.id).count()) + 1
     version = JudgmentVersion(judgment_id=judgment.id, version_number=vnum, content_hash=h,
-                              source_snapshot_id=source_snapshot_id,
-                              published_at=judgment_date)
+                              source_snapshot_id=source_snapshot_id, published_at=judgment_date)
     db.add(version)
     db.flush()
 
-    paras = [p for p in (line.strip() for line in raw_text.splitlines()) if p]
-    nodes = []
-    for i, para in enumerate(paras):
-        n = JudgmentNode(version_id=version.id, para_number=str(i + 1), text=para,
-                         sort_order=i, segment_type=_segment_label(para))
-        db.add(n)
-        nodes.append(n)
+    para_no = 0
+    for sec in segment_judgment_text(raw_text):
+        sect = JudgmentSection(version_id=version.id, section_type=sec["section_type"],
+                               title=sec["title"], sort_order=para_no)
+        db.add(sect)
+        db.flush()
+        for p in sec["paragraphs"]:
+            para_no += 1
+            db.add(JudgmentParagraph(version_id=version.id, section_id=sect.id,
+                                     para_number=str(para_no), text=p, sort_order=para_no,
+                                     language=language))
     judgment.current_version_id = version.id
     db.commit()
     db.refresh(judgment)
-    ref = ecli if ecli else (case_number or canonical_id)
-    body = "\n".join(p.text for p in nodes)
-    upsert_search_entry(
-        db, kind="judgment_node", canonical_ref=f"judgment-{ref}", canonical_id=canonical_id,
-        title=title, body=body, language="en",
-        ecli=ecli, case_number=case_number, court=court, jurisdiction="CY",
-        source_id=source_id)
+    ref = ecli or case_number or f"judgment-{canonical_id}"
+    body = "\n".join(p.text for p in db.query(JudgmentParagraph).filter_by(
+        version_id=version.id).all())
+    upsert_search_entry(db, kind="judgment_node", canonical_ref=f"judgment-{ref}",
+                        canonical_id=canonical_id, title=title, body=body, language=language or "en",
+                        ecli=ecli, case_number=case_number, court=court, jurisdiction=jurisdiction,
+                        source_id=source_id)
     db.commit()
     db.refresh(judgment)
     return judgment, version, True
+
+
+def resolve_judgment_segments(db: Session, canonical_id: str) -> list[dict] | None:
+    judgment = db.query(Judgment).filter_by(canonical_id=canonical_id).first()
+    if judgment is None or judgment.current_version_id is None:
+        return None
+    version_id = judgment.current_version_id
+    out = []
+    sections = db.query(JudgmentSection).filter_by(version_id=version_id)\
+        .order_by(JudgmentSection.sort_order).all()
+    for s in sections:
+        paras = db.query(JudgmentParagraph).filter_by(section_id=s.id)\
+            .order_by(JudgmentParagraph.sort_order).all()
+        out.append({"section_type": s.section_type, "title": s.title,
+                    "paragraphs": [{"para_number": p.para_number, "text": p.text,
+                                    "char_start": p.char_start, "char_end": p.char_end}
+                                   for p in paras]})
+    return out
+
+
+def summarize_judgment(db: Session, canonical_id: str) -> dict:
+    """Extractive, source-grounded summary from holding/legal_analysis/order paragraphs."""
+    judgment = db.query(Judgment).filter_by(canonical_id=canonical_id).first()
+    if judgment is None:
+        return {"ok": False}
+    version_id = judgment.current_version_id
+    preferred = ["holding", "legal_analysis", "order"]
+    summary = []
+    for seg_type in preferred:
+        sect = db.query(JudgmentSection).filter_by(version_id=version_id,
+                                                   section_type=seg_type).first()
+        if sect is None:
+            continue
+        for p in db.query(JudgmentParagraph).filter_by(section_id=sect.id)\
+                .order_by(JudgmentParagraph.sort_order).all():
+            if len((p.text or "").split()) >= 3:
+                summary.append({"text": p.text, "section": seg_type,
+                                "para_number": p.para_number})
+            if len(summary) >= 3:
+                break
+        if len(summary) >= 3:
+            break
+    return {"ok": True, "canonical_id": canonical_id, "mode": "extractive",
+            "source_grounded": True,
+            "summary": summary or [{"text": "(no extractive holding text available)",
+                                    "section": "holding"}]}

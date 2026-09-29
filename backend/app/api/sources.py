@@ -139,9 +139,10 @@ def ingest_raw(source_id: uuid.UUID, payload: IngestRawRequest,
 @router.post("/seed", response_model=dict)
 def seed_registry(ctx: dict = Depends(require_org), db: Session = Depends(get_db)):
     """Load engineering source seed (see SOURCE_REGISTRY_SEED.yaml). Idempotent by name."""
-    from ..services.seed import seed_sources_from_yaml
+    from ..services.seed import seed_sources_from_yaml, seed_core
     path = __import__("app.config", fromlist=["settings"]).settings.root_dir
-    counts = seed_sources_from_yaml(db)
+    counts = seed_core(db)
+    counts.update(seed_sources_from_yaml(db))
     audit.record_audit(db, action="source.registry.seed", org_id=ctx["org_id"],
                        actor_user_id=ctx["user"].id, resource_type="source")
     return counts
