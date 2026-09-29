@@ -231,3 +231,16 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
 - GET /research/vertical?q=&as_of=&matter_id=&limit= returning enriched results (evidence-first, no opaque similarity percentages).
 - Saving/classifying into a matter reuses the task-2 authority endpoints (canonical_ref reference, no duplication).
 - Tests: tests/test_research_vertical_e2e.py (evidence+detail rows; save+classify+folders). Full suite 56 passed.
+
+### 2026-09-29 — Grounded research assistant with first-class provenance (task-4) complete
+- services/assistant.py + POST /assistant/ask + POST /research/vertical (task-3 research service reused):
+  - answers ONLY from retrieved+verified authorities (grounding gate: >=2 substantive query tokens in evidence);
+  - explicit "No sufficiently supported authority... No case, statute, or holding is asserted" when insufficient;
+  - extractive answer (verbatim evidence) — cannot fabricate cases/ECLI/statutes/provisions/quotes/holdings/dates/deadlines (test: answer bigrams appear in retrieved evidence; no invented ECLI);
+  - distinguishes legislation/judgments (+ firm-private source_scope) and cites exact spans;
+  - surfaces adverse/contrary authority from the matter (LAWYER DECISION) and treatment edges (DISTINGUISHES/OVERRULES/CRITICISES), INDEPENDENT of whether the query qualifies;
+  - preserves temporal applicability (as-of resolves the applicable version; passed to research);
+  - first-class provenance per proposition: SOURCE FACT / STRUCTURED EXTRACTION / MODEL INFERENCE / LAWYER DECISION; model overlay always labelled MODEL_INFERENCE (never canonical legal data);
+  - lets the lawyer inspect every supporting authority (canonical_ref + evidence).
+- historical-note: adversarial surfacing works; grounding gate is conservative (morphological variants like "winding up" vs "wound up" can under-trigger — a task-5 ranking/query-understanding target).
+- Tests: tests/test_assistant_e2e.py (3). Full suite 59 passed.

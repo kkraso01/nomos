@@ -110,6 +110,11 @@ def _rrf_fuse(lists: list[list[str]], k: int = _RRF_K) -> dict[str, float]:
 def _temporal_info(db: Session, canonical_ref: str, query_date) -> dict | None:
     if not query_date or not canonical_ref.startswith("law-"):
         return None
+    if isinstance(query_date, str):
+        try:
+            query_date = datetime.fromisoformat(query_date).date()
+        except ValueError:
+            return None
     parts = canonical_ref.split("-art-")
     law_key = parts[0][4:] if len(parts) == 2 else None
     if not law_key:

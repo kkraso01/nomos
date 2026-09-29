@@ -95,6 +95,13 @@ def _detail(db: Session, kind: str, key: str) -> dict:
 def research(db: Session, query: str, *, as_of=None, limit: int = 20,
              relevance_hint: str | None = None) -> dict:
     out = hybrid_search(db, query, as_of=as_of, limit=limit)
+    # normalise as_of to a date (hybrid_search returns an ISO string)
+    asof = out.get("as_of")
+    if isinstance(asof, str):
+        try:
+            asof = datetime.fromisoformat(asof).date()
+        except ValueError:
+            asof = None
     results = []
     for r in out["results"]:
         kind, key = _artifact_key(r["canonical_ref"])
@@ -102,7 +109,7 @@ def research(db: Session, query: str, *, as_of=None, limit: int = 20,
         if kind == "legislation":
             parts = r["canonical_ref"].split("-art-")
             article = parts[1] if len(parts) == 2 else None
-        evidence = _evidence(db, kind, key, article, out.get("as_of"))
+        evidence = _evidence(db, kind, key, article, asof)
         detail = _detail(db, kind, key)
         results.append({
             "canonical_ref": r["canonical_ref"], "kind": r["kind"],
