@@ -9,7 +9,7 @@ from .. import models
 from ..core.tenancy import require_org
 from ..services.corpus import (ingest_legislation, ingest_judgment,
                                resolve_version_as_of, resolve_judgment_segments,
-                               normalize_legislation_text)
+                               summarize_judgment, normalize_legislation_text)
 from ..services.references import parse_reference
 from ..models.corpus import LegislationNode, JudgmentNode
 
@@ -94,6 +94,15 @@ def judgment_segments(canonical_id: str, ctx: dict = Depends(require_org),
     if segs is None:
         raise HTTPException(404, "Judgment not found")
     return {"canonical_id": canonical_id, "segments": segs}
+
+
+@router.get("/judgment/{canonical_id}/summary")
+def judgment_summary(canonical_id: str, ctx: dict = Depends(require_org),
+                     db: Session = Depends(get_db)):
+    out = summarize_judgment(db, canonical_id)
+    if not out["ok"]:
+        raise HTTPException(404, "Judgment not found")
+    return out
 
 
 @router.post("/parse-reference", response_model=ParseOut)

@@ -22,6 +22,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Temporal legislation | FUNCTIONAL | as-of date resolves correct version; tests/test_corpus_e2e.py |
 | Judgment model | FUNCTIONAL | versioned ingest + L0 segmentation (facts/procedural/holding/order); tests/test_corpus_e2e.py |
 | Citation graph | FUNCTIONAL | validated edges (must exist), semantic evidence requirement, traversal; tests/test_citation_e2e.py |
+| Judgment enrichment / summary | FUNCTIONAL | source-grounded extractive summary from holding/analysis/order; tests/test_corpus_e2e.py |
 | Case comparison | FUNCTIONAL | separate legal/factual/procedural/statutory/remedy dimensions with explanations; tests/test_similarity_e2e.py |
 | Legal reference parser | FUNCTIONAL | Cyprus/EU Article/Law, ECLI, case-number; L0 exact bias |
 | BM25 search | FUNCTIONAL | Postgres ts_vector/unaccent lexical (EN+EL); OpenSearch provider pluggable |

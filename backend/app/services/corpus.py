@@ -184,6 +184,55 @@ def resolve_judgment_segments(db: Session, canonical_id: str) -> list[dict] | No
     return _segment_judgment(db, version.id)
 
 
+def summarize_judgment(db: Session, canonical_id: str) -> dict:
+    """Extractive, source-grounded summary from the authoritative segments.
+
+    No generation from model memory: only verbatim sentences from the holding,
+    legal analysis and order segments, each with its source span.
+    """
+    import re as _re
+    judgment = db.query(Judgment).filter_by(canonical_id=canonical_id).first()
+    if judgment is None:
+        return {"ok": False}
+    nodes = db.query(JudgmentNode).filter_by(version_id=judgment.current_version_id)\
+        .order_by(JudgmentNode.sort_order).all()
+    # group body by dominant segment type
+    groups: dict[str, list[str]] = {}
+    current = None
+    for n in nodes:
+        if n.segment_type and n.segment_type != "analysis":
+            current = n.segment_type
+            continue
+        groups.setdefault(current or "body", []).append(n.text or "")
+    preferred = ["holding", "legal_analysis", "order", "body"]
+    sentences: list[dict] = []
+    for seg in preferred:
+        if seg not in groups:
+            continue
+        for para in groups[seg]:
+            for s in _re.split(r"[.;]\s+", para):
+                s = s.strip(" .")
+                if len(s.split()) >= 4:
+                    sentences.append({"text": s, "segment": seg,
+                                      "char_span": [para.find(s), para.find(s) + len(s)]})
+    # take the strongest signals (holding first, then legal analysis), dedupe
+    ordered = [x for x in sentences if x["segment"] in ("holding", "legal_analysis", "order")]
+    if not ordered:
+        ordered = sentences
+    seen, summary = set(), []
+    for s in ordered:
+        if s["text"].lower() in seen:
+            continue
+        seen.add(s["text"].lower())
+        summary.append(s)
+        if len(summary) >= 3:
+            break
+    return {"ok": True, "canonical_id": canonical_id,
+            "mode": "extractive", "source_grounded": True,
+            "summary": summary[:3] if summary else [{"text": "(no extractive holding text available)",
+                                                       "segment": "holding"}]}
+
+
 def resolve_version_as_of(db: Session, canonical_id: str,
                           as_of: datetime | None = None) -> LegislationVersion | None:
     """Resolve the legislation version effective as of `as_of` (or latest)."""

@@ -92,3 +92,7 @@ The following are not blockers to functional feature development and should only
 ### 2026-09-23 — Issue spotting (Phase F) functional
 - /matters/{mid}/suggest-issues: deterministic L0 mapping of ACCEPTED facts to candidate legal issues (insolvency, negligence, breach, damages, liability, limitation, jurisdiction, remedy); persisted as proposed for lawyer review.
 - Tests expand to 30 passing.
+
+### 2026-09-23 — Source-grounded extractive judgment summary (Phase E) functional
+- /corpus/judgment/{id}/summary: verbatim extractive sentences from holding/legal_analysis/order segments with source span; no model-memory generation (source_grounded flag).
+- Tests expand to 31 passing.

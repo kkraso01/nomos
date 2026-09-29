@@ -76,3 +76,17 @@ def test_judgment_segmentation():
     types = {s["segment_type"] for s in segs}
     assert {"facts", "procedural_history", "holding", "order"} <= types
     assert any(s["text"] == "one fact." and s["para_number"] for s in segs)
+
+
+def test_judgment_summary_source_grounded():
+    import uuid
+    h = _login()
+    cid = f"CJS2-{uuid.uuid4().hex[:6]}"
+    client.post("/corpus/judgment", headers=h, json={
+        "canonical_id": cid, "title": "X", "case_number": "6/2021",
+        "raw_text": "Holding\nThe court held that the seller was in breach of contract and awarded damages to the buyer.\nOrder\nThe seller shall pay the buyer's costs."})
+    out = client.get(f"/corpus/judgment/{cid}/summary", headers=h).json()
+    assert out["ok"] is True and out["source_grounded"] is True and out["mode"] == "extractive"
+    texts = [s["text"] for s in out["summary"]]
+    assert any("breach of contract" in t for t in texts)
+    assert any("costs" in t for t in texts)
