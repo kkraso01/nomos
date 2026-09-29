@@ -96,3 +96,8 @@ The following are not blockers to functional feature development and should only
 ### 2026-09-23 — Source-grounded extractive judgment summary (Phase E) functional
 - /corpus/judgment/{id}/summary: verbatim extractive sentences from holding/legal_analysis/order segments with source span; no model-memory generation (source_grounded flag).
 - Tests expand to 31 passing.
+
+### 2026-09-23 — Goal: /nomos/ exposure, HDD-only validation, regression
+- Apache: `/nomos/` reverse-proxy added to the :80 default vhost (backup saved) and applied via graceful `systemctl reload` — no service stopped. Verified: GET /nomos/ (200 HTML landing), /nomos/health (200 JSON), /nomos/docs (200 Swagger). Company site 200; demiourgo containers Up 5 days; flaresolverr running — untouched.
+- HDD-only audit passed: docker data-root + all nomos volumes under /mnt/jellyfin/Projects/NOMOS/docker-data; venv 324M, pip 67M/npm 41M caches, logs, repo all under /mnt/jellyfin/Projects/NOMOS; XDG_CACHE_HOME→HDD; no NOMOS data written to the SD card.
+- Final regression: full backend suite 31 passed / 0 failures; migrations at head (b23cab155aed); rq worker + API running; working tree clean and committed.
