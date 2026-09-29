@@ -83,3 +83,34 @@ def extract_events(text: str) -> list[dict]:
                            "confidence": 0.5})
             start = idx + len(kw)
     return events
+
+_ISSUE_RULES = [
+    ({"insolven", "wound up", "liquidator", "bankrupt", "αφερεγγυ"},
+     "Is the company insolvent and therefore liable to be wound up by the court?"),
+    ({"negligence", "duty of care", "negligent", "αμέλεια"},
+     "Did the defendant owe and breach a duty of care towards the claimant?"),
+    ({"breach", "failed to", "default", "παραβίαση"},
+     "Was there a breach of the parties' contractual obligations?"),
+    ({"damages", "compensation", "loss", "ζημία"},
+     "What damages or compensation is the claimant entitled to recover?"),
+    ({"liable", "liability", "responsib", "ευθύν"},
+     "Is the defendant liable to the claimant and on what legal basis?"),
+    ({"limitation", "time-barred", "παρεγράφ"},
+     "Is the claim barred by the applicable limitation period?"),
+    ({"jurisdiction", "δικαιοδοσία"},
+     "Does the court have jurisdiction to hear and determine the claim?"),
+    ({"specific performance", "injunction"},
+     "Is an equitable remedy (specific performance / injunction) available and appropriate?"),
+]
+
+
+def suggest_issues(facts: list[str]) -> list[dict]:
+    """Deterministic L0: map accepted matter facts to candidate legal issues."""
+    issues = []
+    seen = set()
+    all_txt = " ".join(facts).lower()
+    for keywords, issue in _ISSUE_RULES:
+        if any(k in all_txt for k in keywords) and issue not in seen:
+            seen.add(issue)
+            issues.append({"text": issue})
+    return issues

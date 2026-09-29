@@ -34,7 +34,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Matter document ingestion | FUNCTIONAL | private upload to MinIO + text extraction |
 | Fact extraction | PARTIAL | L0 deterministic extraction with source spans, proposed→review; no LLM |
 | Chronology | FUNCTIONAL | dated events sorted by date |
-| Issue spotting | PARTIAL | issue create/review scaffold; no LLM issue detection |
+| Issue spotting | FUNCTIONAL | L0 proposed issues from accepted facts for lawyer review; tests/test_matter_ws_e2e.py |
 | Authority workspace | FUNCTIONAL | mark relied_on/adverse/distinguishable/rejected; corpus-validated; tests/test_authority_e2e.py |
 | Legal research assistant | FUNCTIONAL | grounded retrieval + citation validation + unsupported path; tests/test_research_e2e.py |
 | Citation validation | FUNCTIONAL | generated citations checked against corpus via /research/validate-citation |

@@ -55,3 +55,21 @@ def test_matter_cross_org_isolation():
     # B cannot read A's facts
     assert client.get(f"/matters/{mid}/facts", headers=hB).status_code == 404
     assert client.get(f"/matters/{mid}/chronology", headers=hB).status_code == 404
+
+def test_issue_spotting_from_accepted_facts():
+    import uuid
+    p = f"iss{uuid.uuid4().hex[:5]}"
+    rr = client.post("/auth/register", json={"org": {"name": p, "slug": p},
+                                             "admin_email": f"{p}@x.com", "admin_password": "pw123"})
+    h2 = {"Authorization": f"Bearer {rr.json()['access_token']}"}
+    mid = client.post("/matters", headers=h2, json={"title": "M"}).json()["id"]
+    doc = client.post(f"/matters/{mid}/documents", headers=h2,
+                      files={"file": ("t.txt", io.BytesIO(b"The company became insolvent and the seller shall pay damages for breach."), "text/plain")}).json()
+    client.post(f"/matters/{mid}/documents/{doc['document_id']}/extract", headers=h2)
+    # accept all proposed facts
+    for f in client.get(f"/matters/{mid}/facts", headers=h2).json()["facts"]:
+        client.post(f"/matters/{mid}/facts/{f['id']}/decision", headers=h2, json={"status": "accepted"})
+    issues = client.post(f"/matters/{mid}/suggest-issues", headers=h2).json()["issues"]
+    texts = [i["text"] for i in issues]
+    assert any("insolvent" in t for t in texts)
+    assert any("damages" in t for t in texts)

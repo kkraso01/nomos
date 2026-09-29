@@ -136,3 +136,27 @@ def create_issue(matter_id: uuid.UUID, text: str = Form(...), source_fact_id: st
     db.commit()
     db.refresh(issue)
     return {"issue_id": str(issue.id), "text": issue.text, "status": issue.status}
+
+
+@router.post("/{matter_id}/suggest-issues")
+def suggest_matter_issues(matter_id: uuid.UUID, ctx: dict = Depends(require_org),
+                          db: Session = Depends(get_db)):
+    """Deterministic L0 issue spotting from ACCEPTED facts of the matter."""
+    org = ctx["org_id"]
+    _get_matter(db, org, matter_id)
+    accepted = [f.text for f in db.query(MatterFact).filter_by(
+        matter_id=matter_id, org_id=org, status="accepted").all()]
+    proposed = []
+    for cand in extract.suggest_issues(accepted):
+        exists = db.query(MatterIssue).filter_by(matter_id=matter_id, org_id=org,
+                                                 text=cand["text"]).first()
+        if exists:
+            proposed.append({"text": cand["text"], "status": exists.status, "created": False})
+            continue
+        db.add(MatterIssue(org_id=org, matter_id=matter_id, text=cand["text"]))
+        proposed.append({"text": cand["text"], "status": "proposed", "created": True})
+    db.commit()
+    audit.record_audit(db, action="matter.issue.suggest", org_id=org,
+                       actor_user_id=ctx["user"].id, resource_type="matter_issue",
+                       detail={"accepted_facts": len(accepted), "issues": len(proposed)})
+    return {"accepted_facts": len(accepted), "issues": proposed}

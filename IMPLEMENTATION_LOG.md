@@ -88,3 +88,7 @@ The following are not blockers to functional feature development and should only
 - /similarity/compare reports LEGAL_ISSUE / FACTUAL / PROCEDURAL / STATUTORY / REMEDY similarity separately.
 - Deterministic L0: heading-carry-forward segmentation groups body text under facts/legal-analysis/holding/order; jaccard term overlap per dimension + shared cited-province overlap + same-court metadata + remedy-vocabulary overlap.
 - Every dimension returns a score and an explanation; missing case -> 404. Tests expand to 29 passing.
+
+### 2026-09-23 — Issue spotting (Phase F) functional
+- /matters/{mid}/suggest-issues: deterministic L0 mapping of ACCEPTED facts to candidate legal issues (insolvency, negligence, breach, damages, liability, limitation, jurisdiction, remedy); persisted as proposed for lawyer review.
+- Tests expand to 30 passing.
