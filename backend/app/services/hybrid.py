@@ -58,12 +58,27 @@ def _dense_candidates(db: Session, query: str, top: int = 25) -> list[tuple[Lega
 
 
 def _exact_legislation_candidates(db: Session, query: str) -> tuple[list[str], dict]:
+    import re as _re
     ref = parse_reference(query)
+    entries = None
+    extra = {}
     if ref.kind == "legislation_article" and ref.law_number:
         entries = db.query(SearchEntry).filter_by(ref_law=ref.law_number,
                                                   ref_article=ref.article_number).all()
-        return [e.canonical_ref for e in entries], {"law": ref.law_number, "article": ref.article_number}
-    return [], {}
+        extra = {"law": ref.law_number, "article": ref.article_number}
+    # robust legal-reference recognition: alphanumeric law keys (e.g. "Article 5 of Law ELW")
+    if not entries:
+        m = _re.search(r"(?:Article|άρθρο|αρ\.)\s*([0-9IVXLC]+[A-Za-z]?)\s+(?:of\s+)?(?:the\s+)?(?:Law\s+|Ν\W?\s*)([A-Za-z0-9_+\-]+)",
+                       query, _re.IGNORECASE)
+        if m:
+            key = m.group(2).strip().rstrip(".")
+            entries = (db.query(SearchEntry).filter_by(ref_law=key, ref_article=m.group(1)).all()
+                       or db.query(SearchEntry).filter_by(canonical_ref=f"law-{key}-art-{m.group(1)}").all())
+            if entries:
+                extra = {"law": key, "article": m.group(1)}
+    if entries:
+        return [e.canonical_ref for e in entries], extra
+    return [], {}  # noqa: RET503
 
 
 def _graph_candidates(db: Session, query: str) -> list[str]:
@@ -214,6 +229,11 @@ def hybrid_search(db: Session, query: str, *, as_of=None, limit: int = 20,
             reranked = True
         except Exception:  # noqa: BLE001
             reranked = False
+
+    # Calibrated ranking: deterministic exact-reference matches are authoritative
+    # lookups and must never be demoted beneath generic semantic reranking.
+    if any(r.get("exact") for r in ranked):
+        ranked = [r for r in ranked if r["exact"]] + [r for r in ranked if not r["exact"]]
 
     for r in ranked:
         r["explanation"] = _explain(r, exact_meta)

@@ -244,3 +244,16 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
   - lets the lawyer inspect every supporting authority (canonical_ref + evidence).
 - historical-note: adversarial surfacing works; grounding gate is conservative (morphological variants like "winding up" vs "wound up" can under-trigger — a task-5 ranking/query-understanding target).
 - Tests: tests/test_assistant_e2e.py (3). Full suite 59 passed.
+
+### 2026-09-29 — Light ranking-quality pass, measured vs benchmark (task-5) complete
+Improvements (no fine-tuning, no new retrieval subsystem):
+1. Robust legal-reference recognition in query understanding: _exact_legislation_candidates now resolves alphanumeric law keys ("Article 5 of Law ELW of 2015") in addition to numeric, so exact-reference queries get the deterministic exact bypass.
+2. Calibrated fusion/ranking: exact-reference matches are treated as authoritative lookups and are never demoted beneath generic semantic reranking (previously the cross-encoder could push an exact match out of the top-N).
+
+Measured on the benchark (baseline -> post-change, both committed):
+- exact_reference MRR 0.5 -> 1.0, nDCG@10 0.631 -> 1.0 (cy-ref-001 MRR 1.0)
+- en aggregate MRR 0.385 -> 0.423, nDCG@10 0.405 -> 0.433
+- non_temporal MRR 0.464 -> 0.5
+- el / greek / cross_lingual GR<->EN MRR 1.0 (unchanged); temporal MRR 0.5; hard negatives 0 (no regression on any important class)
+Reports: eval/reports/baseline.json (pre) + eval/reports/report-20260929-172739.json (post).
+Suite 59 passed.
