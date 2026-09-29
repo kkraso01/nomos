@@ -2,6 +2,7 @@ import uuid
 
 import yaml
 from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from ..db import get_db
@@ -51,6 +52,43 @@ def disable_adapter(source_id: uuid.UUID, ctx: dict = Depends(require_org),
     audit.record_audit(db, action="source.registry.disable", org_id=ctx["org_id"],
                        actor_user_id=ctx["user"].id, resource_type="source", resource_id=row.id,
                        detail={"source": row.name})
+    return row
+
+
+class ClearanceIn(BaseModel):
+    commercial_reuse_allowed: bool
+    bulk_download_allowed: bool | None = None
+    api_available: bool | None = None
+    adapter_enabled: bool | None = None
+    terms_checked_by: str | None = None
+    terms_snapshot_hash: str | None = None
+    licence: str | None = None
+    licence_url: str | None = None
+    reuse_status: str | None = None
+    notes: str | None = None
+
+
+@router.put("/registry/{source_id}/clearance", response_model=SourceRegistryOut)
+def record_clearance(source_id: uuid.UUID, payload: ClearanceIn, ctx: dict = Depends(require_org),
+                     db: Session = Depends(get_db)):
+    """Record a human legal-clearance decision (incl. commercial reuse) for a source.
+
+    This is an explicit, audited action — not an assumption. Until commercial
+    reuse is recorded as allowed, bulk ingestion for the paid service is blocked.
+    """
+    from datetime import datetime, timezone
+    row = db.get(models.SourceRegistry, source_id)
+    if row is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Source not found")
+    data = payload.model_dump(exclude_unset=True)
+    for k, v in data.items():
+        setattr(row, k, v)
+    row.terms_checked_at = datetime.now(timezone.utc)
+    db.commit()
+    db.refresh(row)
+    audit.record_audit(db, action="source.registry.clearance", org_id=ctx["org_id"],
+                       actor_user_id=ctx["user"].id, resource_type="source", resource_id=row.id,
+                       detail={"source": row.name, "commercial_reuse_allowed": row.commercial_reuse_allowed})
     return row
 
 

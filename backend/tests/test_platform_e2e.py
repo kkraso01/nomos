@@ -41,6 +41,16 @@ def test_seed_and_reuse_gate():
 
     # Approved source ingests; identical re-ingest dedupes. (unique key per run)
     ckey = f"eu/t{uuid.uuid4().hex[:8]}"
+    # In commercial-service mode an approved source still needs recorded clearance.
+    r_blocked = client.post(f"/sources/{eur['id']}/ingest", headers=h, json={
+        "canonical_key": ckey, "raw_payload": "Article 1 OK text"})
+    assert r_blocked.status_code == 403, "approved source w/o commercial clearance must be blocked"
+
+    # Record human clearance (audited) then ingest succeeds.
+    cl = client.put(f"/sources/registry/{eur['id']}/clearance", headers=h, json={
+        "commercial_reuse_allowed": True})
+    assert cl.status_code == 200 and cl.json()["commercial_reuse_allowed"] is True
+
     r1 = client.post(f"/sources/{eur['id']}/ingest", headers=h, json={
         "canonical_key": ckey, "raw_payload": "Article 1 OK text"})
     assert r1.status_code == 201, r1.text

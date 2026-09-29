@@ -106,3 +106,17 @@ The following are not blockers to functional feature development and should only
 - Added a self-contained web UI at /ui (and /nomos/ui via Apache): login/register, public search with mode select, and citation validation.
 - The page's JS targets the same API through the /nomos/ proxy (API base auto-detected) — verified: login→search (200), validate-citation (exists:true), register (200) through Apache.
 - Test suite remains 31 passing.
+
+### 2026-09-23 — Source license research + commercial-reuse gate (legal safety)
+- Researched source licences from official pages. CONFIRMED: Cyprus National Open Data Portal
+  (data.gov.cy) is explicitly **CC BY 4.0** (official FAQ; reuse/commercial permitted with
+  attribution + derivative marking) -> registry commercial_reuse_allowed=true.
+  NOT confirmed (network bot-gated/unreachable): EUR-Lex full-text (API + pages 202/0B),
+  ECHR/HUDOC (JS-rendered body), Gazette, Supreme Court -> remain gated.
+  CyLaw remains PERMISSION_REQUIRED (no bulk ingestion).
+  Findings in SOURCE_LICENSE_RESEARCH_2026-09-23.md.
+- Added commercial-service gate: in commercial_service_mode (paid service), bulk ingestion
+  requires `commercial_reuse_allowed=True` on the source (audited human clearance step via
+  `PUT /sources/registry/{id}/clearance`). Verified at runtime: data.gov.cy ingests; EUR-Lex
+  (approved-open but not commercially cleared) blocked 403; CyLaw blocked.
+- Tests updated; suite still 31 passing.

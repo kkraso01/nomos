@@ -7,6 +7,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Session
 
 from ..models import Base, utcnow
+from ..config import settings
 
 
 class LegalSource(Base):
@@ -64,12 +65,21 @@ class IngestionService:
         self.storage = storage
 
     def check_reuse_gate(self, registry) -> None:
-        """Refuse bulk/systematic ingestion unless source is approved and enabled."""
+        """Refuse bulk/systematic ingestion unless source is approved and enabled.
+
+        In commercial-service mode, a source must ALSO be recorded as
+        commercially reusable (commercial_reuse_allowed=True) before any bulk
+        ingestion is permitted for resale. That flag is a human legal-clearance
+        decision, not an assumption.
+        """
+        reasons = []
         if not getattr(registry, "bulk_ingestion_allowed", lambda: False)():
+            reasons.append(f"reuse_status={registry.reuse_status}, adapter_enabled={registry.adapter_enabled}")
+        if getattr(settings, "commercial_service_mode", False) and not registry.commercial_reuse_allowed:
+            reasons.append("commercial_reuse_allowed=False (no recorded legal clearance for commercial resale)")
+        if reasons:
             raise IngestionGateError(
-                f"Bulk ingestion blocked for source {registry.name} "
-                f"(reuse_status={registry.reuse_status}, adapter_enabled={registry.adapter_enabled})"
-            )
+                f"Bulk ingestion blocked for source {registry.name} ({'; '.join(reasons)})")
 
     def ingest_raw(self, registry, source_record_id: str, raw_payload: str, canonical_key: str,
                    title: str | None = None, language: str | None = None,

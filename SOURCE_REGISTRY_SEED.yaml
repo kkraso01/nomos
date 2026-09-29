@@ -8,12 +8,17 @@ sources:
     official_source: true
     primary_source: true
     reuse_status: APPROVED_WITH_ATTRIBUTION
-    licence: CC BY 4.0 (general portal default; verify per dataset)
-    automated_access_allowed: null
-    bulk_download_allowed: null
+    licence: CC BY 4.0
+    licence_url: https://www.data.gov.cy/en/faq
+    commercial_reuse_allowed: true
+    automated_access_allowed: true
+    bulk_download_allowed: true
+    api_available: true
     attribution_required: true
     adapter_enabled: true
-    notes: "Portal FAQ says datasets are generally CC BY 4.0. Preserve dataset-specific licence/terms."
+    terms_checked_by: NOMOS-research
+    terms_snapshot_hash: CC-BY-4.0-faq-2026-09-23
+    notes: "Confirmed licence from official FAQ: CC BY 4.0 (attribution + derivative marking; commercial use permitted). See SOURCE_LICENSE_RESEARCH_2026-09-23.md. Respect per-dataset terms."
 
   - key: cyprus_gazette
     name: Government Gazette of the Republic of Cyprus

@@ -29,6 +29,11 @@ class Settings(BaseSettings):
     default_remote_ai_policy: str = "PUBLIC_ONLY"
     remote_ai_policy: str = "PUBLIC_ONLY"
 
+    # NOMOS is a paid lawyer service. When True, the bulk-ingestion gate also
+    # requires the source to be recorded as commercially reusable (a human
+    # legal-clearance decision); no source may be ingested for resale otherwise.
+    commercial_service_mode: bool = True
+
     openrouter_api_key: str = ""
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
     openrouter_model: str = "deepseek/deepseek-v4-flash-0731"

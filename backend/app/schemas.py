@@ -97,6 +97,8 @@ class SourceRegistryOut(BaseModel):
     bulk_download_allowed: bool
     api_available: bool
     automated_access_allowed: bool
+    commercial_reuse_allowed: bool = False
+    terms_checked_at: Optional[datetime] = None
     created_at: Optional[datetime] = None
 
     class Config:
