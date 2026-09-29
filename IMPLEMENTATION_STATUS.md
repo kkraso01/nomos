@@ -22,6 +22,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Temporal legislation | FUNCTIONAL | as-of date resolves correct version; tests/test_corpus_e2e.py |
 | Judgment model | FUNCTIONAL | versioned ingest + L0 segmentation (facts/procedural/holding/order); tests/test_corpus_e2e.py |
 | Citation graph | FUNCTIONAL | validated edges (must exist), semantic evidence requirement, traversal; tests/test_citation_e2e.py |
+| Case comparison | FUNCTIONAL | separate legal/factual/procedural/statutory/remedy dimensions with explanations; tests/test_similarity_e2e.py |
 | Legal reference parser | FUNCTIONAL | Cyprus/EU Article/Law, ECLI, case-number; L0 exact bias |
 | BM25 search | FUNCTIONAL | Postgres ts_vector/unaccent lexical (EN+EL); OpenSearch provider pluggable |
 | Semantic search | NOT_STARTED | no local embed model on Pi; semantic mode falls back to lexical |
@@ -34,7 +35,6 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Fact extraction | PARTIAL | L0 deterministic extraction with source spans, proposed→review; no LLM |
 | Chronology | FUNCTIONAL | dated events sorted by date |
 | Issue spotting | PARTIAL | issue create/review scaffold; no LLM issue detection |
-| Authority workspace | NOT_STARTED | |
 | Authority workspace | FUNCTIONAL | mark relied_on/adverse/distinguishable/rejected; corpus-validated; tests/test_authority_e2e.py |
 | Legal research assistant | FUNCTIONAL | grounded retrieval + citation validation + unsupported path; tests/test_research_e2e.py |
 | Citation validation | FUNCTIONAL | generated citations checked against corpus via /research/validate-citation |

@@ -83,3 +83,8 @@ The following are not blockers to functional feature development and should only
 ### 2026-09-23 — Judgment segmentation (Phase E) functional
 - L0 deterministic segmentation of judgments into facts / procedural_history / legal_analysis / holding / order / dissent, stored on JudgmentNode.segment_type with para/source spans; GET /corpus/judgment/{id}/segments.
 - Tests expand to 28 passing.
+
+### 2026-09-23 — Case comparison with separate similarity dimensions (Phase E) functional
+- /similarity/compare reports LEGAL_ISSUE / FACTUAL / PROCEDURAL / STATUTORY / REMEDY similarity separately.
+- Deterministic L0: heading-carry-forward segmentation groups body text under facts/legal-analysis/holding/order; jaccard term overlap per dimension + shared cited-province overlap + same-court metadata + remedy-vocabulary overlap.
+- Every dimension returns a score and an explanation; missing case -> 404. Tests expand to 29 passing.
