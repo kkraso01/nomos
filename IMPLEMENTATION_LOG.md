@@ -208,3 +208,7 @@ nothing valuable to migrate; this is a green-field rebuild of the model + retrie
 - Added scripts/run_eval.py: ingests a deterministic CY corpus (winding-up law + a judgment), embeds it, and prints the full retrieval-eval report (recall@10/50, MRR, nDCG@10, precision@10) per query via the live hybrid retriever. Executed: EN recall@10=1.0/MRR=0.25, cross-lingual GR recall@10=1.0/MRR=0.5, judgment recall@10=1.0/MRR=1.0, hard negatives recall=0.
 - Hybrid retrieval tests made robust to the shared, growing dev index (assert target retrieved within a generous recall window; hard negatives remain 0).
 - Full suite 53 passed.
+
+### 2026-09-29 — Platform stability: de-flake background-job test
+- test_durable_background_job previously polled for max 15s; under CPU load the rq job completed at ~16s causing CI noise.
+- Raised the poll window to 60s and guarded against a None status. Full suite now stable (53 passed, no flake).

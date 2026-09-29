@@ -122,12 +122,14 @@ def test_durable_background_job():
     j = client.post("/jobs", headers=h).json()
     jid = j["job_id"]
     status, waited = None, 0
-    while waited < 15:
-        status = client.get(f"/jobs/{jid}", headers=h).json()
+    # The rq worker can lag seconds under CPU load on this device; poll up to 60s.
+    while waited < 60:
+        resp = client.get(f"/jobs/{jid}", headers=h)
+        status = resp.json()
         if status.get("status") in ("finished", "failed"):
             break
         time.sleep(1)
         waited += 1
-    assert status["status"] == "finished", status
+    assert status is not None and status.get("status") == "finished", status
     assert status["result"]["final"] == "done"
     assert len(status["result"]["progress_log"]) == 5
