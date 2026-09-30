@@ -84,12 +84,12 @@ a{{color:#1d4ed8}} ul{{line-height:1.9}} footer{{color:#9ca3af;font-size:.85rem;
 <main>
 <p>This is the NOMOS API. Browse the API documentation or key workflow endpoints below.</p>
 <ul>
-<li><a href="/ui">Web UI (login → search)</a></li>
-<li><a href="/docs">Interactive API docs (Swagger UI)</a></li>
-<li><a href="/health">Health check</a></li>
-<li><a href="/openapi.json">OpenAPI specification</a></li>
-<li><a href="/sources/registry">Source registry</a></li>
-<li><a href="/search?q=insolvency">Search (needs auth)</a></li>
+<li><a href="./ui">Web UI (login → search)</a></li>
+<li><a href="./docs">Interactive API docs (Swagger UI)</a></li>
+<li><a href="./health">Health check</a></li>
+<li><a href="./openapi.json">OpenAPI specification</a></li>
+<li><a href="./sources/registry">Source registry</a></li>
+<li><a href="./search?q=insolvency">Search (needs auth)</a></li>
 </ul>
 </main>
 <footer><span>NOMOS {version}</span> · <span>env: {env}</span></footer>
