@@ -1,0 +1,1680 @@
+[
+ {
+  "title": "Κατάλογος γεννήσεων και ονομάτων",
+  "resources": []
+ },
+ {
+  "title": "Ενδιαιτήματα και βιότοποι - Κατανομή Τύπων Οικοτόπων",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/150d2d1a-ae6e-49b6-a614-95b34b649b31"
+  ]
+ },
+ {
+  "title": "Μόνιμες Δειγματοληπτικές Επιφάνειες Οικοτόπων - Κατανομή Θηλαστικών",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/76487801-2514-414e-bc9b-cabec4de32db"
+  ]
+ },
+ {
+  "title": "Κατανομή Ειδών - Ερπετά (CYSERPENTS)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/633cca5d-5f74-4c6c-8ce5-83bf1e8ae073"
+  ]
+ },
+ {
+  "title": "Κατανομή Ειδών - Χλωρίδα  (CYPLANTS_AOO)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/560317ee-e23b-41c9-968e-428510b73f1c"
+  ]
+ },
+ {
+  "title": "Κατανομή Ειδών - CYPLANTS",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/b46189a7-7d31-4bfa-b3b5-e310afc7f636"
+  ]
+ },
+ {
+  "title": "Κάλυψη Γης - Κατανομή Κωνοφόρων και Πλατύφυλλων Δέντρων",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/96b0a5ca-6575-45ca-bbeb-39f6ab4de876"
+  ]
+ },
+ {
+  "title": "Κατανομή Ειδών - Αμφίβια (CYAMPHIBIANS)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/3601c698-a4a7-4151-9017-25668dec2b6a"
+  ]
+ },
+ {
+  "title": "Κάλυψη Γης - Κατανομή Μόνιμων Υδροτροπικών Συστημάτων Γλυκού Νερού (Wetlands)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/cfe1567a-0b39-4f7f-8de1-e78ecdd98957"
+  ]
+ },
+ {
+  "title": "Στατιστικά Στοιχεία Προστίμων και Ποινών που επιβλήθηκαν για Παραβάσεις Νομοθεσίας για Ασφάλεια και Υγεία στην Εργασία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/99774194-d4ac-4313-ab33-ca900ebeb2c0",
+   "https://www.data.gov.cy/en/resource/i/c6e3aa7d-526e-4267-bbba-f5437f8d3a9f"
+  ]
+ },
+ {
+  "title": "Εργατικά Ατυχήματα ανά Οικονομική Δραστηριότητα (κωδικοποίηση NACE 2)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/b59c6bb5-8c42-414b-808d-22d13f2de0c2"
+  ]
+ },
+ {
+  "title": "Εργατικά Ατυχήματα - Δείκτης Ατυχημάτων ανά Οικονομική Δραστηριότητα",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c186bc6c-6e55-45ef-bf85-c23b9075092d"
+  ]
+ },
+ {
+  "title": "Εργατικά Ατυχήματα ανά Φύλο και Οικονομική Δραστηριότητα",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/b6c123ed-61f0-4bb7-a356-4b3a97e66842"
+  ]
+ },
+ {
+  "title": "Μέσος Όρος Ημερών που Χάθηκαν ανά Εργατικό Ατύχημα, ανά Τομέα Οικονομικής Δραστηριότητας, - Δείκτης Εργατικών Ατυχημάτων",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/2e00b10f-9e29-4b2b-9017-53bea5d40d0a"
+  ]
+ },
+ {
+  "title": "Ηλικία Σελήνης (ημέρες)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/6b8e04c7-0693-432b-a5c3-1e6366ab4b1d",
+   "https://www.data.gov.cy/en/resource/i/80c142ab-cf9c-4c67-af10-bb5d71cadade"
+  ]
+ },
+ {
+  "title": "Ετήσιες Εκθέσεις Αστυνομίας Κύπρου",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/8bc66511-58e5-49f5-9b40-28cd8ea52435",
+   "https://www.data.gov.cy/en/resource/i/b7206cfc-92ad-4782-84af-b9e45166542c",
+   "https://www.data.gov.cy/en/resource/i/345a3826-8de8-4cef-9841-13cd6bed4ae0"
+  ]
+ },
+ {
+  "title": "Ετήσιες Εκθέσεις Υπουργείου Οικονομικών",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/7c3caed2-426b-4c5b-9ee6-da3f3f89d11d",
+   "https://www.data.gov.cy/en/resource/i/a229a97a-7df5-41dc-822c-839731983a86",
+   "https://www.data.gov.cy/en/resource/i/30b46798-dbd2-47f3-a3f9-da4323bae09c",
+   "https://www.data.gov.cy/en/resource/i/f754ee01-7e99-4836-a7c3-11d89ae50747"
+  ]
+ },
+ {
+  "title": "Κατανομή Πληθυσμού ανά Επαρχία (INSPIRE)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/bf502c92-c7ed-417d-882d-37f62dc1aef2",
+   "https://www.data.gov.cy/en/resource/i/3a4c7a65-7d75-4646-8c49-08dc0665fb47",
+   "https://www.data.gov.cy/en/resource/i/6e76d990-4fc0-41f4-9536-617b722c2995",
+   "https://www.data.gov.cy/en/resource/i/c04501b8-b59b-4aaf-9e5f-10b1d8bcf882",
+   "https://www.data.gov.cy/en/resource/i/d4b48fe0-a11b-4f16-96cf-5dca498ed95b",
+   "https://www.data.gov.cy/en/resource/i/66e131c7-2ca4-45fc-8159-0bc72efb3f08"
+  ]
+ },
+ {
+  "title": "Κατάλογος Αποφάσεων της Επιτροπής Προστασίας του Ανταγωνισμού αναφορικά με σχέση οικονομικής εξάρτησης",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/4bc4134c-b216-4e31-8251-6bbad3073782",
+   "https://www.data.gov.cy/en/resource/i/4d88fc9f-6186-41d2-806e-70262c991477",
+   "https://www.data.gov.cy/en/resource/i/13e6b1c3-bbd9-47a2-8acc-5a6579aeffb6"
+  ]
+ },
+ {
+  "title": "Κατανομή Πληθυσμού - Δημογραφία ανά Δήμο/Κοινότητα (INSPIRE)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c8aa8a43-a682-4888-800e-d5b54104f1c7",
+   "https://www.data.gov.cy/en/resource/i/d401fd7f-4851-4a23-9b14-acc7f03fe72f",
+   "https://www.data.gov.cy/en/resource/i/e5955b15-8dba-427f-a899-0bda7c549be6",
+   "https://www.data.gov.cy/en/resource/i/dd0a0796-b8df-4828-9e4f-86f7c3651228",
+   "https://www.data.gov.cy/en/resource/i/3fcb5cb2-2350-426a-9b30-be155417b415",
+   "https://www.data.gov.cy/en/resource/i/4bd33dff-c0c6-4142-9f99-bcbd49ceac09"
+  ]
+ },
+ {
+  "title": "Κατανομή Πληθυσμού - Δημογραφία ανά Ενορία (INSPIRE)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/f076d024-b3e0-4648-a774-b91b5c8f2161",
+   "https://www.data.gov.cy/en/resource/i/ec5145ee-c4c2-4696-9b62-8728228bc34f",
+   "https://www.data.gov.cy/en/resource/i/c85adfb6-08d5-47c2-ba67-ea8cea37143f",
+   "https://www.data.gov.cy/en/resource/i/ff4779e7-39dd-4835-8ffe-c84e317296d3",
+   "https://www.data.gov.cy/en/resource/i/00aabf73-a806-4fcb-843f-5a7fb253d1cb",
+   "https://www.data.gov.cy/en/resource/i/15a5c922-0feb-4aab-8826-940c8d2b1137"
+  ]
+ },
+ {
+  "title": "Κατανομή Πληθυσμού - Δημογραφία ανά Ταχυδρομικό Τομέα (INSPIRE)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/31d08c0d-456c-44e2-a0cd-3c3a3bede4ae",
+   "https://www.data.gov.cy/en/resource/i/aeb02ff0-35eb-4869-8fce-31039c1e2710",
+   "https://www.data.gov.cy/en/resource/i/e18910eb-348c-4fe7-a7b3-349593a5fc65",
+   "https://www.data.gov.cy/en/resource/i/93d6ce90-3b32-41c5-8052-06f587025d88",
+   "https://www.data.gov.cy/en/resource/i/2a8b391e-440a-4239-9bcb-856e834e64f9",
+   "https://www.data.gov.cy/en/resource/i/968aaba0-3844-4fee-98bd-0122f2c90cac"
+  ]
+ },
+ {
+  "title": "Κατανομή Απασχολούμενου Πληθυσμού ανά Επαρχία και Δήμο/Κοινότητα (INSPIRE)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/e4912b19-8e8c-4898-9093-484a3e0a3db4",
+   "https://www.data.gov.cy/en/resource/i/d2328dd4-436d-4c02-88e3-f2f66a2ec699",
+   "https://www.data.gov.cy/en/resource/i/5e73e7e3-a473-49e1-9e23-882047ce0f21",
+   "https://www.data.gov.cy/en/resource/i/51dcd6bb-ea2f-4695-973e-ea8e926bbc5c",
+   "https://www.data.gov.cy/en/resource/i/b70835dc-3520-4dcb-b1c9-d377bfde23ba",
+   "https://www.data.gov.cy/en/resource/i/48aebb28-0877-4cc0-a647-19d073bf8351"
+  ]
+ },
+ {
+  "title": "Κατανομή Απασχολούμενου Άνεργου Πληθυσμού ανά Επαρχία και Δήμο/Κοινότητα (INSPIRE)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/da23c7c9-2481-4f17-9817-29aea41db9df",
+   "https://www.data.gov.cy/en/resource/i/9a0ac585-048a-46db-8c18-bcc8d3e74cee",
+   "https://www.data.gov.cy/en/resource/i/d1f8a234-da7b-494c-87d5-6906824e92e8",
+   "https://www.data.gov.cy/en/resource/i/f100f870-b6df-4e51-be14-13ee9e598627",
+   "https://www.data.gov.cy/en/resource/i/7e896da5-1075-460e-aa06-273a1c54a499",
+   "https://www.data.gov.cy/en/resource/i/d012ad85-7960-4e66-a79f-5d786be3337b"
+  ]
+ },
+ {
+  "title": "Κατανομή Πληθυσμού ανά Τομέα Απασχόλησης, ανά Επαρχία και Δήμο/Κοινότητα (INSPIRE)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/8d018c8f-a253-471e-a832-b31245cb25cf",
+   "https://www.data.gov.cy/en/resource/i/deffd7c2-f355-4b90-9648-542106c02b05",
+   "https://www.data.gov.cy/en/resource/i/a9918d3f-17ce-434b-87a2-d04d7ebe627a",
+   "https://www.data.gov.cy/en/resource/i/6f9196b7-a820-4484-880c-567dabd8e149",
+   "https://www.data.gov.cy/en/resource/i/25bacc6a-0c84-4cb7-a6db-c8e225d21f1e",
+   "https://www.data.gov.cy/en/resource/i/7a20b91e-3212-4130-8e7b-c5182208c734"
+  ]
+ },
+ {
+  "title": "Κατανομή των Οικοτόπων στην Κύπρο (INSPIRE)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/d9a77300-7f27-4bb3-862d-9f39a4b2f8b1",
+   "https://www.data.gov.cy/en/resource/i/00710c89-ba59-48a1-af99-1077b647bc96",
+   "https://www.data.gov.cy/en/resource/i/f2e9e438-eaa3-420d-9726-d5ad7284dd78",
+   "https://www.data.gov.cy/en/resource/i/4715495b-ef60-4138-bb7f-f7906f541211",
+   "https://www.data.gov.cy/en/resource/i/f9a2e5da-e25b-4de1-b2a5-e2d0f9afcbcd",
+   "https://www.data.gov.cy/en/resource/i/1fe9c404-823e-4d72-b15f-3a2abf43a109"
+  ]
+ },
+ {
+  "title": "Θέσεις Δημοσίων Κτιρίων και Υπηρεσιών - Landmark Areas (INSPIRE)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/e7ddbd08-add9-48ce-b176-581e32aceeba",
+   "https://www.data.gov.cy/en/resource/i/4a0d50b2-aa14-458c-ad78-af418b03c5fb",
+   "https://www.data.gov.cy/en/resource/i/8704300f-3fde-4895-9e08-9ed659883322",
+   "https://www.data.gov.cy/en/resource/i/0e72ac8e-cab6-4cba-ac04-b27c14ffdbee",
+   "https://www.data.gov.cy/en/resource/i/33240700-af7e-43ab-a981-453629bdbaac",
+   "https://www.data.gov.cy/en/resource/i/2c80326a-f06d-4bfc-a95c-7bba69aa04d7"
+  ]
+ },
+ {
+  "title": "Κατανομή Ειδών Χλωρίδας στην Κύπρο (INSPIRE)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/8b19caa4-7b7e-435a-863b-f4934f6d8df7",
+   "https://www.data.gov.cy/en/resource/i/0ca48894-578e-4a63-933e-08863b62e704",
+   "https://www.data.gov.cy/en/resource/i/7ac21eb2-7cfa-4431-b3b6-667268e7426e",
+   "https://www.data.gov.cy/en/resource/i/207c930b-1b39-4955-aaac-7e321cf77a3b",
+   "https://www.data.gov.cy/en/resource/i/53b4445a-5957-41e7-8bed-6519dc779386",
+   "https://www.data.gov.cy/en/resource/i/3c5d84f7-ed59-4736-b97b-169ee6b596ec"
+  ]
+ },
+ {
+  "title": "Κυριότεροι Οικονομικόι Δείκτες - Μηνιαία Στοιχεία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/2fdd9f18-8989-47a9-9597-22b532adc9c3"
+  ]
+ },
+ {
+  "title": "Συγκριτικά Στοιχεία Κυριότερων Οικονομικών Δεικτών (Μηνιαία)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c37887a2-0dd4-422f-a43a-e49dd9dd004a"
+  ]
+ },
+ {
+  "title": "Εθνικοί Λογαριασμοί - Χρονοσειρά από 1995",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/4ce32017-26b9-4e21-adc4-09320995fa0f",
+   "https://www.data.gov.cy/en/resource/i/aff3d34b-94d9-4183-b742-8146f5c72bd8"
+  ]
+ },
+ {
+  "title": "Δημόσια Οικονομικά - Τριμηνιαίοι Λογαριασμοί Γενικής Κυβέρνησης",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/43e9fd88-9338-4a8b-a8e7-14f1f7f46762"
+  ]
+ },
+ {
+  "title": "Δημόσια Οικονομικά - Ετήσιοι Λογαριασμοί Γενικής Κυβέρνησης (Χρονοσειρά από 2000)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/0eaa3ee0-b1a3-4c95-b1f3-1cdccacd29ad",
+   "https://www.data.gov.cy/en/resource/i/afaaf696-4acc-426d-be8a-7199aea21045"
+  ]
+ },
+ {
+  "title": "Ανάλυση Εισπραχθέντων Φόρων και Κοινωνικών Εισφορών (Χρονοσειρά από 1995)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/d1f0d50c-970b-4077-8868-c1fba917f206",
+   "https://www.data.gov.cy/en/resource/i/9eb58c3b-b847-4171-9fc4-8a70b6690fc3"
+  ]
+ },
+ {
+  "title": "Διαδικασία Υπερβολικού Ελλείματος - Ετήσια Έκθεση",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/b112a7b6-52ad-4efd-bcf3-914c472fefe8"
+  ]
+ },
+ {
+  "title": "Δημοσιονομικές Εξελίξεις (Πρόγραμμα Μεταμνημονιακής Παρακολούθησης)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/56ca09ba-621a-4ffa-bbe8-888fe2e3c09d"
+  ]
+ },
+ {
+  "title": "Συμπληρωματικές Πληροφορίες για τις Εν Δυνάμει Δαπάνες του Κράτους",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/39da70b6-16e9-4e4c-888d-871bd2a75b87"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Σύγκριση με αντίστοιχη περσινή περίοδο)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/62d03c52-c8de-45e2-8b7d-310a8180353c"
+  ]
+ },
+ {
+  "title": "Συχνότητα Ονομάτων (Απογραφή Πληθυσμού 2011)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c10c44a9-734e-411c-af5c-4dfefcaf6054"
+  ]
+ },
+ {
+  "title": "Γεωγραφική Κατανομή Κατοικιών (Απογραφή Πληθυσμού 2011)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/37cd7974-df74-4adb-a471-43fbc8102b6c",
+   "https://www.data.gov.cy/en/resource/i/70bd0eb8-2997-4f5f-8d9c-9d70c0a9b292"
+  ]
+ },
+ {
+  "title": "Γεωγραφική Κατανομή Κατοικημένων Κατοικιών (Απογραφή Πληθυσμού 2011)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/f709831e-e05c-4e9d-be52-13e872e3bab9",
+   "https://www.data.gov.cy/en/resource/i/23e3f24a-ea6e-41e6-a88b-00fd988bdc06"
+  ]
+ },
+ {
+  "title": "Γεωγραφική Κατανομή Νοικοκυριών (Απογραφή Πληθυσμού 2011)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/0d4a0f92-6a7c-4268-9ffc-5f03102e78df",
+   "https://www.data.gov.cy/en/resource/i/792991d7-6c02-4c80-9927-6bd507116842"
+  ]
+ },
+ {
+  "title": "Οικονομία (Στατιστική Επετηρίδα)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/287bafde-3a6a-4ece-a7cc-7d8bc1a96acc"
+  ]
+ },
+ {
+  "title": "Στατιστικά Ποινικών Διώξεων Εργοδοτών για Παραβιάσεις της Εργαστικής Νομοθεσίας",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/ea86bbc6-f94f-4782-96c9-21fe97d694ca"
+  ]
+ },
+ {
+  "title": "Στατιστικά Aπεργιών ανά Τομέα Οικονομική Δραστηριότητας",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/5f97063c-2389-4eae-99ca-71fff4f9d974",
+   "https://www.data.gov.cy/en/resource/i/2cab12a8-f8d2-4252-bf44-ae3475b35d18"
+  ]
+ },
+ {
+  "title": "Δημοσιονομικές Εκθέσεις",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/9c4a7f0a-7a16-4c53-a409-c489d19a0f54",
+   "https://www.data.gov.cy/en/resource/i/baa860a9-cf0a-40a5-8f7e-d62f523b2ca4"
+  ]
+ },
+ {
+  "title": "Φυσικά και Νομικά Πρόσωπα που Έλαβαν από την Δημοκρατία Πέραν του 1 εκατ. Ευρώ",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/5a4477d4-ba71-479b-9621-0cf4543317b5",
+   "https://www.data.gov.cy/en/resource/i/db6b373b-7e08-42f7-9a3c-e3db732ff29c"
+  ]
+ },
+ {
+  "title": "Φυσικά και Νομικά Πρόσωπα που Έλαβαν Πέραν των 5 Χιλιάδων Ευρώ ανά Κονδύλι Δαπάνης της Κυβέρνησης",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/357c4248-fd45-449a-bf85-913e35670809"
+  ]
+ },
+ {
+  "title": "Παρατηρητήριο Τουρισμού Υπουργείου Οικονομικών",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/7f8b5a76-9196-4591-a99e-fabb1d4c923f",
+   "https://www.data.gov.cy/en/resource/i/4fd59c30-a3df-480c-be0b-506c8599d6f3"
+  ]
+ },
+ {
+  "title": "Παρατηρητήριο Αγοράς Εργασίας Υπουργείου Οικονομικών",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/0df2b386-7344-4ffe-a462-eace4adf88e4",
+   "https://www.data.gov.cy/en/resource/i/be2d97cf-24ce-4d64-85d4-20dd7aa2829c",
+   "https://www.data.gov.cy/en/resource/i/14f18a4e-5e86-4868-ad37-83c57f1881f7",
+   "https://www.data.gov.cy/en/resource/i/a9d27406-b37d-4e18-a157-50880d05740d",
+   "https://www.data.gov.cy/en/resource/i/93e15f31-1643-4004-bc5f-1887ee5af75f"
+  ]
+ },
+ {
+  "title": "Προϋπολογισμός 2017 και Μεσοπρόθεσμο Δημοσιονομικό Πλαίσιο 2017-19",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/2ed010bf-a6e9-4463-b776-8b4b7996907b",
+   "https://www.data.gov.cy/en/resource/i/70b750ee-f503-4ed6-b922-b62ae84ec3f0",
+   "https://www.data.gov.cy/en/resource/i/8f1aed3d-150e-441a-8fc4-57353a790c0c"
+  ]
+ },
+ {
+  "title": "Προϋπολογισμός 2016 και Μεσοπρόθεσμο Δημοσιονομικό Πλαίσιο 2016-18",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/ebaa0732-d31e-4c48-8a74-0e67ca78e105"
+  ]
+ },
+ {
+  "title": "Τοποθεσίες Αστυνομικών Σταθμών στην Κύπρο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/d55f5442-79dc-424d-a312-866920b5daf7"
+  ]
+ },
+ {
+  "title": "Όρια Κάλυψης Αστυνομικών Σταθμών",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/75c206ab-7303-4859-a4c6-52cde73f9d27"
+  ]
+ },
+ {
+  "title": "Προϋπολογισμός 2018 και Μεσοπρόθεσμο Δημοσιονομικό Πλαίσιο 2018-20",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/015cb532-9098-4df9-ba6c-72a010a9360c",
+   "https://www.data.gov.cy/en/resource/i/d0690de6-bc25-456f-9c31-498d39e82512",
+   "https://www.data.gov.cy/en/resource/i/c11e126e-f4af-47d9-b3ad-3299d74aff8b"
+  ]
+ },
+ {
+  "title": "Αποτελέσματα Ελέγχου Ποιότητας Πόσιμου Νερού εκτός Νομοθετικών Ορίων - Μικροβιολογικός έλεγχος",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/1a0861c7-d041-430c-9161-7a6e507b4038",
+   "https://www.data.gov.cy/en/resource/i/fc8b5844-f263-4f62-9988-6cb4a2d1cd35",
+   "https://www.data.gov.cy/en/resource/i/113c5e55-d9b1-40bf-98e3-7434858ea4bb",
+   "https://www.data.gov.cy/en/resource/i/b9f76d37-0048-4e1d-92f5-8949a1ed90e8",
+   "https://www.data.gov.cy/en/resource/i/bfca2c70-06ff-4f61-a093-7b7d6a5cb206",
+   "https://www.data.gov.cy/en/resource/i/2554fe74-00f8-433c-800a-bf00571f573b"
+  ]
+ },
+ {
+  "title": "Αποτελέσματα ελέγχου ποιότητας πόσιμου νερού εκτός Νομοθετικών Ορίων - Ιοντικός έλεγχος και Βαρέα Μέταλλα",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/00b222cc-e78e-44b7-93f4-6768c9d74066",
+   "https://www.data.gov.cy/en/resource/i/313eb266-47d8-4aa9-abdc-72331510034b",
+   "https://www.data.gov.cy/en/resource/i/3edebc03-bb31-4309-bdb1-adc8877c3807",
+   "https://www.data.gov.cy/en/resource/i/a4d39498-a3e6-461e-84b3-403a663c87ae",
+   "https://www.data.gov.cy/en/resource/i/d90c425e-53c7-486a-9e6a-a5a10e7ec06e",
+   "https://www.data.gov.cy/en/resource/i/7d67afaf-29ab-4d7c-b4a1-4b88670fdec6"
+  ]
+ },
+ {
+  "title": "Αποτελέσματα ελέγχου ποιότητας πόσιμου νερού εκτός Νομοθετικών Ορίων - Οργανικοί ρύποι",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/112de3b1-0356-4a13-aed3-bed549ac9bb2",
+   "https://www.data.gov.cy/en/resource/i/3574a518-f01f-408d-ad9e-b98f05db1c54",
+   "https://www.data.gov.cy/en/resource/i/d5657c52-6a76-45cb-95f0-0743db82cb20",
+   "https://www.data.gov.cy/en/resource/i/f16045de-c602-4e0f-b19d-836d6af324e1",
+   "https://www.data.gov.cy/en/resource/i/78318d38-8bdb-4b3e-85b0-06a5e799e21d",
+   "https://www.data.gov.cy/en/resource/i/fc7d59e6-df43-41bd-b818-a19db4597781"
+  ]
+ },
+ {
+  "title": "Κατάλογος Διμερών Συμφωνιών Νομικής/Δικαστικής Συνεργασίας",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/55aaffb8-4a74-41c2-bdd1-c2953f4213a5",
+   "https://www.data.gov.cy/en/resource/i/388216f0-9cce-44c9-8621-591608bfdb39"
+  ]
+ },
+ {
+  "title": "Κατάλογος Επαγγελμάτων που ρυθμίζονται με νομοθεσία στην Κύπρο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/2fdcba92-3d70-4872-9a61-13f73b5b6ca2",
+   "https://www.data.gov.cy/en/resource/i/a721235e-c63f-427c-bc38-2bf002ec4200"
+  ]
+ },
+ {
+  "title": "Αδικήματα Οικονομικού Εγκλήματος ανά Είδος Αδικήματος και Έτος",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/053119cc-5360-4cfe-a6aa-1ee1723cf658",
+   "https://www.data.gov.cy/en/resource/i/c6216437-1a82-4ec0-8729-bc79fa47e1e1"
+  ]
+ },
+ {
+  "title": "Απασχολούμενοι κατά Κοινότητα και Οικονομική Δραστηριότητα",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c02295ab-b252-46e5-9156-618afb999880",
+   "https://www.data.gov.cy/en/resource/i/da27fbb9-50ca-447f-90d2-5345a52b25af",
+   "https://www.data.gov.cy/en/resource/i/55c9ec5f-1d1f-4d53-89a8-5a676d34009a",
+   "https://www.data.gov.cy/en/resource/i/17492d18-e2cd-4672-b0a1-bafeabb90a0c",
+   "https://www.data.gov.cy/en/resource/i/e258f9af-8182-464c-b79f-34738b685616",
+   "https://www.data.gov.cy/en/resource/i/9ead0489-bcf4-475b-b042-b20299e7a39b"
+  ]
+ },
+ {
+  "title": "Ενεργοί Εισφορείς και Εισφορές στο Ταμείο Κοινωνικών Ασφαλίσεων ανά Οικονομική Δραστηριότητα",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/3691d434-d8ad-43ee-afae-7c49450e7f34",
+   "https://www.data.gov.cy/en/resource/i/61b8e595-5e16-4165-8b7a-f878e4c50d0c"
+  ]
+ },
+ {
+  "title": "Αριθμός ατόμων που αποτάθηκαν για επίδομα ανεργίας κατά οικονομική δραστηριότητα και μήνα",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/89b690c4-223d-4751-a839-cf19237dd348",
+   "https://www.data.gov.cy/en/resource/i/448c6e52-8e32-4f5a-9f30-3f8e70dd8953"
+  ]
+ },
+ {
+  "title": "Αιτήσεις και Μέσο Ποσό Πληρωμής Πλεονασμού κατά Οικονομική Δραστηριότητα",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/30131c0d-4fb3-4f45-a54b-a64bb94a193d",
+   "https://www.data.gov.cy/en/resource/i/4059c2f1-b4e5-406d-a254-7a2e1bb760a2"
+  ]
+ },
+ {
+  "title": "Καταγγελίες ανα έτος - Παραβάσεις  της Εθνικής και Κοινοτικής Νομοθεσίας που αφορά στον αλιευτικό τομέα",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/b0a06267-4d2c-4baa-a860-574f232ff933"
+  ]
+ },
+ {
+  "title": "Τυποποίηση Ονομάτων Χωρών και Πρωτευουσών",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/b0030878-3a0f-4fac-80a3-cdc1091a7dda"
+  ]
+ },
+ {
+  "title": "Τυποποίηση Ελληνικών Ονομάτων Προσώπων",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/2bb40a99-e21b-4bb5-9edb-004e2e5b07ba",
+   "https://www.data.gov.cy/en/resource/i/0afc55e9-dd62-4597-96f1-1db5234f0770"
+  ]
+ },
+ {
+  "title": "Κατανομή του προσωπικού των σχολείων  κατά εκπαιδευτική βαθμίδα και φύλο και σχολική χρονιά",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/97e6966d-c5ed-42de-bbdc-23c6a4eb6c47",
+   "https://www.data.gov.cy/en/resource/i/50c647e3-4ff4-494c-8fbf-254ee22b2a40",
+   "https://www.data.gov.cy/en/resource/i/7c1c6539-17d8-443c-a59f-1d6752bb6073"
+  ]
+ },
+ {
+  "title": "Κατανομή των εκπαιδευτικών λειτουργών, κατά θέση και εκπαιδευτική βαθμίδα",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/9b5c743f-9947-445f-aee5-c8790ce60113",
+   "https://www.data.gov.cy/en/resource/i/2e533c6f-efb7-4401-b2a8-5f6bdd2c42d2",
+   "https://www.data.gov.cy/en/resource/i/a49ba92c-2e2e-4eeb-9970-20e2e1a10f2b"
+  ]
+ },
+ {
+  "title": "Δηλώσεις περιουσιακών στοιχείων Ορισμένων Δημόσια Εκτεθειμένων Προσώπων και Ορισμένων Αξιωματούχων της Κυπριακής Δημοκρατίας, με βάση τη νομοθεσία  για το \"Πόθεν Έσχες\"",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/430b31c1-8563-470a-921a-003bbe1a0cb3"
+  ]
+ },
+ {
+  "title": "Προϋπολογισμός 2019 και Μεσοπρόθεσμο Δημοσιονομικό Πλαίσιο 2019-21",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/0090640b-6160-465e-93fc-7d5e505677a3",
+   "https://www.data.gov.cy/en/resource/i/f2225f2f-9c41-4185-9f58-1b1497c76bf3",
+   "https://www.data.gov.cy/en/resource/i/0a16096c-d013-4490-b173-f3aecc0ea5ca"
+  ]
+ },
+ {
+  "title": "Αδειες Διαμονής (Single Permits) Υπηκόων Τρίτων Χωρών ανά Διάρκεια Άδειας, Είδος Απόφασης και Λόγο παραχώρησης",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/f51238b9-9d54-4f3a-a1ea-b0e9d7ba82ae",
+   "https://www.data.gov.cy/en/resource/i/24dabbbd-448c-4ea3-b0e0-14166c59a7ba",
+   "https://www.data.gov.cy/en/resource/i/0eb13d22-4a5e-4ac0-bace-31de113184a3",
+   "https://www.data.gov.cy/en/resource/i/e00301b6-f5ab-4289-941c-8170334616cd"
+  ]
+ },
+ {
+  "title": "Προϋπολογισμός 2020 και Μεσοπρόθεσμο Δημοσιονομικό Πλαίσιο 2020-22",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/047f68f1-a85b-44ea-984f-699820cbe331",
+   "https://www.data.gov.cy/en/resource/i/12df8ef7-99e0-4ab4-8843-48e89b46c081",
+   "https://www.data.gov.cy/en/resource/i/b7423939-07c5-4f81-a89c-c65d04bba0e6"
+  ]
+ },
+ {
+  "title": "Κατανομή Ασυμπτωματικών Περιπτώσεων COVID-19 κατά τη Διάγνωση, ανά Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/41049dc6-0d77-453a-8100-cc628a9729ae"
+  ]
+ },
+ {
+  "title": "Κατανομή Ασυμπτωματικών Περιπτώσεων COVID-19 κατά τη Διάγνωση, ανά Ηλικία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/7ca9529a-6a43-46e5-87ee-56c18e0790cb"
+  ]
+ },
+ {
+  "title": "Κατανομή Ασυμπτωματικών Περιπτώσεων COVID-19 κατά τη Διάγνωση, ανά Επαρχία Διαμονής και Επιδημιολογικό Ιστορικό",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/688c33f3-9185-471e-a4b7-00c7282025d5"
+  ]
+ },
+ {
+  "title": "Κατανομή Περιπτώσεων COVID-19 κατά τη Διάγνωση, ανά Συχνά Αναφερόμενα Συμπτώματα",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/ffdeb673-d284-4069-a901-23f08e4beb7b"
+  ]
+ },
+ {
+  "title": "Κατανομή Περιπτώσεων COVID-19 σε Εργαζόμενους στον Τομέα Υγείας ανά Επαρχία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/e49ac37d-3d24-4d7a-9a60-6c2daaa01eed"
+  ]
+ },
+ {
+  "title": "Αδειες Διαμονής (Single Permits) Υπηκόων Τρίτων Χωρών ανά Διάρκεια Άδειας, Είδος Απόφασης και Λόγο παραχώρησης",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/53710e8d-dc82-425b-9d8f-fa24b45d6b66",
+   "https://www.data.gov.cy/en/resource/i/96410c65-c23a-4140-a53f-3edb8263c922",
+   "https://www.data.gov.cy/en/resource/i/5ac26a99-8a38-4662-9d35-12f83926531b",
+   "https://www.data.gov.cy/en/resource/i/8f2778c1-96c7-4e6b-a67c-1574da133ff0"
+  ]
+ },
+ {
+  "title": "Συναλλαγματικές Ισοτιμίες Ξένων Νομισμάτων με Ευρώ για Τελωνειακούς Σκοπούς",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/d0cab9e3-e2fc-4181-8522-1bbcc26ad900",
+   "https://www.data.gov.cy/en/resource/i/db62eec0-3eac-4cad-b48f-b0de41d4a362"
+  ]
+ },
+ {
+  "title": "Προϋπολογισμός 2021 και Μεσοπρόθεσμο Δημοσιονομικό Πλαίσιο 2021-23",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/f3df5714-d16a-42cb-8fc9-f97ebdb5a14e",
+   "https://www.data.gov.cy/en/resource/i/4a50ce5a-1665-45a8-a361-13b6853887f8",
+   "https://www.data.gov.cy/en/resource/i/1875da4b-6c12-40e0-b331-f70f03481c52"
+  ]
+ },
+ {
+  "title": "Αποκλειστική Οικονομική Ζώνη (Υδρογραφικά Δεδομένα)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c0948c9d-7655-45fb-b366-17a43218e677",
+   "https://www.data.gov.cy/en/resource/i/7ee72aac-d1d2-49d9-8261-27ee4a65671b",
+   "https://www.data.gov.cy/en/resource/i/59992d35-75a6-4d5b-88cf-b532c88670de",
+   "https://www.data.gov.cy/en/resource/i/aac6809f-b031-4632-ae59-145d3bd96134"
+  ]
+ },
+ {
+  "title": "Αριθμός Υποστατικών κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Δήμο/Κοινότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/46d6fa82-9b3e-43d4-9c4f-674413d82662"
+  ]
+ },
+ {
+  "title": "Κατανομή Ατόμων 20 Ετών και Άνω κατά Μορφωτικό Επίπεδο και Φύλο, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/b5b51c9a-c88a-46fe-9647-21413b1432df"
+  ]
+ },
+ {
+  "title": "Άτομα που Εμπλέκονται σε Εργατικά Ατυχήματα κατά Οικονομική Δραστηριότητα (Nace Αναθ. 2) και Βαθμό Τραύματος, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/a2b48506-c98b-41e4-9df7-86377e143a5d"
+  ]
+ },
+ {
+  "title": "Τρέχουσες Δαπάνες Υγείας κατά Λειτουργία Υγειονομικής Περίθαλψης, Ετήσια (€εκ.)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/75c5575d-3f3d-432b-8c44-ab46d5e3953e"
+  ]
+ },
+ {
+  "title": "Τρέχουσες Δαπάνες Υγείας κατά Πάροχο Υγειονομικής Περίθαλψης, Ετήσια (€εκ.)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/39c901e4-2b6d-4f8d-acb5-819531ea29d9"
+  ]
+ },
+ {
+  "title": "Τρέχουσες Δαπάνες Υγείας κατά Λειτουργία Υγειονομικής Περίθαλψης και Συστήματα Χρηματοδότησης, Ετήσια (€εκ.)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/de874e3c-7b3e-46e8-a71c-052dc40756f5"
+  ]
+ },
+ {
+  "title": "Τρέχουσες Δαπάνες Υγείας κατά Πάροχο Υγειονομικής Περίθαλψης και Συστήματα Χρηματοδότησης, Ετήσια (€εκ.)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/ae8c3e49-b632-4073-8a41-5bc0b93e45fa"
+  ]
+ },
+ {
+  "title": "Τρέχουσες Δαπάνες Υγείας κατά Λειτουργία Υγειονομικής Περίθαλψης και Πάροχο Υγειονομικής Περίθαλψης, Ετήσια (€εκ.)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/dac89462-7b1c-4329-8590-27fd4f3416c4"
+  ]
+ },
+ {
+  "title": "Πρόσβαση στο Διαδίκτυο στις Επιχειρήσεις κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/a54fe05e-5b74-450d-b29b-d164565e6bf5"
+  ]
+ },
+ {
+  "title": "Πρόσβαση στο Διαδίκτυο από Απασχολούμενους στις Επιχειρήσεις κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/20a617a6-c003-4a5d-b8f3-192262287dd2"
+  ]
+ },
+ {
+  "title": "Ταχύτητα Μεταφοράς Δεδομένων (Download speed) Σταθερής Σύνδεσης στο Διαδίκτυο κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/ea2b6a5c-a0de-4437-b1e6-d6d1a68a62b1"
+  ]
+ },
+ {
+  "title": "Παρεχόμενες Yπηρεσίες Ιστότοπου κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/71951741-e808-4cb9-bb8a-0413d9713ac4"
+  ]
+ },
+ {
+  "title": "Μέσα Κοινωνικής Δικτύωσης κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/87bdf672-5198-4b5a-a725-f1be2b59c400"
+  ]
+ },
+ {
+  "title": "Συσκέψεις μέσω Διαδικτύου και Εξ’ αποστάσεως πρόσβαση κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/1c6fda52-8ece-4868-93af-349a0cc18655"
+  ]
+ },
+ {
+  "title": "Άλλη Χρήση Διαδικτύου κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/e051f177-279e-48ba-9978-67504c030b1f"
+  ]
+ },
+ {
+  "title": "Ανταλλαγή Πληροφοριών Ηλεκτρονικά εντός της Eπιχείρησης κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/e9084c1c-f9ee-4533-85c3-979019397011"
+  ]
+ },
+ {
+  "title": "Τιμολόγηση κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/4630c16a-b6da-4267-be66-e51f31375137"
+  ]
+ },
+ {
+  "title": "Αξιοποίηση, Ανταλλαγή, Ανάλυση και Εμπόριο Δεδομένων κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/760a1b67-ad54-4c9c-9b3d-26c3851ccf63"
+  ]
+ },
+ {
+  "title": "Πωλήσεις Μέσω Ιστότοπου ή Eφαρμογών κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c5bb8248-4e74-4341-b103-094240bb94a3"
+  ]
+ },
+ {
+  "title": "Πωλήσεις μέσω μηνυμάτων τύπου EDI (Electronic Data Interchange) κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/f38cf666-97c2-404b-8fef-9ebe88c0901e"
+  ]
+ },
+ {
+  "title": "Εξειδικευμένο Προσωπικό σε Θέματα ΤΠΕ και Δεξιότητες κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/baef669f-19ed-4d14-a12d-31705e9de478"
+  ]
+ },
+ {
+  "title": "Ασφάλεια στις ΤΠΕ  κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/7b4f71a3-7f39-42ef-9d37-5900f82548a9"
+  ]
+ },
+ {
+  "title": "Χρήση Διασυνδεδεμένων Συσκευών ή Συστημάτων μέσω Διαδικτύου (Internet of Things) κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c7ebb5dc-b482-46b6-9751-f703a4e74c71"
+  ]
+ },
+ {
+  "title": "Τεχνητή Νοημοσύνη (Artificial Intelligence) κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/09166fc4-7e64-4c5f-82d8-bfd1583f8669"
+  ]
+ },
+ {
+  "title": "Επιπτώσεις του Covid-19 κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/193dead1-1734-4882-afe9-5cdcef67d402"
+  ]
+ },
+ {
+  "title": "Ανάλυση Μαζικών Δεδομένων (Big Data Analysis) κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/983a7e53-cf4b-4162-ab45-4c082a2e8c12"
+  ]
+ },
+ {
+  "title": "Χρήση Τρισδιάστατων Εκτυπωτών κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/39f295f5-c014-4710-b44d-53b0f96ae98d"
+  ]
+ },
+ {
+  "title": "Χρήση Ρομποτικής κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/43296130-932d-4c60-b270-189a85d56ae7"
+  ]
+ },
+ {
+  "title": "ΤΠΕ και Περιβάλλον κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/5251adf1-bd04-4366-9f12-9335f39b2908"
+  ]
+ },
+ {
+  "title": "Χρήση Υπηρεσιών Υπολογιστικού Νέφους (Cloud Computing Services) κατά Οικονομική Δραστηριότητα, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/f2045d7c-d2e5-4b55-bbfa-c94b7b755730"
+  ]
+ },
+ {
+  "title": "Δείκτες Απολαβών σε Ονομαστικούς Όρους κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/76a2504d-1412-43f6-adad-0a55b950a6d8"
+  ]
+ },
+ {
+  "title": "Μέσες Ακαθάριστες Μηνιαίες Απολαβές κατά Κλάδο Οικονομικής Δραστηριότητας NACE (Αναθ. 2) και Φύλο, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c592ac3e-44cc-482f-ba60-bb3b3df12ad1"
+  ]
+ },
+ {
+  "title": "Εκατοστιαία Κατανομή Εργαζομένων κατά Ακαθάριστες Μηνιαίες Απολαβές και Φύλο, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/daeae91d-e678-4244-8ac4-64fe507143af"
+  ]
+ },
+ {
+  "title": "Μέσος Όρος Ετήσιων Συνολικών Απολαβών, Μη-Σταθερών Επιδομάτων και Απολαβών Υπερωριών κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/5e41e606-2763-459b-926b-c0b9c4a8b951"
+  ]
+ },
+ {
+  "title": "Μέσος Όρος Ετήσιων Συνολικών Απολαβών, Μη-Σταθερών Επιδομάτων και Απολαβών Υπερωριών κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Ηλικιακή Ομάδα και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c7cba5f0-07e4-4cb8-939b-bdcbb2000966"
+  ]
+ },
+ {
+  "title": "Μέσος Όρος Ετήσιων Συνολικών Απολαβών, Μη-Σταθερών Επιδομάτων και Απολαβών Υπερωριών κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Διάρκεια Υπηρεσίας στην Επιχείρηση και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/cba2f143-9b31-4a58-9eaf-d74f261b76f4"
+  ]
+ },
+ {
+  "title": "Διάμεσες και Μέσες Ετήσιες Συνολικές Απολαβές και Διάστημα Εμπιστοσύνης κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/5abf52f4-67c6-4d8b-a91f-257cde88baec"
+  ]
+ },
+ {
+  "title": "Διάμεσες και Μέσες Ετήσιες Συνολικές Απολαβές κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Τύπο Οικονομικού Ελέγχου της Επιχείρησης, Φύλο και Ποσοστιαία Μεταβολή σε Σύγκριση με την Προηγούμενη Περίοδο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/65f28a83-b294-4f9b-b332-9ef240336287"
+  ]
+ },
+ {
+  "title": "Μέσος Όρος Ετήσιων Συνολικών Απολαβών, Μη-Σταθερών Επιδομάτων και Απολαβών Υπερωριών κατά Επαγγελματική Κατηγορία (ISCO-08), Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/eea33e2a-20a0-4a6b-b41b-fbd3aa2b7527"
+  ]
+ },
+ {
+  "title": "Διάμεσες και Μέσες Ετήσιες Συνολικές Απολαβές κατά Επαγγελματική Κατηγορία (ISCO-08), Τύπο Οικονομικού Ελέγχου της Επιχείρησης, Φύλο και Ποσοστιαία Μεταβολή σε Σύγκριση με την Προηγούμενη Περίοδο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/5fc51c4c-7bf7-4ed0-af13-0d76739028e0"
+  ]
+ },
+ {
+  "title": "Μέσες Ετήσιες Συνολικές Απολαβές κατά Επαγγελματική Κατηγορία (ISCO-08), Τύπο Οικονομικού Ελέγχου της Επιχείρησης, Ανώτατο Ολοκληρωμένο Επίπεδο Εκπαίδευσης και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/01ec35ab-7888-4f98-814f-bda6722b179f"
+  ]
+ },
+ {
+  "title": "Μέσες Ετήσιες Συνολικές Απολαβές κατά Επαγγελματική Κατηγορία (ISCO-08), Τύπο Οικονομικού Ελέγχου της Επιχείρησης, Διάρκεια Υπηρεσίας στην Επιχείρηση και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/fa02f823-e71f-435c-96e4-76814c309fb5"
+  ]
+ },
+ {
+  "title": "Μέσες Ετήσιες Συνολικές Απολαβές κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/03bf4a83-4e36-4e18-8b0b-96818b1e700f"
+  ]
+ },
+ {
+  "title": "Μέσες Ωριαίες Απολαβές κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Τύπο Εργοδότησης και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/f80ec06f-62a4-46d3-9fe2-266642ccdc8d"
+  ]
+ },
+ {
+  "title": "Μέσες Ωριαίες Απολαβές κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Τύπο Εργοδότησης, Ηλικιακή Ομάδα και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/191f51ec-0d3c-432c-ad59-d4c53e3e9b24"
+  ]
+ },
+ {
+  "title": "Μέσες Ωριαίες Απολαβές κατά Επαγγελματική Κατηγορία (ISCO-08), Τύπο Εργοδότησης, Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/3d31f985-2eed-49ab-8eb4-8b877ae1f49b"
+  ]
+ },
+ {
+  "title": "Μέσες Μηνιαίες Συνολικές Απολαβές, Απολαβές Υπερωριών και Πληρωμές για Βάρδια κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c65a4a84-2a37-4d91-bbb6-e710c1e41d35"
+  ]
+ },
+ {
+  "title": "Μέσες Μηνιαίες Συνολικές Απολαβές, Απολαβές Υπερωριών και Πληρωμές για Βάρδια κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Ηλικιακή Ομάδα και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/3af71bb8-284b-48a7-9136-5758bc729e1b"
+  ]
+ },
+ {
+  "title": "Μέσες Μηνιαίες Συνολικές Απολαβές, Απολαβές Υπερωριών και Πληρωμές για Βάρδια κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Διάρκεια Υπηρεσίας στην Επιχείρηση και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/359438a8-4955-4188-9ada-062425392116"
+  ]
+ },
+ {
+  "title": "Διάμεσες και Μέσες Μηνιαίες Συνολικές Απολαβές και Διάστημα Εμπιστοσύνης κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/d0577282-5b63-46bb-aea6-9c0a33cd1ec9"
+  ]
+ },
+ {
+  "title": "Διάμεσες και Μέσες Μηνιαίες Συνολικές Απολαβές κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Τύπο Οικονομικού Ελέγχου της Επιχείρησης, Φύλο και Ποσοστιαία Μεταβολή σε Σύγκριση με την Προηγούμενη Περίοδο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/efed4f82-a728-45eb-b80f-cb81c14872a5"
+  ]
+ },
+ {
+  "title": "Μέσες Μηνιαίες Συνολικές Απολαβές, Απολαβές Υπερωριών και Πληρωμές για Βάρδια κατά Επαγγελματική Κατηγορία (ISCO-08), Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/365371b2-04bb-44ef-b16f-475fc0f3e0dc"
+  ]
+ },
+ {
+  "title": "Διάμεσες και Μέσες Μηνιαίες Συνολικές Απολαβές κατά Επαγγελματική Κατηγορία (ISCO-08), Τύπο Οικονομικού Ελέγχου της Επιχείρησης, Φύλο και Ποσοστιαία Μεταβολή σε Σύγκριση με την Προηγούμενη Περίοδο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/83fcc3b9-14a5-4d18-aaa3-62589569ebd7"
+  ]
+ },
+ {
+  "title": "Μέσες Μηνιαίες Συνολικές Απολαβές κατά Επαγγελματική Κατηγορία (ISCO-08), Τύπο Οικονομικού Ελέγχου της Επιχείρησης, Ανώτατο Ολοκληρωμένο Επίπεδο Εκπαίδευσης και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/22e9f633-3db8-4ef4-9396-a2088e1fe1e3"
+  ]
+ },
+ {
+  "title": "Μέσες Μηνιαίες Συνολικές Απολαβές κατά Επαγγελματική Κατηγορία (ISCO-08), Τύπο Οικονομικού Ελέγχου της Επιχείρησης, Διάρκεια Υπηρεσίας στην Επιχείρηση και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/e00d90ec-75b4-4df2-95a4-ddffc92a84a4"
+  ]
+ },
+ {
+  "title": "Μέσες Μηνιαίες Συνολικές Απολαβές κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/2c03112b-2c96-4ae8-8c8c-308536c6d6fe"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100), Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/b9092280-b0f3-44d3-b0a1-f578ddd48a40"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα  (Έτος Βάσης 2016=100) 2000-2022, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/419db098-f452-449b-b2d1-b2b262c6adf7"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2023Τ1, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/a2fd6042-a850-4b20-a58e-a40c2e646417"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2023Τ2, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/ea07f63e-f5cb-46ac-b90a-95ae322260da"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2023Τ3, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/00b3a276-69f9-4d99-9ff3-324cee433b5d"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2023Τ4, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/1afd9d0e-7b32-40d9-8f58-58c4759504b7"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2024Τ1, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/b7b9e862-99db-4d11-89da-18fabdfa1e73"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2024Τ2, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/cd86d250-90eb-4de8-bc9b-45f93fba5655"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2024Τ3, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/440c040a-a600-4cfd-b51d-e70d5b4cb43e"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2024Τ4, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/96a1a2a2-73bc-465c-a836-99fe59de79b1"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2025Τ1, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/5080f287-1649-4e9b-9a39-1cd0b4d870a4"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2025Τ2, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/f7284f14-88ee-46de-b4a3-912fe9c541b6"
+  ]
+ },
+ {
+  "title": "Εργατικό Κόστος κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/931491e3-66b3-47fc-a855-294fded64889"
+  ]
+ },
+ {
+  "title": "Μέσες Ώρες Εργασίας που Αμείφθηκαν και Πραγματοποιήθηκαν ανά Μισθωτό κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2)",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/04ea6905-16bd-41e1-b50d-55fd97545c9d"
+  ]
+ },
+ {
+  "title": "Κενές Θέσεις και Ποσοστό Κενών Θέσεων κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/ba635c9d-450c-47a1-b175-045732a3c981"
+  ]
+ },
+ {
+  "title": "Κενές Θέσεις και Ποσοστό Κενών Θέσεων κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/664bf164-37e4-475a-9c03-baf1b5d4dfc6"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Τόπο Διαμονής, Οικονομική Δραστηριότητα NACE (Αναθ. 1) και Φύλο, 1999-2007, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/0a2bb453-adef-4042-b72b-16af5456c4ee"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Τόπο Διαμονής, Οικονομική Δραστηριότητα NACE (Αναθ. 1) και Φύλο, 1999-2007, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c95f0535-2d97-4878-878a-15f2022ea9da"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 1) και Φύλο, 1999-2007, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/b26325f7-1763-4e84-a0f8-8569c17d4b8e"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 1) και Φύλο, 1999-2007, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/3f5819e9-8c30-4148-87d3-553e32308f92"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Επαγγελματική Υπόσταση, Οικονομική Δραστηριότητα NACE (Αναθ. 1) και Φύλο, 1999-2007, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/c0a4f080-6bab-4257-85e3-09cb6b45b6a4"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Επαγγελματική Υπόσταση, Οικονομική Δραστηριότητα NACE (Αναθ. 1) και Φύλο, 1999-2007, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/751ff50b-94d5-43f0-b81f-1df3aecbdad4"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Τόπο Διαμονής, Οικονομική Δραστηριότητα NACE (Αναθ. 1) της Τελευταίας Εργασίας  και Φύλο, 1999-2007, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/659b8491-2dae-40df-a899-e1f3b9cf9ad4"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Τόπο Διαμονής, Οικονομική Δραστηριότητα NACE (Αναθ. 1) της Τελευταίας Εργασίας και Φύλο, 1999-2007, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/26b2cace-8197-465c-b546-cb6dff7c7a41"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 1) της Τελευταίας Εργασίας και Φύλο, 1999-2007, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/4d49ba2e-a94d-465b-8d16-f882981eeb74"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 1) της Τελευταιας Εργασίας και Φύλο, 1999-2007, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/bb7ff1c0-e0da-4847-94bb-66650bffc1c4"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Επαγγελματική Υπόσταση, Οικονομική Δραστηριότητα NACE (Αναθ. 1) της Τελευταίας Εργασίας και Φύλο, 1999-2007, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/bc420c46-d690-4dbe-b03a-abacc38c0463"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Επαγγελματική Υπόσταση, Οικονομική Δραστηριότητα NACE (Αναθ. 1) της Τελευταίας Εργασίας και Φύλο, 1999-2007, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/2df14fd4-81c6-4276-8e90-15f0d3b44b87"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Τόπο Διαμονής, Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/fb504830-70dc-40ed-9c0e-7467ad112dac"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Τόπο Διαμονής, Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/72ca8287-d627-49e6-8cec-f1f5e81703e9"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/cac9651c-28b7-49d6-947c-8aff01dda271"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/92a000bb-d666-45d1-bd61-ab51c84b4ccf"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Επαγγελματική Υπόσταση, Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/99040492-df1e-4a25-8b1d-94816d8190d4"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Επαγγελματική Υπόσταση, Οικονομική Δραστηριότητα NACE (Αναθ. 2) και Φύλο, Ετήσια",
+  "resources": [
+   "https://www.data.gov.cy/en/resource/i/1c62d597-c049-4829-8dad-3469715f5489"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Τόπο Διαμονής, Οικονομική Δραστηριότητα NACE (Αναθ. 2) της Τελευταίας Εργασίας και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/197f372c-f38c-4866-ab7d-c6042add63cf"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Τόπο Διαμονής, Οικονομική Δραστηριότητα NACE (Αναθ. 2) της Τελευταίας Εργασίας και Φύλο, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/d6b5650b-9d86-4e13-b0c8-3264c587d3a5"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 2) της Τελευταίας Εργασίας και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/2c93edd0-5850-49dc-80e7-4c25c6ac7467"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 2) της Τελευταίας Εργασίας και Φύλο, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/68a4404b-0ff9-4a43-92c1-df066ad4f7f9"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Επαγγελματική Υπόσταση, Οικονομική Δραστηριότητα NACE (Αναθ. 2) της Τελευταίας Εργασίας και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/6958da2c-e2ae-4c01-a717-f8040224c801"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Επαγγελματική Υπόσταση, Οικονομική Δραστηριότητα NACE (Αναθ. 2) της Τελευταίας Εργασίας και Φύλο, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/172edf28-81c9-4f62-aaf9-e81f03013fd4"
+  ]
+ },
+ {
+  "title": "Εγγεγραμμένοι Άνεργοι κατά Οικονομική Δραστηριότητα NACE (Αναθ. 1), 2005-2010, Μηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/35faa36e-c5f1-4cc3-aeb0-da308d1f10a1"
+  ]
+ },
+ {
+  "title": "Εγγεγραμμένοι Άνεργοι κατά Οικονομική Δραστηριότητα NACE (Αναθ. 1), 2005-2010, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/0bf86583-f2e5-42e1-9181-be547ff684cd"
+  ]
+ },
+ {
+  "title": "Εγγεγραμμένοι Άνεργοι κατά Οικονομική Δραστηριότητα ISIC 1968, 2002-2004, Μηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/fb5b11d2-4f71-4246-8ae5-c8fb22a5ad24"
+  ]
+ },
+ {
+  "title": "Εγγεγραμμένοι Άνεργοι κατά Οικονομική Δραστηριότητα ISIC 1968, 2002-2004, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/33dd2c1d-bce2-4d0c-82ea-0f0f47e9743a"
+  ]
+ },
+ {
+  "title": "Τοποθετήσεις σε Εργασία κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Μηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/9e7a4003-f76f-44cd-a7c9-248970598a81"
+  ]
+ },
+ {
+  "title": "Τοποθετήσεις σε Εργασία κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/12886701-46f8-4b58-9b48-0c549be41407"
+  ]
+ },
+ {
+  "title": "Εγγεγραμμένοι Άνεργοι κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Μηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/1d101262-a737-4c81-9ea0-ebf426c5f59d"
+  ]
+ },
+ {
+  "title": "Εγγεγραμμένοι Άνεργοι κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2), Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/85397ae8-c33e-4720-bfb6-d9a18941afb4"
+  ]
+ },
+ {
+  "title": "Έκβαση Ποινικής Διαδικασίας Επαρχιακών Δικαστηρίων και Κακουργιοδικείων κατά Φύλο, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/2c853aa4-3ea9-45b0-8225-dd8870d9a736"
+  ]
+ },
+ {
+  "title": "Σοβαρά Αδικήματα που Καταγγέλθηκαν στην Αστυνομία, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/c5f8c51d-5168-431c-a73f-e23a3f155f05"
+  ]
+ },
+ {
+  "title": "Πραγματικές Υποθέσεις Σοβαρών Αδικημάτων που Καταγγέλθηκαν στην Αστυνομία κατά Ομάδα Αδικήματος, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/32795230-ef43-4030-97c5-e0487783275e"
+  ]
+ },
+ {
+  "title": "Σύνολο Θυμάτων Πραγματικών Υποθέσεων Σοβαρών Αδικημάτων που Καταγγέλθηκαν στην Αστυνομία κατά Ομάδα Αδικήματος καιΤύπο Θύματος , Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/bae89833-a5d0-44c0-a25a-3b658a936790"
+  ]
+ },
+ {
+  "title": "Κατανομή Καταναλωτικών Δαπανών ανά 10.000€ κατά Κατηγορία Αγαθών και Υπηρεσιών και Κοινωνικοοικονομική Θέση Υπεύθυνου του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/7abd9e4b-44d6-461e-9261-aec5c126abe2"
+  ]
+ },
+ {
+  "title": "Κατανομή Καταναλωτικών Δαπανών ανά 10.000€ κατά Κατηγορία Αγαθών και Υπηρεσιών και Οικονομική Κατάσταση του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/7ac7c732-4538-48f0-9250-ea10ae9cf105"
+  ]
+ },
+ {
+  "title": "Κατανομή Καταναλωτικών Δαπανών ανά 10.000€ κατά Κατηγορία Αγαθών και Υπηρεσιών και Κύρια Πηγή Εισοδήματος, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/60deeb12-09a0-47e7-b833-0e4412a74acd"
+  ]
+ },
+ {
+  "title": "Κατανομή Καταναλωτικών Δαπανών ανά 10.000€ κατά Κατηγορία Αγαθών και Υπηρεσιών και Εισοδηματικό Δεκατημόριο, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/a0e938d3-1f01-49e3-9666-b958fe20981a"
+  ]
+ },
+ {
+  "title": "Κατανομή Καταναλωτικών Δαπανών ανά 10.000€ κατά Κατηγορία Αγαθών και Υπηρεσιών και Τύπο Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/341f8e13-18ba-4f62-ab54-cbaaeb0b40e1"
+  ]
+ },
+ {
+  "title": "Κατανομή Καταναλωτικών Δαπανών ανά 10.000€ κατά Κατηγορία Αγαθών και Υπηρεσιών και Ηλικία Υπεύθυνου του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/f381a4b8-3e4a-43ca-97bd-985684396e22"
+  ]
+ },
+ {
+  "title": "Κατανομή Καταναλωτικών Δαπανών ανά 10.000€ κατά Κατηγορία Αγαθών και Υπηρεσιών και Αστική/Αγροτική Περιοχή, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/64b51654-cce6-476c-afc7-90bd26823bf0"
+  ]
+ },
+ {
+  "title": "Κατανομή Καταναλωτικών Δαπανών ανά 10.000€ κατά Κατηγορία Αγαθών και Υπηρεσιών και Μέγεθος του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/44e44518-b193-4953-bb9b-24dd05a6e20d"
+  ]
+ },
+ {
+  "title": "Μέση Ετήσια Καταναλωτική Δαπάνη ανά Ισοδύναμο Ενήλικα κατά Κύρια Κατηγορία Αγαθών και Υπηρεσιών και Κοινωνικοοικονομική Θέση Υπεύθυνου του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/bff31304-8317-42b2-8f6a-d794d7e14250"
+  ]
+ },
+ {
+  "title": "Μέση Ετήσια Καταναλωτική Δαπάνη ανά Ισοδύναμο Ενήλικα κατά Κύρια Κατηγορία Αγαθών και Υπηρεσιών και Οικονομική Κατάσταση του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/f2908608-1fb6-458c-9377-e70110d11490"
+  ]
+ },
+ {
+  "title": "Μέση Ετήσια Καταναλωτική Δαπάνη Νοικοκυριού κατά Κύρια Κατηγορία Αγαθών και Υπηρεσιών και Κοινωνικοοικονομική Θέση Υπεύθυνου του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/169e3fc6-72f0-412a-93de-bdd83677b2d8"
+  ]
+ },
+ {
+  "title": "Μέση Ετήσια Καταναλωτική Δαπάνη Νοικοκυριού κατά Κύρια Κατηγορία Αγαθών και Υπηρεσιών και Οικονομική Κατάσταση του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/c85a5164-e276-454d-89f4-55ba2c3b9ea8"
+  ]
+ },
+ {
+  "title": "Μέσο Ετήσιο Εισόδημα Νοικοκυριού κατά Πηγή Εισοδήματος και Κοινωνικοοικονομική Θέση Υπεύθυνου του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/a569c4b3-9457-4b29-ac36-951005ce6cf4"
+  ]
+ },
+ {
+  "title": "Μέσο Ετήσιο Εισόδημα Νοικοκυριού κατά Πηγή Εισοδήματος και Οικονομική Κατάσταση του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/71f31a7b-0c73-4276-b6a2-0e91e863615e"
+  ]
+ },
+ {
+  "title": "Μέσο Ετήσιο Εισόδημα ανά Ισοδύναμο Ενήλικα κατά Πηγή Εισοδήματος και Κοινωνικοοικονομική Θέση Υπεύθυνου του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/5d0acc41-bbee-4d7e-98b0-1383361f2ebc"
+  ]
+ },
+ {
+  "title": "Μέσο Ετήσιο Εισόδημα ανά Ισοδύναμο Ενήλικα κατά Πηγή Εισοδήματος και Οικονομική Κατάσταση του Νοικοκυριού, 2023",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/6ca6e730-3eb7-4b90-81a1-450aeb5f81f7"
+  ]
+ },
+ {
+  "title": "Ποσοστιαία Κατανομή των Παροχών Κοινωνικής Προστασίας κατά Λειτουργία, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/7e213102-068a-4312-80be-765565747778"
+  ]
+ },
+ {
+  "title": "Συνολικές Δαπάνες Κοινωνικής Προστασίας και Ποσοστιαία Κατανομή κατά Πρόγραμμα, σε Τρέχουσες Τιμές, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/05de6473-03f8-4f94-b0c5-1c7b42e8de98"
+  ]
+ },
+ {
+  "title": "Απασχόληση σε Άτομα και Ώρες κατά Οικονομική Δραστηριότητα και Επαγγελματική Υπόσταση, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/9b95896d-a2ad-4315-88dd-05aea70a6ef2"
+  ]
+ },
+ {
+  "title": "Ισολογισμοί Μη-Χρηματοοικονομικών Περιουσιακών Στοιχείων, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/0e8d02ad-00a8-4ef1-814c-a9c7e712a095"
+  ]
+ },
+ {
+  "title": "Απασχόληση σε Άτομα και Ώρες κατά Οικονομική Δραστηριότητα και Επαγγελματική Υπόσταση, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/7870f72c-dfbf-4ded-839b-c41224bc67b0"
+  ]
+ },
+ {
+  "title": "Μη Ενοποιημένοι Χρηματοοικονομικοί Λογαριασμοί (Συναλλαγές), Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/cfddf2cb-965c-439e-9d82-c15522beadae"
+  ]
+ },
+ {
+  "title": "Μη Ενοποιημένοι Ισολογισμοί Χρηματοοικονομικών Περιουσιακών Στοιχείων και Υποχρεώσεων (Αποθέματα), Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/a33feda6-13aa-48e9-b94d-7f3d335021c2"
+  ]
+ },
+ {
+  "title": "Μη Χρηματοοικονομικοί Λογαριασμοί κατά Θεσμικό Τομέα, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/8d11e272-2006-4e2e-9dc5-207195794452"
+  ]
+ },
+ {
+  "title": "Πίνακας Προσφοράς σε Βασικές Τιμές, Περιλαμβανομένης Μετατροπής σε Τιμές Αγοραστή, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/8344d792-3be7-4970-87df-afc77bf1508c"
+  ]
+ },
+ {
+  "title": "Οικονομικά Ενεργός και Μη Οικονομικά Ενεργός Πληθυσμός (15 Ετών και Άνω) που Καταγράφηκε κατά Φύλο, Επαρχία και Αστική/Αγροτική Περιοχή 1.10.2021",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/0e1290cc-37e3-4f11-bba8-508a72ded725"
+  ]
+ },
+ {
+  "title": "Οικονομικά Ενεργός και Μη Οικονομικά Ενεργός Πληθυσμός (15 Ετών και Άνω) που Καταγράφηκε κατά Φύλο και Ηλικία 1.10.2021",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/79a2907c-0077-4c26-b86b-89b6821cc34e"
+  ]
+ },
+ {
+  "title": "Οικονομικά Ενεργός και Μη Οικονομικά Ενεργός Πληθυσμός (15 Ετών και Άνω) που Καταγράφηκε κατά Φύλο, Αστική/Αγροτική Περιοχή και Ομάδα Υπηκοότητας 1.10.2021",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/bdf2c210-231b-4b7b-995c-f4be556a362a"
+  ]
+ },
+ {
+  "title": "Οικονομικά Ενεργός Πληθυσμός (15 Ετών και Άνω) που Καταγράφηκε κατά Φύλο, Επαρχία και Αστική/Αγροτική Περιοχή 1.10.2021",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/74bc285a-9d91-4f48-aa1a-db75d90df75a"
+  ]
+ },
+ {
+  "title": "Οικονομικά Ενεργός Πληθυσμός (15 Ετών και Άνω) που Καταγράφηκε κατά Οικονομική Δραστηριότητα (NACE Αναθ. 2), Φύλο, Επαρχία και Αστική/Αγροτική Περιοχή 1.10.2021",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/3b26a625-ac05-4613-adf7-b06508850cae"
+  ]
+ },
+ {
+  "title": "Εργαζόμενοι (15 Ετών και Άνω) που Καταγράφηκαν κατά Φύλο, Επίπεδο Μόρφωσης, Τόπο Διαμονής (Αστική/Αγροτική Περιοχή) και Οικονομική Δραστηριότητα (NACE Αναθ. 2) 1.10.2021",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/a2858f8a-e5ae-4d91-8098-ccc1f368d551"
+  ]
+ },
+ {
+  "title": "Μη Οικονομικά Ενεργός Πληθυσμός (15 Ετών και Άνω) που Καταγράφηκε κατά Φύλο, Επαρχία και Αστική/Αγροτική Περιοχή 1.10.2021",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/7666490b-2b7c-44e7-bead-cdc284838abc"
+  ]
+ },
+ {
+  "title": "Ποσοστιαία Κατανομή Πληθυσμού κατά Ηλικία και Φύλο στις Απογραφές",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/e494054e-e8f1-4213-972c-5cfc6466558c"
+  ]
+ },
+ {
+  "title": "Ποσοστιαία Κατανομή Πληθυσμού κατά Οικογενειακή Υπόσταση και Φύλο (για Πρόσωπα 15 Χρονών και Πάνω) στις Απογραφές",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/28df0908-dde0-4ea0-80ab-f10aa108a56e"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Έτος Βάσης 2015=100) 2015-2025, Μηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/7a9b2b53-c206-484c-9243-ccbefd2a03ac",
+   "https://data.gov.cy/index.php/en/resource/i/7de6867f-7274-443b-839b-eac6884b80ab"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Έτος Βάσης 2015=100) 2016-2025, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/325c43ff-04be-49a2-a25f-23f13195803c",
+   "https://data.gov.cy/index.php/en/resource/i/1872065f-252a-4625-9a5f-37161c4b5cf0"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Έτος Βάσης 2005=100) 2006-2015, Μηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/258fba0a-b83a-4166-8ec6-26c6b244df7d"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Έτος Βάσης 2005=100) 2006-2015, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/3e85479b-fb22-4096-bb1e-c016db095dd2"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Έτος Βάσης 1998=100) 2004-2005, Μηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/76d1001d-1cee-4a88-be63-e3ea3628ef9c"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Έτος Βάσης 1998=100) 2004-2005, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/c09ed59b-5c3c-4bbb-b6ff-a7bc3d4a35be"
+  ]
+ },
+ {
+  "title": "Μη-Χρηματοοικονομικοί Λογαριασμοί της Γενικής Κυβέρνησης, Τριμηνιαία (EN)",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/7b3fc060-355a-40c1-bf4c-69eb67fbf280"
+  ]
+ },
+ {
+  "title": "Δημοσιονομικό Πλεόνασμα (+) / Έλλειμμα (-) και Ενοποιημένο Ακαθάριστο Χρέος της Γενικής Κυβέρνησης, Ετήσια (EN)",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/423c2c8d-5177-43bf-9e4a-213ab99755a9"
+  ]
+ },
+ {
+  "title": "Ποσοστιαία Κατανομή Τουριστών κατά Ηλικία, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/92df0e63-f853-4a82-945c-5984fa47b926"
+  ]
+ },
+ {
+  "title": "Ποσοστιαία Κατανομή Τουριστών κατά Φύλο, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/6e197e9c-e521-47dc-b0f5-8fd69ede54fe"
+  ]
+ },
+ {
+  "title": "Ποσοστιαία Κατανομή Τουριστών κατά Μήνα και Τύπο Καταλύματος στην Κύπρο, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/91354675-70a6-4a4d-b7de-e0845b5e1df3"
+  ]
+ },
+ {
+  "title": "Ποσοστιαία Κατανομή Τουριστών κατά Τύπο Καταλύματος στην Κύπρο, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/a36c4718-b037-415a-97fd-97f298757ece"
+  ]
+ },
+ {
+  "title": "Ποσοστιαία Κατανομή Τουριστών κατά Χώρα Συνήθους Διαμονής και Τύπο Καταλύματος στην Κύπρο, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/a0505d42-cdf4-4ce6-8dce-fd73c73ce4a4"
+  ]
+ },
+ {
+  "title": "Ποσοστιαία Κατανομή Τουριστών κατά Χώρα Συνήθους Διαμονής και Τοποθεσία Διαμονής στην Κύπρο, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/bff37397-9401-4f39-b611-8bead2cdb040"
+  ]
+ },
+ {
+  "title": "Ποσοστιαία Κατανομή Τουριστών κατά Τύπο Καταλύματος και Τοποθεσία Διαμονής στην Κύπρο, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/5ee500ca-0237-416e-90b8-38f34baa1540"
+  ]
+ },
+ {
+  "title": "Ποσοστιαία Κατανομή Τουριστών κατά Αριθμό Επισκέψεων στην Κύπρο και Τύπο Ταξιδιού, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/c98766c9-ba6a-46ba-ac3a-b2a29ac80461"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Έτος Βάσης 2025=100), Μηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/ce31a961-558f-4e1f-b8f2-ab2a4e503ca4"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Έτος Βάσης 1998=100) 2004-2005, Μηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/09807ad0-fc0c-41ab-8e87-f7af58c6f699"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Έτος Βάσης 1998=100) 2004-2005, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/098aac25-9f38-4d44-85d9-59c7f12d29fa"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Έτος Βάσης 2005=100) 2006-2015, Μηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/f61e6b34-859e-455b-913a-7553e2d63423"
+  ]
+ },
+ {
+  "title": "Δείκτης Τιμών Καταναλωτή κατά Οικονομική Κατηγορία (Έτος Βάσης 2005=100) 2006-2015, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/b3a88303-446c-47ca-8beb-086b27f860b5"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2025Τ3, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/6acd0b60-6616-4186-8af1-04853520c864"
+  ]
+ },
+ {
+  "title": "Έκβαση Ποινικής Διαδικασίας Επαρχιακών Δικαστηρίων και Κακουργιοδικείων κατά Φύλο, Ετήσια",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/260ba42a-c049-4ce4-827f-a20dc4617c91"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Τόπο Διαμονής, Οικονομική Δραστηριότητα NACE (Αναθ. 2.1) και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/27e99b92-9f11-4eb2-9590-ba7adf84fa73"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 2.1) και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/00f416c0-6bc1-4b54-b7e4-def697bd904e"
+  ]
+ },
+ {
+  "title": "Απασχόληση κατά Επαγγελματική Υπόσταση, Οικονομική Δραστηριότητα NACE (Αναθ. 2.1) και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/0fbf70c7-12f6-4ceb-8b27-5576ad746c8b"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Τόπο Διαμονής, Οικονομική Δραστηριότητα NACE (Αναθ. 2.1) της Τελευταίας Εργασίας και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/a528a55d-d075-4f94-ab9e-4165755378c4"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Υπηκοότητα, Οικονομική Δραστηριότητα NACE (Αναθ. 2.1) της Τελευταίας Εργασίας και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/ee168ea2-294f-4127-a0a5-aa02bb8869a1"
+  ]
+ },
+ {
+  "title": "Ανεργία κατά Επαγγελματική Υπόσταση, Οικονομική Δραστηριότητα NACE (Αναθ. 2.1) της Τελευταίας Εργασίας και Φύλο, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/712d5f09-2e11-4fc9-8e4c-17de8c42593d"
+  ]
+ },
+ {
+  "title": "Κενές Θέσεις και Ποσοστό Κενών Θέσεων κατά Οικονομική Δραστηριότητα NACE (Αναθ. 2.1), Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/80408e4b-5cf8-4f44-b312-e735cb93608c"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2025Τ4, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/f6cf113a-5151-4665-ab13-926468374ca2"
+  ]
+ },
+ {
+  "title": "Οικονομικά Ενεργός και Μη Οικονομικά Ενεργός Πληθυσμός (15 Ετών και Άνω) που Καταγράφηκε κατά Επαρχία και Δήμο/Κοινότητα 1.10.2021",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/d92eecf3-7b8f-458c-ab14-f6f5d60a8130"
+  ]
+ },
+ {
+  "title": "Εργαζόμενοι (15 Ετών και Άνω) που Καταγράφηκαν κατά Τόπο Διαμονής (Επαρχία και Δήμο/Κοινότητα) και Οικονομική Δραστηριότητα (NACE Αναθ. 2) 1.10.2021",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/a78fc551-01ae-42fd-a702-5f35d169e2cc"
+  ]
+ },
+ {
+  "title": "Δείκτης Εργατικού Κόστους κατά Οικονομική Δραστηριότητα (Έτος Βάσης 2020=100) 2000Τ1-2026Τ1, Τριμηνιαία",
+  "resources": [
+   "https://data.gov.cy/index.php/en/resource/i/0723f8c1-ed20-4e7a-9dce-cd59e7e661e6"
+  ]
+ }
+]
