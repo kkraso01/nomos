@@ -85,13 +85,15 @@ class DataGovCyAdapter(SourceAdapter):
         "labour_inspection_court_stats": {
             "title": "Στατιστικά Στοιχεία Δικαστικών Υποθέσεων ανά Νόμο/Κανονισμό",
             "dataset_id": "100182f8-2fe4-4997-862e-178e081cf9ca",
+            "dataset_url": "https://www.data.gov.cy/el/dataset/statistika-stoiheia-dikastikon-ypotheseon-ana-nomokanonismo",
             "resource_id": "830d6a25-adb9-4163-a893-928acf3dba12",
-            "download_url": None,  # numeric id resolved below from resource page
+            "numeric_id": "828",
+            "download_url": "https://www.data.gov.cy/el/resource/828/download/file",
             "licence": "CC BY 4.0",
             "licence_url": "https://creativecommons.org/licenses/by/4.0/",
             "commercial_reuse_allowed": True,
             "attribution_required": True,
-            "terms_page_sha256": None,
+            "terms_page_sha256": "c4515ccef51a28d4d95a198216f4c81895dbfba3aa9a0b6c7b5fcab6c38e91e2",
             "authority_type": "CASE_STATISTICS",  # structured stats, NOT judgment text
             "linked_on_external": False,
             "kind": "source_document",
@@ -99,13 +101,15 @@ class DataGovCyAdapter(SourceAdapter):
         "justice_annual_reports": {
             "title": "Ετήσιες Εκθέσεις του Υπουργείου Δικαιοσύνης και Δημοσίας Τάξεως",
             "dataset_id": "509ffcc2-bea5-40c7-a45c-d03bdd5bd914",
+            "dataset_url": "https://www.data.gov.cy/el/dataset/etisies-ektheseis-toy-ypoyrgeioy-dikaiosynis-kai-dimosias-taxeos",
             "resource_id": "2ccaf3ad-d475-4a6b-b1de-6213a48f75bf",
-            "download_url": None,
+            "numeric_id": "2072",
+            "download_url": "https://www.data.gov.cy/el/resource/2072/download/file",
             "licence": "CC BY 4.0",
             "licence_url": "https://creativecommons.org/licenses/by/4.0/",
             "commercial_reuse_allowed": True,
             "attribution_required": True,
-            "terms_page_sha256": None,
+            "terms_page_sha256": "8e26cbb2d2f91e05e805e1e64016542658a14689221cb6d7f95309927a496bc4",
             "authority_type": "GOVERNMENT_PUBLICATION",  # justice material, not judicial authority
             "linked_on_external": False,
             "kind": "source_document",
@@ -142,9 +146,9 @@ class DataGovCyAdapter(SourceAdapter):
         if record.get("dataset_key") == "consumer_decisions":
             return self._normalize_consumer_csv(raw, record)
         if mt == "CASE_STATISTICS":
-            return self._normalize_tabular(raw, record, kind="case_statistics")
+            return self._normalize_xlsx(raw, record)
         if mt == "GOVERNMENT_PUBLICATION":
-            return self._normalize_publication(raw, record)
+            return self._normalize_pdf_publication(raw, record)
         raise AdapterConfigError(f"no normalizer for {record['dataset_key']}")
 
     # ---- consumer decisions -----------------------------------------------
@@ -183,41 +187,65 @@ class DataGovCyAdapter(SourceAdapter):
             })
         return out
 
-    # ---- generic tabular ---------------------------------------------------
-    def _normalize_tabular(self, raw: bytes, record: dict, kind: str) -> list[dict]:
-        text = raw.decode("utf-8-sig", errors="replace")
-        rows = list(csv.DictReader(io.StringIO(text)))
+    def _normalize_xlsx(self, raw: bytes, record: dict) -> list[dict]:
+        import io
+        from openpyxl import load_workbook
+        wb = load_workbook(io.BytesIO(raw), data_only=True, read_only=True)
+        ws = wb.worksheets[0]
+        rows = list(ws.iter_rows(values_only=True))
+        header = [str(c).strip() if c is not None else "" for c in rows[0]]
         out = []
-        for i, r in enumerate(rows):
-            vals = {k: (v or "").strip() for k, v in r.items()}
-            joined = " | ".join(f"{k}: {v}" for k, v in vals.items() if v)
+        for i, r in enumerate(rows[1:]):
+            vals = {}
+            for j, h in enumerate(header):
+                if h and j < len(r):
+                    v = r[j]
+                    vals[h] = str(v).strip() if v is not None else ""
+            joined = " | ".join(f"{h}: {v}" for h, v in vals.items() if v)
+            year = vals.get("YEAR", "")
+            law = vals.get("LAW - REGULATION", "") or vals.get("LAW", "")
+            rowkey = hashlib.sha256(joined.encode("utf-8")).hexdigest()[:10]
             out.append({
                 "kind": "source_document",
                 "authority_type": record["authority_type"],
-                "canonical_key": f"{_slug(record['dataset_key'])}-row-{i}",
-                "title": f"{record['title']} (row {i})",
+                "canonical_key": f"{_slug(record['dataset_key'])}-{_slug_cy(year) or 'na'}-{rowkey}",
+                "title": f"LegalStats {year} – {law}".strip(" – "),
                 "language": "el",
                 "body": joined,
+                "legislation": law,
+                "year": year,
                 "structured": vals,
                 "dataset_key": record["dataset_key"],
                 "licence": record.get("licence"),
                 "licence_url": record.get("licence_url"),
+                "external_url": record.get("dataset_url"),
             })
         return out
 
-    def _normalize_publication(self, raw: bytes, record: dict) -> list[dict]:
-        # Reports are PDFs/XLSX we treat as opaque link/metadata records.
+    def _normalize_pdf_publication(self, raw: bytes, record: dict) -> list[dict]:
+        import hashlib, subprocess, tempfile, os
         h = hashlib.sha256(raw).hexdigest()
+        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as fh:
+            fh.write(raw)
+            path = fh.name
+        try:
+            cp = subprocess.run(["pdftotext", "-layout", path, "-"], capture_output=True, timeout=120)
+            text = cp.stdout.decode("utf-8", errors="replace") if cp.returncode == 0 else record["title"]
+        finally:
+            os.unlink(path)
+        text = text.strip()
+        body = text[:200000] if text else record["title"]
         return [{
             "kind": "source_document",
             "authority_type": record["authority_type"],
-            "canonical_key": f"{_slug(record['dataset_key'])}-{h[:8]}",
+            "canonical_key": f"{_slug(record['dataset_key'])}-{h[:10]}",
             "title": record["title"],
             "language": "el",
-            "body": record["title"],
+            "body": body,
             "dataset_key": record["dataset_key"],
             "licence": record.get("licence"),
             "licence_url": record.get("licence_url"),
+            "external_url": record.get("dataset_url"),
             "content_hash": h,
         }]
 
