@@ -100,8 +100,7 @@ class DataGovCyAdapter(SourceAdapter):
         },
         "justice_annual_reports": {
             "title": "Ετήσιες Εκθέσεις του Υπουργείου Δικαιοσύνης και Δημοσίας Τάξεως",
-            "dataset_id": "509ffcc2-bea5-40c7-a45c-d03bdd5bd914",
-            "dataset_url": "https://www.data.gov.cy/el/dataset/etisies-ektheseis-toy-ypoyrgeioy-dikaiosynis-kai-dimosias-taxeos",
+            "dataset_id": "509ffcc2-bea5-40c7-a45c-d03bdd5bd914",            "dataset_url": "https://www.data.gov.cy/el/dataset/etisies-ektheseis-toy-ypoyrgeioy-dikaiosynis-kai-dimosias-taxeos",
             "resource_id": "2ccaf3ad-d475-4a6b-b1de-6213a48f75bf",
             "numeric_id": "2072",
             "download_url": "https://www.data.gov.cy/el/resource/2072/download/file",
@@ -111,6 +110,22 @@ class DataGovCyAdapter(SourceAdapter):
             "attribution_required": True,
             "terms_page_sha256": "8e26cbb2d2f91e05e805e1e64016542658a14689221cb6d7f95309927a496bc4",
             "authority_type": "GOVERNMENT_PUBLICATION",  # justice material, not judicial authority
+            "linked_on_external": False,
+            "kind": "source_document",
+        },
+        "bilateral_legal_cooperation": {
+            "title": "Κατάλογος Διμερών Συμφωνιών Νομικής/Δικαστικής Συνεργασίας",
+            "dataset_id": "d5f6b423-08d3-4dc5-a14f-e6e7c9f3c12f",
+            "dataset_url": "https://www.data.gov.cy/el/dataset/katalogos-dimeron-symfonion-nomikisdikastikis-synergasias",
+            "resource_id": "55aaffb8-4a74-41c2-bdd1-c2953f4213a5",
+            "numeric_id": "2058",
+            "download_url": "https://www.data.gov.cy/el/resource/2058/download/file",
+            "licence": "CC BY 4.0",
+            "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+            "commercial_reuse_allowed": True,
+            "attribution_required": True,
+            "terms_page_sha256": "91905a2320cf9e26416ea36d03540380754e2538b3fa85e6162afa934bac40b2",
+            "authority_type": "JUDICIAL_METADATA",  # international/judicial-cooperation instrument list
             "linked_on_external": False,
             "kind": "source_document",
         },
@@ -149,6 +164,8 @@ class DataGovCyAdapter(SourceAdapter):
             return self._normalize_xlsx(raw, record)
         if mt == "GOVERNMENT_PUBLICATION":
             return self._normalize_pdf_publication(raw, record)
+        if mt == "JUDICIAL_METADATA":
+            return self._normalize_csv(raw, record)
         raise AdapterConfigError(f"no normalizer for {record['dataset_key']}")
 
     # ---- consumer decisions -----------------------------------------------
@@ -184,6 +201,33 @@ class DataGovCyAdapter(SourceAdapter):
                 "licence": record.get("licence"),
                 "licence_url": record.get("licence_url"),
                 "attribution_required": record.get("attribution_required"),
+            })
+        return out
+
+    def _normalize_csv(self, raw: bytes, record: dict) -> list[dict]:
+        text = raw.decode("utf-8-sig", errors="replace")
+        rows = list(csv.DictReader(io.StringIO(text)))
+        out = []
+        for i, r in enumerate(rows):
+            vals = {k: (v or "").strip() for k, v in r.items() if k}
+            joined = " | ".join(f"{k}: {v}" for k, v in vals.items() if v)
+            rowkey = hashlib.sha256(joined.encode("utf-8")).hexdigest()[:10]
+            country = vals.get("Χώρα", "") or vals.get("Country", "")
+            law = vals.get("Νόμος/Μνημόνιο", "") or vals.get("Law", "")
+            title = f"Bilateral Legal Co-op – {country}".strip(" – ")
+            out.append({
+                "kind": "source_document",
+                "authority_type": record["authority_type"],
+                "canonical_key": f"{_slug(record['dataset_key'])}-{rowkey}",
+                "title": title,
+                "language": "el",
+                "body": joined,
+                "law_reference": law,  # e.g. 'Κυρ. Νόμος 68/82' (deterministic, kept as text)
+                "structured": vals,
+                "dataset_key": record["dataset_key"],
+                "licence": record.get("licence"),
+                "licence_url": record.get("licence_url"),
+                "external_url": record.get("dataset_url"),
             })
         return out
 

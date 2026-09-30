@@ -289,3 +289,7 @@ After forced regeneration of the (previously deleted) fixture chunk embeddings, 
 - Ministry of Justice annual report 2013 (175pg PDF @ /el/resource/2072, pdftotext-extracted): ingested as GOVERNMENT_PUBLICATION (not judicial authority), CC BY 4.0 (sha256 8e26cbb2…).
 - Fixed Labour XLSX normalizer collision (40-char law-slug truncation collapsed 236->135): canonical key now content-hashed (row sha256) -> 236 unique. Cleared the stale collapsed rows and re-ingested (this is CC BY 4.0 data we control; not user/destructive data).
 - Running real corpus now 346 source_documents (consumer 109 + labour 236 + justice 1), all searchable in Greek with provenance + external URL. Judgment search projection untouched (authority types kept distinct).
+
+### 2026-09-30 — P2 judicial metadata (task-1 data track)
+- Bilateral legal/judicial cooperation agreements (19 rows @ /el/resource/2058): country + ratifying Cyprus law (e.g., "Κυρ. Νόμος 68/82") + notes. Ingested as JUDICIAL_METADATA, CC BY 4.0 (dataset page verified+snapshotted sha256 91905a23…).
+- Running real corpus now 365 source_documents (consumer 109 + labour 236 + justice 1 + bilateral 19), all Greek-searchable with provenance + external URL; authority types kept distinct from judgments. Next: EUR-Lex/CELLAR as the major EU production corpus.
