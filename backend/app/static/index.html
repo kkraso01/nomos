@@ -1,103 +1,157 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<title>NOMOS Web</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOMOS — Legal research workspace</title>
 <style>
-:root{color-scheme:light dark} body{font-family:system-ui,sans-serif;max-width:860px;margin:2rem auto;padding:0 1rem}
-h1{font-size:1.6rem} section{background:#f6f7f9;border:1px solid #dfe3e8;border-radius:8px;padding:12px 14px;margin:12px 0}
-input,select,button{font:inherit;padding:6px 8px;border:1px solid #cbd;border-radius:6px}
-button{background:#1d4ed8;color:#fff;border:none;cursor:pointer}
-pre{white-space:pre-wrap;background:#0f1117;color:#d6dadd;padding:10px;border-radius:6px;max-height:220px;overflow:auto}
-small{color:#6b7280}
-</style></head>
-<body>
-<h1>NOMOS · Web</h1>
-<div id="api" hidden></div>
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{font-family:ui-rounded,system-ui,sans-serif;margin:0;background:#f7f7f9;color:#111827}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.top{display:flex;align-items:center;gap:12px;padding:12px 20px;background:#111827;color:#f5f5f5}
+.top h1{font-size:1.15rem;margin:0}
+.top .sp{color:#cbd5e1}
+.top button{background:transparent;color:#e5e7eb;border:1px solid #374151;border-radius:6px;padding:5px 10px;cursor:pointer}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin:14px 0}
+label{font-size:.8rem;color:#6b7280;display:block;margin-bottom:4px}
+input,select{font:inherit;padding:7px 10px;border:1px solid #d1d5db;border-radius:7px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+button.btn{background:#1d4ed8;color:#fff;border:none;border-radius:7px;padding:8px 16px;cursor:pointer;font:inherit}
+button.sec{background:#fff;border:1px solid #d1d5db;border-radius:7px;padding:6px 12px;cursor:pointer;font:inherit}
+button.sml{font-size:.75rem;padding:3px 8px;border:1px solid #d1d5db;border-radius:5px;background:#fff;cursor:pointer}
+.status{font-size:.85rem;color:#4b5563;margin:6px 0}
+.badge{display:inline-block;font-size:.7rem;padding:1px 8px;border-radius:9px;margin-right:6px}
+.badge.leg{background:#e0e7ff;color:#3730a3}
+.badge.jud{background:#fef3c7;color:#92400e}
+.badge.prov{background:#dcfce7;color:#15803d}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.75rem;color:#6b7280}
+.res{padding:14px;border:1px solid #e5e7eb;border-left:4px solid #111827;border-radius:8px;margin-bottom:10px;background:#fff}
+.res .why{color:#2563eb;font-size:.8rem}
+.ev{background:#f4f4f5;border:1px solid #e5e7eb;border-radius:7px;padding:8px 10px;font-size:.82rem;white-space:pre-wrap}
+.tog{cursor:pointer;color:#4b5563;font-size:.78rem;text-decoration:underline}
+.warn{color:#dc2626;font-size:.85rem}
+pre.ct{white-space:pre-wrap;background:#0f1117;color:#d6dadd;padding:8px;border-radius:7px;font-size:.78rem}
+</style></head><body>
+<div class="top"><span>NOMOS</span><span class="sp">|</span><span>Legal research workspace</span>
+  <button id="logout" hidden>Sign out</button></div>
+<div class="wrap">
 
-<section id="authSec">
-  <h3>Sign in</h3>
-  <form id="loginF">
-    Email <input id="email" size="22" value="a@law.com">
-    Password <input id="password" type="password" size="14" value="pw123">
-    <button type="submit">Login</button>
-  </form>
-  <p><small>No account? <button type="button" id="registerBtn">Register org (admin@example.com / adminpass)</button></small></p>
+<section class="card" id="authSec">
+  <h2 style="font-size:1.1rem;margin:0 0 8px">Sign in</h2>
+  <div class="row">
+    <div><label>Email</label><input id="email" value="a@law.com" autocomplete="username"></div>
+    <div><label>Password</label><input id="password" type="password" value="pw123" autocomplete="current-password"></div>
+    <div style="min-width:180px"><label>Jurisdiction</label><select id="jur"><option value="CY">Cyprus</option><option value="EU">EU</option><option value="ECHR">ECHR</option></select></div>
+    <button class="btn" id="loginB">Sign in</button>
+  </div>
 </section>
 
-<section id="searchSec" hidden>
-  <h3>Search public law</h3>
-  <input id="q" size="34" placeholder="e.g. Article 5 of Law 261; insolvency; εκκαθάριση">
-  <select id="mode"><option value="hybrid">hybrid</option><option value="lexical">lexical</option></select>
-  <button id="go">Search</button>
-  <button id="logout">Logout</button>
-  <p id="who"></p>
-</section>
-
-<section id="resSec" hidden>
-  <h3>Results</h3>
+<section class="card" id="workSec" hidden>
+  <div class="row">
+    <div style="flex:1"><label>Search Cyprus law (English or Greek)</label>
+      <input id="q" style="width:100%" placeholder="e.g. company wound up on insolvency · εκκαθάριση λόγω αφερεγγυότητης · Article 5 of Law ELW"></div>
+    <div><label>Relevant date (as-of)</label><input id="date" type="date"></div>
+    <div><label>Result type</label><select id="mode"><option value="hybrid">Hybrid</option><option value="lexical">Lexical</option><option value="semantic">Semantic</option></select></div>
+    <button class="btn" id="go">Search</button>
+  </div>
+  <div class="status" id="st">Enter a query to search. Use a date to resolve the law as it stood on that day.</div>
   <div id="results"></div>
+  <div class="status" id="authStatus"></div>
+  <div><button class="sec" id="assistB">Ask grounded research assistant →</button></div>
 </section>
 
-<section id="citSec" hidden>
-  <h3>Validate a citation</h3>
-  <input id="cit" size="34" placeholder="Article 5 of Law 261 of 2015">
-  <button id="citGo">Validate</button>
-  <pre id="citOut"></pre>
+<section class="card" id="assistSec" hidden>
+  <h2 style="font-size:1.05rem;margin:0 0 8px">Grounded research assistant</h2>
+  <div class="row">
+    <input id="aq" style="flex:1" placeholder="Ask a question — the assistant answers only from verified authorities">
+    <button class="btn" id="ask">Ask</button>
+  </div>
+  <div class="status" id="ast"></div>
+  <div id="aa"></div>
 </section>
 
 <script>
 const API = location.pathname.startsWith('/nomos') ? '/nomos' : '';
-let TOKEN = null;
+const BADGE = {legislation_node:'leg', judgment_node:'jud', provision:'prov'};
+let TOKEN=null, JUR='CY', MID=null;
 
-function show(id,on){document.getElementById(id).hidden=!on;}
-function set(key,val){document.getElementById(key).value=val;}
+const $=id=>document.getElementById(id);
+const show=(id,on)=>$(id).hidden=!on;
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function wrapTxt(s,n){s=s||'';return s.length>n?s.slice(0,n)+'…':s;}
 
-async function req(path,opts){opts=opts||{};opts.headers=Object.assign({},opts.headers||{});
-  if(TOKEN)opts.headers['Authorization']='Bearer '+TOKEN;
-  if(opts.json){opts.headers['Content-Type']='application/json';opts.body=JSON.stringify(opts.json);delete opts.json;}
-  const r=await fetch(API+path,opts);const ct=r.headers.get('content-type')||'';
-  const body=ct.includes('json')?await r.json():{status:r.status};
-  return {r,body};
+async function req(path,opts){opts=opts||{json:false};const h={};
+ if(TOKEN)h.Authorization='Bearer '+TOKEN;
+ if(opts.json!==false){h['Content-Type']='application/json';}
+ const init={method:opts.method||(opts.json===false?'GET':'POST'),headers:h};
+ if(opts.json!==false)init.body=JSON.stringify(opts.json);
+ else if(opts.params)path+='?'+new URLSearchParams(opts.params).toString();
+ const r=await fetch(API+path,init);let body=null;
+ try{body=await r.json();}catch(e){body={}} return {r,body};
 }
 
-document.getElementById('loginF').onsubmit=async(e)=>{e.preventDefault();
-  const {r,body}=await req('/auth/login',{method:'POST',json:{email:document.getElementById('email').value,password:document.getElementById('password').value}});
-  if(r.ok){TOKEN=body.access_token;enter();}else{alert('Login failed: '+JSON.stringify(body));}
-};
-
-document.getElementById('registerBtn').onclick=async()=>{
-  const {r,body}=await req('/auth/register',{method:'POST',json:{org:{name:'Web Org',slug:'web'+Date.now()},admin_email:'admin@example.com',admin_password:'adminpass'}});
-  if(r.ok){TOKEN=body.access_token;enter();}else{alert(JSON.stringify(body));}
-};
-
-function enter(){show('authSec',false);show('searchSec',true);show('citSec',true);
-  document.getElementById('who').textContent='Signed in · token '+TOKEN.slice(0,12)+'…';
+async function ensureMatter(){
+ if(MID)return MID;
+ const {body}=await req('/matters',{method:'GET',json:false});
+ const mine=body.find?body:[];
+ const m = mine[0] || (await req('/matters',{json:{title:'My Research'}})).body;
+ MID=m.id; return MID;
 }
 
-function render(r){const d=document.getElementById('results');d.innerHTML='';
-  if(r.results&&r.results.length===0){d.innerHTML='<p>No results.</p>';}
-  (r.results||[]).forEach(x=>{const box=document.createElement('div');
-    box.innerHTML='<b>'+escapeHtml(x.title||x.kind)+'</b> <code>'+escapeHtml(x.canonical_ref||'')+'</code><br>'+
-      '<small>score '+x.score+' · '+escapeHtml(x.reason_for_match||'')+'</small>'+
-      '<pre>'+escapeHtml((x.text||'').slice(0,260))+'</pre>';d.appendChild(box);});
+$('loginB').onclick=async()=>{
+  const u=$('email').value, p=$('password').value; JUR=$('jur').value;
+  const {r,body}=await req('/auth/login',{json:{email:u,password:p}});
+  if(!r.ok){$('st').innerHTML='<span class="warn">Sign-in failed.</span>';return;}
+  TOKEN=body.access_token; try{MID=(await ensureMatter());}catch(e){}
+  show('authSec',false);show('workSec',true);show('logout',true);
+  $('st').textContent='Signed in. Enter a query (use a relevant date to see the law as it stood).';
+};
+
+async function saveAuth(canonicalRef, classification){
+  const mid=await ensureMatter();
+  await req('/matters/'+mid+'/authorities',{json:{canonical_ref:canonicalRef,classification:classification,source_scope:'public',jurisdiction:JUR}});
+  $('st').textContent='Saved "'+canonicalRef+'" to matter as '+classification+'.';
 }
 
-document.getElementById('go').onclick=async()=>{
-  const q=document.getElementById('q').value;if(!q)return;
-  const {r,body}=await req('/search?q='+encodeURIComponent(q)+'&mode='+document.getElementById('mode').value);
-  if(r.ok){show('resSec',true);render(body);}else{alert(JSON.stringify(body));}
+function card(r){
+  const b=BADGE[r.kind]||''; const cls=b?('<span class="badge '+b+'">'+esc((r.kind||'').split('_')[0])+'</span>'):'';
+  const temporal=r.temporal?('<div class="status">Applicable version v'+esc(r.temporal.applicable_version)+' as of chosen date · '+esc(r.temporal.applicable_from||'')+' → '+(r.temporal.applicable_to||'now')+'</div>'):'';
+  const ev=(r.evidence&&r.evidence[0])
+    ?('<button class="tog" data-show="0">show evidence</button><div class="ev" hidden>'+esc(wrapTxt(r.evidence[0].text,600))+'</div>'):'';
+  const why=(r.why||[]).map(w=>'<div class="why">• '+esc(w)+'</div>').join('');
+  return '<div class="res">'+cls+'<b>'+esc(r.title||r.canonical_ref)+'</b> <span class="mono">'+esc(r.canonical_ref)+'</span><br>'+
+    why+temporal+ev+'<br>'+
+    '<button class="sml" data-act="support" data-ref="'+esc(r.canonical_ref)+'">Save · supporting</button> '+
+    '<button class="sml" data-act="adverse" data-ref="'+esc(r.canonical_ref)+'">adverse</button> '+
+    '<button class="sml" data-act="neutral" data-ref="'+esc(r.canonical_ref)+'">neutral</button></div>';
+}
+
+$('go').onclick=async()=>{
+  const q=$('q').value.trim(); if(!q){$('st').textContent='Enter a query.';return;}
+  const date=$('date').value; const mode=$('mode').value;
+  $('st').textContent='Searching…'; $('results').textContent='';
+  const params={q:q,mode:mode,limit:20}; if(date)params.as_of=date+'T00:00:00Z';
+  const {r,body}=await req('/research/vertical',{json:false,params});
+  if(!r.ok){$('st').innerHTML='<span class="warn">Search failed: '+esc((body.detail||r.status))+'.</span>';return;}
+  $('st').textContent=body.count+' result'+(body.count===1?'':'s')+' for "'+q+'"'+(date?' (as at '+date+')':'');
+  $('results').innerHTML=body.results.map(card).join('')||'<p>No results.</p>';
 };
-
-document.getElementById('citGo').onclick=async()=>{
-  const t=document.getElementById('cit').value;if(!t)return;
-  const {r,body}=await req('/research/validate-citation',{method:'POST',json:{text:t}});
-  document.getElementById('citOut').textContent=JSON.stringify(body,null,2);
+$('results').onclick=async(e)=>{
+  const b=e.target;
+  if(b.dataset.act){await saveAuth(b.dataset.ref, b.dataset.act);}
+  else if(b.className==='tog'){const ev=b.nextElementSibling;const on=ev.hidden;ev.hidden=!on;b.dataset.show=on?'1':'0';}
 };
+$('logout').onclick=()=>{TOKEN=null;MID=null;show('workSec',false);show('assistSec',false);show('authSec',true);show('logout',false);};
 
-document.getElementById('logout').onclick=()=>{TOKEN=null;show('searchSec',false);show('resSec',false);show('citSec',false);show('authSec',true);};
-
-function escapeHtml(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-
-// on load: if we have no token, show login (authSec already visible)
+$('assistB').onclick=()=>show('assistSec',true);
+$('ask').onclick=async()=>{
+  const aq=$('aq').value.trim(); if(!aq)return;
+  $('ast').textContent='Asking grounded assistant…'; $('aa').textContent='';
+  const {r,body}=await req('/assistant/ask',{json:{query:aq}});
+  if(!r.ok){$('ast').innerHTML='<span class="warn">Assistant error.</span>';return;}
+  if(body.supported===false){$('ast').innerHTML='<span class="warn">'+esc(body.message||'Insufficient evidence.')+'</span>';return;}
+  let html='<p class="status">'+esc(wrapTxt(body.answer,900))+'</p>'+
+    '<div class="status"><b>'+body.propositions.length+' evidence-backed propositions (SOURCE FACT)</b></div>'+
+    '<div class="status"><b>Sources ('+body.authorities.length+')</b></div>';
+  for(const a of body.authorities) html+='<p class="mono">'+esc(a.canonical_ref)+'</p><div class="ev" hidden>'+esc(wrapTxt((a.evidence||[{}])[0].text||'',300))+'</div>';
+  $('aa').innerHTML=html; $('ast').textContent='Answer grounded only in the verified sources above.';
+};
 </script>
 </body></html>
