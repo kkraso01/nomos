@@ -122,3 +122,8 @@ ONNX Runtime (no torch/CUDA).
 Semantic *embeddings* (dense retrieval) remain intentionally unconfigured on this device.
 Model download: `huggingface_hub` → `cross-encoder/ms-marco-MiniLM-L-6-v2`, file
 `onnx/model_qint8_arm64.onnx` (+ tokenizer/config) into `models/reranker-minilm`.
+
+### Frontend / Apache + GitHub
+- Web UI: `http://<host>/nomos/` (landing) and `http://<host>/nomos/ui` (login → search → validate) are served through the Apache reverse proxy to the FastAPI backend; `/nomos/health` returns JSON. (Apache block: `ProxyPass /nomos/ http://127.0.0.1:8010/`.)
+- Source: repository is pushed to `git@github.com:kkraso01/nomos.git` (branch `master`). SSH key: `~/.ssh/id_ed25519_github`. Secrets (`.env`, keys) and generated artifacts (`__pycache__`, venv) are gitignored.
+- To (re)start the stack after the host loses containers/processes: `docker compose up -d` (postgres 5433, redis 6380) from `NOMOS_agent_handoff/`, then `cd backend && ../.venv/bin/alembic upgrade head && ../.venv/bin/python -m uvicorn app.main:app --port 8010 & ../.venv/bin/python app/workers.py &`.
