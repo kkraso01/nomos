@@ -54,5 +54,7 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Grounded assistant in workflow | FUNCTIONAL | exposed via /nomos/ui; provenance SOURCE FACT; honest insufficient-evidence path |
 | Frontend workflows | FUNCTIONAL | browseable web UI at /ui (and /nomos/ui): login/register, search, validate-citation; real API via Apache proxy |
 | Entitlements / usage metering | FUNCTIONAL | plan-based server-side feature denial; tests/test_plan_e2e.py |
+| On-prem readiness | DOCUMENTED | DEPLOYMENT_ONPREM_READINESS.md: containerized, tenant-isolated, local AI no-egress, entitlements, public/private separable; installer deferred |
+| Subscription tiers | CONFIG-READY | core/tiers.py + /plan/tier (FREE/DEMO vs PRO; productivity-only limits); pricing captured as config, no pricing UI until core works |
 | Production deployment | DEFERRED_PRODUCTION | Not part of current goal |
 | Performance/load testing | DEFERRED_PRODUCTION | Not part of current goal |

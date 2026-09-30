@@ -36,3 +36,11 @@ def get_entitlements(ctx: dict = Depends(require_org), db: Session = Depends(get
     plan = org.plan if org else "starter"
     return {"plan": plan,
             "features": {f: is_entitled(plan or "starter", f) for f in sorted(FEATURES)}}
+
+@router.get("/tier")
+def my_tier(ctx: dict = Depends(require_org), db: Session = Depends(get_db)):
+    from ..core.tiers import tier_for_plan, TIERS
+    org = _get_org(db, ctx["org_id"])
+    tier = tier_for_plan(org.plan if org else None)
+    return {"plan": org.plan if org else None, "tier": tier,
+            "label": TIERS[tier]["label"], "limits": TIERS[tier]["limit"]}

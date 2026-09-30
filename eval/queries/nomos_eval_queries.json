@@ -1,17 +1,231 @@
 [
-  {"id": "cy-ref-001", "language": "en", "jurisdiction": "CY", "query": "Article 5 of Law ELW of 2015", "query_type": "exact_reference", "relevant_date": null, "legal_issue": ["insolvency", "winding up"], "notes": "exact article/law lookup must bypass fuzzy ambiguity", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "en-001", "language": "en", "jurisdiction": "CY", "query": "company wound up in the event of insolvency", "query_type": "ordinary_research", "relevant_date": null, "legal_issue": ["insolvency", "winding up"], "notes": "english ordinary legal research", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "en-002", "language": "en", "jurisdiction": "CY", "query": "appointment of a liquidator after insolvency", "query_type": "legal_issue_similarity", "relevant_date": null, "legal_issue": ["liquidator"], "notes": "liquidator issue across law and case", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "en-003", "language": "en", "jurisdiction": "CY", "query": "seller failed to deliver goods under the contract", "query_type": "factual_similarity", "relevant_date": null, "legal_issue": ["sale of goods", "breach"], "notes": "factual similarity to sale-of-goods judgment", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "en-temp-001", "language": "en", "jurisdiction": "CY", "query": "winding up on insolvency 2021", "query_type": "temporal_legislation", "relevant_date": "2021-06-01", "legal_issue": ["insolvency"], "notes": "year in query -> applicable version as of 2021", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "el-001", "language": "el", "jurisdiction": "CY", "query": "εκκαθάριση εταιρείας λόγω αφερεγγυότητας", "query_type": "greek", "relevant_date": null, "legal_issue": ["insolvency", "liquidation"], "notes": "greek query", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "x-gr-en-001", "language": "el", "jurisdiction": "CY", "query": "η εταιρεία τέθηκε σε εκκαθάριση λόγω αφερεγγυότητας", "query_type": "cross_lingual_gr_en", "relevant_date": null, "legal_issue": ["insolvency"], "notes": "greek query, english target", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "x-en-gr-001", "language": "en", "jurisdiction": "CY", "query": "the company was wound up for insolvency", "query_type": "cross_lingual_en_gr", "relevant_date": null, "legal_issue": ["insolvency"], "notes": "english query, greek target supported", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "case-001", "language": "en", "jurisdiction": "CY", "query": "ECLI:CY:AD:2019:A55", "query_type": "case_citation_lookup", "relevant_date": null, "legal_issue": [], "notes": "external ECLI not in corpus -> coverage gap, expect []", "provenance": "coverage-gap", "review_status": "reviewed"},
-  {"id": "cited-001", "language": "en", "jurisdiction": "CY", "query": "cases citing Alpha v Beta", "query_type": "cited_by_related", "relevant_date": null, "legal_issue": [], "notes": "citation-graph traversal; greedy expectation", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "amb-001", "language": "en", "jurisdiction": "CY", "query": "dismissal", "query_type": "ambiguous", "relevant_date": null, "legal_issue": [], "notes": "ambiguous single term; hard to satisfy precisely", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "proced-001", "language": "en", "jurisdiction": "CY", "query": "appeal after first instance judgment", "query_type": "procedural_similarity", "relevant_date": null, "legal_issue": ["procedure"], "notes": "procedural similarity", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "hard-001", "language": "en", "jurisdiction": "CY", "query": "limitation period professional negligence", "query_type": "hard_negative", "relevant_date": null, "legal_issue": [], "notes": "plausible wording, nothing relevant in corpus", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "hard-002", "language": "en", "jurisdiction": "CY", "query": "quantum teleportation liability", "query_type": "hard_negative", "relevant_date": null, "legal_issue": [], "notes": "out-of-scope hard negative", "provenance": "synthetic-test-only", "review_status": "reviewed"},
-  {"id": "adv-001", "language": "en", "jurisdiction": "CY", "query": "cases distinguishing my authority", "query_type": "adverse_contrary", "relevant_date": null, "legal_issue": [], "notes": "adverse/contrary authority intent; greedy expectation", "provenance": "synthetic-test-only", "review_status": "reviewed"}
+ {
+  "id": "cy-ref-001",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "Article 5 of Law ELW of 2015",
+  "query_type": "exact_reference",
+  "relevant_date": null,
+  "legal_issue": [
+   "insolvency",
+   "winding up"
+  ],
+  "notes": "exact article/law lookup must bypass fuzzy ambiguity",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "en-001",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "company wound up in the event of insolvency",
+  "query_type": "ordinary_research",
+  "relevant_date": null,
+  "legal_issue": [
+   "insolvency",
+   "winding up"
+  ],
+  "notes": "english ordinary legal research",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "en-002",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "appointment of a liquidator after insolvency",
+  "query_type": "legal_issue_similarity",
+  "relevant_date": null,
+  "legal_issue": [
+   "liquidator"
+  ],
+  "notes": "liquidator issue across law and case",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "en-003",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "seller failed to deliver goods under the contract",
+  "query_type": "factual_similarity",
+  "relevant_date": null,
+  "legal_issue": [
+   "sale of goods",
+   "breach"
+  ],
+  "notes": "factual similarity to sale-of-goods judgment",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "en-temp-001",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "winding up on insolvency 2021",
+  "query_type": "temporal_legislation",
+  "relevant_date": "2021-06-01",
+  "legal_issue": [
+   "insolvency"
+  ],
+  "notes": "year in query -> applicable version as of 2021",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "el-001",
+  "language": "el",
+  "jurisdiction": "CY",
+  "query": "εκκαθάριση εταιρείας λόγω αφερεγγυότητας",
+  "query_type": "greek",
+  "relevant_date": null,
+  "legal_issue": [
+   "insolvency",
+   "liquidation"
+  ],
+  "notes": "greek query",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "x-gr-en-001",
+  "language": "el",
+  "jurisdiction": "CY",
+  "query": "η εταιρεία τέθηκε σε εκκαθάριση λόγω αφερεγγυότητας",
+  "query_type": "cross_lingual_gr_en",
+  "relevant_date": null,
+  "legal_issue": [
+   "insolvency"
+  ],
+  "notes": "greek query, english target",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "x-en-gr-001",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "the company was wound up for insolvency",
+  "query_type": "cross_lingual_en_gr",
+  "relevant_date": null,
+  "legal_issue": [
+   "insolvency"
+  ],
+  "notes": "english query, greek target supported",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "case-001",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "ECLI:CY:AD:2019:A55",
+  "query_type": "case_citation_lookup",
+  "relevant_date": null,
+  "legal_issue": [],
+  "notes": "external ECLI not in corpus -> coverage gap, expect []",
+  "provenance": "coverage-gap",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "cited-001",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "cases citing Alpha v Beta",
+  "query_type": "cited_by_related",
+  "relevant_date": null,
+  "legal_issue": [],
+  "notes": "citation-graph traversal; greedy expectation",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "amb-001",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "dismissal",
+  "query_type": "ambiguous",
+  "relevant_date": null,
+  "legal_issue": [],
+  "notes": "ambiguous single term; hard to satisfy precisely",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "proced-001",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "appeal after first instance judgment",
+  "query_type": "procedural_similarity",
+  "relevant_date": null,
+  "legal_issue": [
+   "procedure"
+  ],
+  "notes": "procedural similarity",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "hard-001",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "limitation period professional negligence",
+  "query_type": "hard_negative",
+  "relevant_date": null,
+  "legal_issue": [],
+  "notes": "plausible wording, nothing relevant in corpus",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "hard-002",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "quantum teleportation liability",
+  "query_type": "hard_negative",
+  "relevant_date": null,
+  "legal_issue": [],
+  "notes": "out-of-scope hard negative",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "adv-001",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "cases distinguishing my authority",
+  "query_type": "adverse_contrary",
+  "relevant_date": null,
+  "legal_issue": [],
+  "notes": "adverse/contrary authority intent; greedy expectation",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "el-002",
+  "language": "el",
+  "jurisdiction": "CY",
+  "query": "καταχρηστική απόλυση εργαζομένου μετά από άρνηση μετάθεσης",
+  "query_type": "legal_issue_similarity",
+  "relevant_date": null,
+  "legal_issue": [
+   "termination",
+   "dismissal"
+  ],
+  "notes": "greek legal-issue query added for breadth",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ },
+ {
+  "id": "en-ref-002",
+  "language": "en",
+  "jurisdiction": "CY",
+  "query": "Law ELW Article 1 short title",
+  "query_type": "exact_reference",
+  "relevant_date": null,
+  "legal_issue": [],
+  "notes": "alphanumeric exact ref",
+  "provenance": "synthetic-test-only",
+  "review_status": "reviewed"
+ }
 ]
