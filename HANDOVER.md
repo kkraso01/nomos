@@ -59,11 +59,11 @@ eval benchmark (`eval/` + `scripts/run_eval.py`).
 - **Benchmark** grown to 17 queries (`eval/queries`, `eval/expected`).
 
 ## 6. THE BLOCKER (why the goal stopped) — read before resuming
-1. **No reachable, licence-confirmed, bulk-fetchable Cyprus legal corpus.** From this host:
-   data.gov.cy CC BY 4.0 confirmed but its CKAN/site APIs 404/gated (no reachable bulk mechanism);
-   EUR-Lex/HUDOC/Supreme Court bot-gated or JS; Gazette UNKNOWN; CyLaw PERMISSION_REQUIRED (no bulk
-   without written consent); no production deployment allowed. => The "real legally reusable Cyprus
-   authority" completion criterion cannot be met here. UNKNOWN != permission is enforced.
+1. ~~No reachable, licence-confirmed, bulk-fetchable Cyprus legal corpus~~ **PARTIALLY RESOLVED 2026-09-30**
+   (see §9b). The remaining gap is the FULL-TEXT **judgment / consolidated-statute** corpus
+   (Supreme Court/Gazette/HUDOC still UNKNOWN; CyLaw PERMISSION_REQUIRED; EUR-Lex full text
+   bot-gated on this host). The substantive-document/administrative-decision level of the
+   Cyprus corpus is now real and ingested. UNKNOWN != permission remains enforced.
 2. **Dataset was lost.** Host's docker-data wiped + reboot dropped containers/DB. Recreated a fresh
    DB with only a small demo seed (ELW law + 2 judgments). Consequently the benchmark (task-4)
    shows dense/cross-lingual/temporal = 0 — that's a data-loss measurement artifact, NOT a ranking
@@ -100,3 +100,31 @@ The real bulk catalog IS reachable:
 - IMPORTANT: the catalog contains **open datasets/statistics, NOT full-text Cyprus legislation or judgments**. Only ~a handful are legal (e.g. court-case statistics per law). So data.gov.cy alone does NOT provide a legal-authority corpus — confirms the "do not assume it contains the complete corpus" caveat.
 - Verified legal-adjacent datasets indexed in `eval/fixtures/data_gov_cy_legal_datasets.json`.
 - Full-text authority would need EUR-Lex (approved, full text bot-gated), HUDOC/Gazette/Supreme Court (UNKNOWN), or CyLaw (permission required).
+
+## 9b. Corpus DATA TRACK — RESOLVED (2026-09-30) — read this FIRST
+A real, licence-gated Cyprus/EU ingestion path is DONE and functional, unblocking the data
+side of the old blocker:
+- **Adapters** `backend/app/adapters/` (`base.py` SourceAdapter contract, `data_gov_cy.py`,
+  `eurlex_cellar.py`). Driver scripts `scripts/ingest_data_gov_cy.py`, `scripts/ingest_eurlex.py`.
+- **Real file mechanism (DKAN)**: resource landing `/en/resource/i/<uuid>` → numeric
+  `/el/resource/<id>/download/file` (raw CSV/XLSX/PDF). THIS is how files are actually served
+  (the earlier generic link was a mistake; the corrected mechanism is verified).
+- **Cyprus corpus ingested under individually re-verified CC BY 4.0** (terms pages snapshotted + hashed
+  in `ingestion/licence_snapshots/`):
+  - 109 Consumer Protection decisions (P0, ADMINISTRATIVE_DECISION)
+  - 236 Labour-Inspection court-case-by-law stats (P1, CASE_STATISTICS — NOT judgments)
+  - 1 Ministry of Justice annual report (P1, GOVERNMENT_PUBLICATION)
+  - 19 bilateral legal-cooperation agreements (P2, JUDICIAL_METADATA)
+  → 365 real Cyprus source_documents, Greek-searchable with provenance + external URL.
+- **Council of Ministers decisions = BLOCKED_EXTERNAL** (all resources are link-only pointers to
+  cm.gov.cy on a separate unverified host — no reusable file hosted by the portal).
+- **EUR-Lex/CELLAR**: adapter built (real CELEX seeds 32011L0083, 32016R0679, REAL official titles),
+  anti-fabrication normalize (refuses invalid CELEX/missing title), ingested through the real EU
+  legislation pipeline and Greek-searchable. LIVE full-text bulk still externally gated (EUR-Lex
+  202 anti-bot, cellar-imm-pub 000). Commercial resale gate honestly blocks until human clearance.
+- **Offline adapter tests** `tests/test_adapters.py` (9 pass) over recorded real fixtures
+  `eval/fixtures/data_gov_cy_{consumer_decisions.csv,labour_court_stats.xlsx}`.
+- Remaining for "complete" Cyprus/EU authority: full-text court Judgments + consolidated statutes
+  (still gated) and EUR-Lex full-text bulk (needs unconstrained network / monthly data dump).
+  A clean task-4 re-measure can now rank a REAL corpus (not the near-empty demo DB), so
+  `scripts/run_eval.py` should give a trustworthy signal once re-run on real data.
