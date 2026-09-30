@@ -1,0 +1,497 @@
+{
+  "queries": 17,
+  "per_query": {
+    "cy-ref-001": {
+      "id": "cy-ref-001",
+      "query": "Article 5 of Law ELW of 2015",
+      "query_type": "exact_reference",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [
+        "law-ELW-art-5"
+      ],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": []
+    },
+    "en-001": {
+      "id": "en-001",
+      "query": "company wound up in the event of insolvency",
+      "query_type": "ordinary_research",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [
+        "law-ELW-art-5"
+      ],
+      "hard_negative": [
+        "judgment-1/2018"
+      ],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": [
+        "law-ELW-art-1",
+        "judgment-4/2022"
+      ]
+    },
+    "en-002": {
+      "id": "en-002",
+      "query": "appointment of a liquidator after insolvency",
+      "query_type": "legal_issue_similarity",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [
+        "judgment-4/2022",
+        "law-ELW-art-5"
+      ],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.5,
+        "recall@50": 0.5,
+        "mrr": 1.0,
+        "ndcg@10": 0.613,
+        "precision@10": 1.0
+      },
+      "ranked_top": [
+        "judgment-4/2022"
+      ]
+    },
+    "en-003": {
+      "id": "en-003",
+      "query": "seller failed to deliver goods under the contract",
+      "query_type": "factual_similarity",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [
+        "judgment-1/2018"
+      ],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 1.0,
+        "recall@50": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0,
+        "precision@10": 0.5
+      },
+      "ranked_top": [
+        "judgment-1/2018",
+        "judgment-4/2022"
+      ]
+    },
+    "en-temp-001": {
+      "id": "en-temp-001",
+      "query": "winding up on insolvency 2021",
+      "query_type": "temporal_legislation",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": "2021-06-01",
+      "relevant": [
+        "law-ELW-art-5"
+      ],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": [
+        "law-ELW-art-1",
+        "judgment-4/2022"
+      ]
+    },
+    "el-001": {
+      "id": "el-001",
+      "query": "εκκαθάριση εταιρείας λόγω αφερεγγυότητας",
+      "query_type": "greek",
+      "language": "el",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [
+        "law-ELW-art-5"
+      ],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": []
+    },
+    "x-gr-en-001": {
+      "id": "x-gr-en-001",
+      "query": "η εταιρεία τέθηκε σε εκκαθάριση λόγω αφερεγγυότητας",
+      "query_type": "cross_lingual_gr_en",
+      "language": "el",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [
+        "law-ELW-art-5"
+      ],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": []
+    },
+    "x-en-gr-001": {
+      "id": "x-en-gr-001",
+      "query": "the company was wound up for insolvency",
+      "query_type": "cross_lingual_en_gr",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [
+        "law-ELW-art-5"
+      ],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": [
+        "law-ELW-art-1",
+        "judgment-4/2022"
+      ]
+    },
+    "case-001": {
+      "id": "case-001",
+      "query": "ECLI:CY:AD:2019:A55",
+      "query_type": "case_citation_lookup",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": []
+    },
+    "cited-001": {
+      "id": "cited-001",
+      "query": "cases citing Alpha v Beta",
+      "query_type": "cited_by_related",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": []
+    },
+    "amb-001": {
+      "id": "amb-001",
+      "query": "dismissal",
+      "query_type": "ambiguous",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": []
+    },
+    "proced-001": {
+      "id": "proced-001",
+      "query": "appeal after first instance judgment",
+      "query_type": "procedural_similarity",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": []
+    },
+    "hard-001": {
+      "id": "hard-001",
+      "query": "limitation period professional negligence",
+      "query_type": "hard_negative",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": []
+    },
+    "hard-002": {
+      "id": "hard-002",
+      "query": "quantum teleportation liability",
+      "query_type": "hard_negative",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": []
+    },
+    "adv-001": {
+      "id": "adv-001",
+      "query": "cases distinguishing my authority",
+      "query_type": "adverse_contrary",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": []
+    },
+    "el-002": {
+      "id": "el-002",
+      "query": "καταχρηστική απόλυση εργαζομένου μετά από άρνηση μετάθεσης",
+      "query_type": "legal_issue_similarity",
+      "language": "el",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 0.0,
+        "recall@50": 0.0,
+        "mrr": 0.0,
+        "ndcg@10": 0.0,
+        "precision@10": 0.0
+      },
+      "ranked_top": []
+    },
+    "en-ref-002": {
+      "id": "en-ref-002",
+      "query": "Law ELW Article 1 short title",
+      "query_type": "exact_reference",
+      "language": "en",
+      "jurisdiction": "CY",
+      "relevant_date": null,
+      "relevant": [
+        "law-ELW-art-1"
+      ],
+      "hard_negative": [],
+      "metrics": {
+        "recall@10": 1.0,
+        "recall@50": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0,
+        "precision@10": 1.0
+      },
+      "ranked_top": [
+        "law-ELW-art-1"
+      ]
+    }
+  },
+  "segments": {
+    "en": {
+      "recall@10": 0.179,
+      "recall@50": 0.179,
+      "mrr": 0.214,
+      "ndcg@10": 0.187,
+      "precision@10": 0.179
+    },
+    "exact_reference": {
+      "recall@10": 0.5,
+      "recall@50": 0.5,
+      "mrr": 0.5,
+      "ndcg@10": 0.5,
+      "precision@10": 0.5
+    },
+    "CY": {
+      "recall@10": 0.147,
+      "recall@50": 0.147,
+      "mrr": 0.176,
+      "ndcg@10": 0.154,
+      "precision@10": 0.147
+    },
+    "non_temporal": {
+      "recall@10": 0.156,
+      "recall@50": 0.156,
+      "mrr": 0.188,
+      "ndcg@10": 0.163,
+      "precision@10": 0.156
+    },
+    "exact": {
+      "recall@10": 0.5,
+      "recall@50": 0.5,
+      "mrr": 0.5,
+      "ndcg@10": 0.5,
+      "precision@10": 0.5
+    },
+    "ordinary_research": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "semantic": {
+      "recall@10": 0.1,
+      "recall@50": 0.1,
+      "mrr": 0.133,
+      "ndcg@10": 0.108,
+      "precision@10": 0.1
+    },
+    "legal_issue_similarity": {
+      "recall@10": 0.25,
+      "recall@50": 0.25,
+      "mrr": 0.5,
+      "ndcg@10": 0.306,
+      "precision@10": 0.5
+    },
+    "factual_similarity": {
+      "recall@10": 1.0,
+      "recall@50": 1.0,
+      "mrr": 1.0,
+      "ndcg@10": 1.0,
+      "precision@10": 0.5
+    },
+    "temporal_legislation": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "temporal": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "el": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "greek": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "cross_lingual_gr_en": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "cross_lingual_en_gr": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "case_citation_lookup": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "cited_by_related": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "ambiguous": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "procedural_similarity": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "hard_negative": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    },
+    "adverse_contrary": {
+      "recall@10": 0.0,
+      "recall@50": 0.0,
+      "mrr": 0.0,
+      "ndcg@10": 0.0,
+      "precision@10": 0.0
+    }
+  }
+}
