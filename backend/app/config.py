@@ -34,6 +34,10 @@ class Settings(BaseSettings):
     # legal-clearance decision); no source may be ingested for resale otherwise.
     commercial_service_mode: bool = True
 
+    # Server-side subscription usage enforcement (FREE/DEMO per-day search limits vs
+    # PRO unlimited). Default off so local/dev + tests are unaffected; enable in prod.
+    enforce_usage_limits: bool = False
+
     openrouter_api_key: str = ""
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
     openrouter_model: str = "deepseek/deepseek-v4-flash-0731"

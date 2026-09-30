@@ -55,6 +55,6 @@ Do not use FUNCTIONAL unless the workflow has been tested end-to-end with repres
 | Frontend workflows | FUNCTIONAL | browseable web UI at /ui (and /nomos/ui): login/register, search, validate-citation; real API via Apache proxy |
 | Entitlements / usage metering | FUNCTIONAL | plan-based server-side feature denial; tests/test_plan_e2e.py |
 | On-prem readiness | DOCUMENTED | DEPLOYMENT_ONPREM_READINESS.md: containerized, tenant-isolated, local AI no-egress, entitlements, public/private separable; installer deferred |
-| Subscription tiers | CONFIG-READY | core/tiers.py + /plan/tier (FREE/DEMO vs PRO; productivity-only limits); pricing captured as config, no pricing UI until core works |
+| Subscription tiers | FUNCTIONAL | FREE/DEMO vs PRO enforced server-side (Redis usage limits); check_usage + /plan/tier; lower tiers never get worse law; enable via enforce_usage_limits | core/tiers.py + /plan/tier (FREE/DEMO vs PRO; productivity-only limits); pricing captured as config, no pricing UI until core works |
 | Production deployment | DEFERRED_PRODUCTION | Not part of current goal |
 | Performance/load testing | DEFERRED_PRODUCTION | Not part of current goal |

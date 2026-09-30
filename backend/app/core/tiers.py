@@ -46,3 +46,21 @@ def tier_for_plan(plan: str | None) -> str:
 
 def usage_limit(tier: str, key: str):
     return TIERS.get(tier, TIERS[FREE_DEMO]).get("limit", {}).get(key)
+
+
+def check_usage(redis, org_id, tier: str, key: str) -> dict:
+    """Enforce a per-org daily usage allowance for the tier.
+
+    FREE/DEMO is rate-limited (productivity/capacity only); PRO is unrestricted.
+    Returns {'allowed': bool, 'remaining': int|None}. The cheap/legal tiers are
+    NEVER made to return worse/incorrect law — only call volume is limited.
+    """
+    limit = usage_limit(tier, key)
+    if limit is None:
+        return {"allowed": True, "remaining": None}
+    day = __import__("datetime").datetime.utcnow().strftime("%Y%m%d")
+    rk = f"usage:{org_id}:{key}:{day}"
+    used = int(redis.incr(rk))
+    if used == 1:
+        redis.expire(rk, 86400)
+    return {"allowed": used <= limit, "remaining": max(0, limit - used)}
